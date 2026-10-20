@@ -442,7 +442,7 @@ dialog.sheet::backdrop{background:rgba(14,26,51,.6);backdrop-filter:blur(3px)}
       <div class="floor-head rv" data-rv>
         <span class="eyebrow">Étage 1 · Les biens disponibles</span>
         <h2>Cinq adresses, <em>prêtes à vivre.</em></h2>
-        <p class="lead">Le loyer, la caution, l'avance et la commission sont affichés avant la visite.</p>
+        <p class="lead">Le loyer, la caution et l'avance sont affichés avant la visite.</p>
       </div>
       <div class="filter-note" id="filterNote" hidden></div>
     </div>
@@ -586,8 +586,8 @@ const IMG = n => 'img/' + n + '.jpg';
 const arrow = '<svg><use href="#arrow"/></svg>';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* Conditions d'entrée — montants d'exemple, à remplacer par ceux de l'agence */
-const COND = { caution: 2, avance: 1, commission: 1 };
+/* Conditions d'entrée : nombre de mois de loyer demandés */
+const COND = { caution: 2, avance: 1 };
 
 const BIENS = [
   { id:'f3-fahu', type:'F3', titre:'F3 avec cuisine américaine', quartier:'Fahu', prix:150000, ch:2, sdb:1, img:'fahu',
@@ -799,12 +799,10 @@ const detail = document.getElementById('detail'), building = document.getElement
 function renderDetail(b) {
   const imgs = [1,2,3].map(n => IMG('bien-' + b.img + '-' + n));
   const rows = [
-    ['Loyer mensuel', '', b.prix, false],
-    ['Caution', COND.caution + ' mois de loyer, remboursable au départ', b.prix * COND.caution, true],
-    ['Avance', COND.avance + ' mois de loyer', b.prix * COND.avance, true],
-    ['Commission agence', COND.commission + ' mois, payée une seule fois', b.prix * COND.commission, true],
+    ['Loyer', 'Par mois', fcfa(b.prix) + ' F'],
+    ['Caution', 'Remboursable au départ', COND.caution + ' mois de loyer'],
+    ['Avance', '', COND.avance + ' mois de loyer'],
   ];
-  const total = b.prix * (COND.caution + COND.avance + COND.commission);
   detail.innerHTML = `
   <div class="wrap">
     <a class="back" href="#etage-1">${arrow}Retour à l'étage 1</a>
@@ -821,9 +819,8 @@ function renderDetail(b) {
       <aside class="cond">
         <span class="eyebrow">À savoir avant la visite</span>
         <h2>Conditions d'entrée</h2>
-        <table>${rows.map(([l,s,v,ex]) => `<tr><td>${l}${ex?'<span class="ex">exemple</span>':''}${s?`<small>${s}</small>`:''}</td><td class="num">${fcfa(v)} F</td></tr>`).join('')}
-          <tr class="total"><td>Total à l'entrée</td><td class="num">${fcfa(total)} F</td></tr></table>
-        <p class="note">Montants d'exemple, confirmés par l'agence avant la visite. Contrat écrit et reçu pour chaque paiement.</p>
+        <table>${rows.map(([l,s,v]) => `<tr><td>${l}${s?`<small>${s}</small>`:''}</td><td class="num">${v}</td></tr>`).join('')}</table>
+        <p class="note">Conditions confirmées par l'agence avant la visite. Contrat écrit et reçu pour chaque paiement.</p>
         <p class="free">Visite gratuite et sans engagement.</p>
         <div class="acts">
           <button class="btn btn-nuit" type="button" id="askVisit">Demander une visite${arrow}</button>
@@ -889,7 +886,7 @@ function openVisit(b) {
   vForm.bien.value = `${b.titre} (${b.quartier})`;
   vForm.budget.value = fcfa(b.prix);
   if (!vForm.date.value) { const d = new Date(); d.setDate(d.getDate() + 14); vForm.date.value = d.toISOString().slice(0,10); }
-  document.getElementById('visitCond').textContent = `À prévoir à l'entrée : ${fcfa(b.prix*(COND.caution+COND.avance+COND.commission))} FCFA (montants d'exemple). La visite est gratuite.`;
+  document.getElementById('visitCond').textContent = `Loyer : ${fcfa(b.prix)} FCFA par mois. Caution : ${COND.caution} mois de loyer, avance : ${COND.avance} mois. La visite est gratuite.`;
   dlg.showModal ? dlg.showModal() : dlg.setAttribute('open','');
 }
 dlg.addEventListener('click', e => { if (e.target.closest('[data-close]') || e.target === dlg) dlg.close(); });
@@ -903,9 +900,10 @@ vForm.addEventListener('submit', e => {
   vForm.hidden = true; vDone.hidden = false;
 });
 
+lift.querySelector('[data-go="rdc"]').setAttribute('aria-current','true');
 route();
 setupReveal(document);
-setFloor('RDC'); current = 'RDC'; lift.querySelector('[data-go="rdc"]').setAttribute('aria-current','true'); moveCabin(); onScroll();
+moveCabin(); onScroll();
 })();
 </script>
 
