@@ -5,6 +5,7 @@ import { SiteContext } from "./components/ui.jsx";
 import { Header, Footer, MobileBar } from "./components/Layout.jsx";
 import { BookingForm, CarForm, Modal } from "./components/Forms.jsx";
 import { Home, Garage, Lavage, Voitures, Pieces, Contact } from "./pages/Pages.jsx";
+import Splash, { useIntro } from "./components/Splash.jsx";
 
 const VIEWS = { accueil: Home, garage: Garage, lavage: Lavage, voitures: Voitures, pieces: Pieces, contact: Contact };
 const readHash = () => {
@@ -13,6 +14,9 @@ const readHash = () => {
 
 export default function App() {
   /* Navigation instantanée : une seule page React, pas de rechargement → un clic suffit */
+  const intro = useIntro();                      // écran logo au premier chargement
+  const [ready, setReady] = useState(!intro);
+  const reveal = useCallback(() => setReady(true), []);
   const [page, setPage] = useState(readHash);
   const [sub, setSub] = useState(null);          // ancre (« devis ») ou onglet (« location »)
   const [booking, setBooking] = useState(null);  // null = fermé, sinon liste des prestations présélectionnées
@@ -46,10 +50,10 @@ export default function App() {
   }, [page]);
 
   const ctx = useMemo(() => ({
-    page, go,
+    page, go, ready,
     openBooking: (ids = []) => setBooking(ids),
     openCar: (c, mode) => setCar({ car: c, mode }),
-  }), [page, go]);
+  }), [page, go, ready]);
 
   const View = VIEWS[page];
   const closeBooking = useCallback(() => setBooking(null), []);
@@ -59,6 +63,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <SiteContext.Provider value={ctx}>
         <a href="#contenu" className="sr-only z-[70] rounded-lg bg-neon px-4 py-3 font-semibold text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Aller au contenu</a>
+        {intro && <Splash onReveal={reveal} />}
         <Header />
         <AnimatePresence mode="wait" initial={false}>
           <motion.main id="contenu" key={page}
