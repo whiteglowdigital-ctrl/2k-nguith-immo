@@ -152,10 +152,10 @@ export function ServiceCard({ s, i = 0 }) {
 export function WashPlans() {
   const { openBooking } = useSite();
   return (
-    <ul className="grid items-center gap-6 lg:grid-cols-3 lg:gap-5">
+    <ul className="grid items-center gap-6 lg:grid-cols-3 lg:gap-5 lg:py-6">
       {WASH_PLANS.map((p, i) => (
-        <Reveal as="li" key={p.id} delay={i * 0.08} className={p.featured ? "lg:z-10 lg:scale-[1.06]" : ""}>
-          <article className={`relative flex flex-col overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1.5 ${p.featured ? "border border-neon/70 bg-ink-3 shadow-[0_0_0_1px_rgba(250,204,21,.25),0_0_60px_-10px_rgba(250,204,21,.45)]" : "glass hover:border-white/25"}`}>
+        <Reveal as="li" key={p.id} delay={i * 0.08} className={p.featured ? "relative z-10 lg:scale-[1.08]" : "lg:scale-[0.97]"}>
+          <article className={`relative flex flex-col overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1.5 ${p.featured ? "border border-neon/45 bg-gradient-to-b from-ink-4 to-ink-3 shadow-[0_0_0_1px_rgba(250,204,21,.12),0_30px_80px_-20px_rgba(0,0,0,.9),0_0_70px_-18px_rgba(250,204,21,.45)]" : "glass hover:border-white/25"}`}>
             {p.featured && (
               <span className="absolute right-5 top-5 z-10 rounded-full bg-neon px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink">Populaire</span>
             )}
@@ -275,38 +275,67 @@ export function PageHero({ kicker, title, accent, sub, img, children }) {
 }
 
 /* ---------- Avis + adresse ---------- */
+/* Exemples pour la maquette : à remplacer par de vrais avis Google avant la mise en ligne. */
+const REVIEWS = [
+  { name: "Moussa D.", car: "Toyota Corolla", text: "Diagnostic clair et prix annoncé avant les travaux. Aucune surprise sur la facture." },
+  { name: "Awa N.", car: "Hyundai Tucson", text: "Vidange et lavage complet au même endroit. Accueil sérieux, voiture rendue impeccable." },
+  { name: "Ibrahima S.", car: "Peugeot 308", text: "J'ai reçu l'estimation sur WhatsApp avant de me déplacer. Simple et rapide." },
+];
+
+const satin = "relative overflow-hidden rounded-[28px] border border-white/[0.09] bg-gradient-to-br from-white/[0.075] via-white/[0.025] to-transparent shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_30px_60px_-30px_rgba(0,0,0,.9)] backdrop-blur-xl";
+
 export function ReviewsAndPlace() {
   return (
-    <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
-      <Reveal className="glass rounded-3xl p-7 md:p-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-          <h2 className="display text-4xl text-white md:text-5xl">Avis <span className="text-neon">clients</span></h2>
-          <div className="flex items-center gap-4">
-            <p className="text-5xl font-black text-white">[Note]<span className="text-xl font-light text-mist/60">/5</span></p>
-            <div><div className="flex gap-1 text-mist/40" aria-hidden="true">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4" />)}</div><p className="mt-1 text-sm font-light text-mist/60">[Nombre] avis Google</p></div>
-          </div>
+    <div className="grid gap-6">
+      <Reveal className="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.35em] text-neon"><span className="h-px w-10 bg-neon" aria-hidden="true" />Ils nous font confiance</p>
+          <h2 className="display text-4xl text-white sm:text-5xl lg:text-6xl">Avis <span className="text-neon">clients</span></h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {[0, 1].map((i) => (
-            <figure key={i} className="rounded-2xl border border-dashed border-white/15 p-5">
-              <blockquote className="font-light text-mist">[Avis client à ajouter]</blockquote>
-              <figcaption className="mt-4 flex items-center gap-3 text-sm text-mist/70"><span className="grid h-9 w-9 place-items-center rounded-full bg-white/5"><UserRound className="h-4 w-4" aria-hidden="true" /></span>[Prénom du client]</figcaption>
+        <div className={`${satin} flex items-center gap-4 px-6 py-4`}>
+          <p className="text-4xl font-black text-white">[Note]<span className="text-lg font-light text-mist/60">/5</span></p>
+          <div><div className="flex gap-1 text-neon" aria-hidden="true">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div><p className="mt-1 text-sm font-light text-mist/70">[Nombre] avis Google</p></div>
+        </div>
+      </Reveal>
+
+      <ul className="grid gap-5 md:grid-cols-3">
+        {REVIEWS.map((r, i) => (
+          <Reveal as="li" key={r.name} delay={i * 0.08} className="h-full">
+            <figure className={`${satin} group flex h-full flex-col gap-6 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-white/20`}>
+              <span aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-neon/[0.07] blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex gap-1 text-neon" aria-label="5 étoiles sur 5">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" aria-hidden="true" />)}</div>
+                <span className="rounded-full border border-white/10 px-2.5 py-0.5 text-[11px] font-light text-mist/60">Exemple</span>
+              </div>
+              <blockquote className="flex-1 text-lg font-light leading-relaxed text-white">« {r.text} »</blockquote>
+              <figcaption className="flex items-center gap-3 border-t border-white/[0.08] pt-5">
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-neon to-amber-500 text-sm font-bold text-ink" aria-hidden="true">{r.name[0]}</span>
+                <span><span className="block font-semibold text-white">{r.name}</span><span className="text-sm font-light text-mist/60">{r.car}</span></span>
+              </figcaption>
             </figure>
-          ))}
-        </div>
-        <Button as="a" href={CONFIG.googleAvis} variant="ghost" className="mt-8"><Star className="h-4 w-4" aria-hidden="true" />Laisser un avis Google</Button>
-      </Reveal>
-      <Reveal delay={0.1} className="relative isolate flex min-h-[380px] flex-col justify-end overflow-hidden rounded-3xl border border-white/10 p-7 md:p-10">
-        <img src={IMG.night} alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/80 to-ink/20" />
-        <MapPin className="mb-5 h-9 w-9 text-neon" strokeWidth={1.5} aria-hidden="true" />
-        <h2 className="display mb-4 text-3xl text-white">Nous trouver</h2>
-        <p className="font-light text-mist">{CONFIG.adresse}</p>
-        <p className="mt-2 flex items-center gap-2 font-light text-mist"><Clock className="h-4 w-4 text-neon" aria-hidden="true" />Du mardi au dimanche · Fermé le lundi</p>
-        <a href={mapsUrl} target="_blank" rel="noopener" className="mt-6 inline-flex min-h-[44px] items-center gap-2 self-start font-semibold text-white underline decoration-neon decoration-2 underline-offset-8 hover:text-neon">
-          Voir sur Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-        </a>
-      </Reveal>
+          </Reveal>
+        ))}
+      </ul>
+      <p className="text-xs font-light text-mist/50">[Avis d'exemple à remplacer par de vrais avis Google]</p>
+
+      <div className="grid gap-5 lg:grid-cols-[1fr_1.3fr]">
+        <Reveal className={`${satin} flex flex-col justify-center gap-5 p-7 md:p-10`}>
+          <h3 className="display text-2xl text-white md:text-3xl">Votre avis compte</h3>
+          <p className="font-light text-mist/80">Vous êtes passé chez nous ? Dites-nous comment ça s'est passé.</p>
+          <Button as="a" href={CONFIG.googleAvis} variant="ghost" className="self-start"><Star className="h-4 w-4" aria-hidden="true" />Laisser un avis Google</Button>
+        </Reveal>
+        <Reveal delay={0.1} className="relative isolate flex min-h-[320px] flex-col justify-end overflow-hidden rounded-[28px] border border-white/10 p-7 md:p-10">
+          <img src={IMG.night} alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+          <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/80 to-ink/20" />
+          <MapPin className="mb-5 h-9 w-9 text-neon" strokeWidth={1.5} aria-hidden="true" />
+          <h2 className="display mb-4 text-3xl text-white">Nous trouver</h2>
+          <p className="font-light text-mist">{CONFIG.adresse}</p>
+          <p className="mt-2 flex items-center gap-2 font-light text-mist"><Clock className="h-4 w-4 text-neon" aria-hidden="true" />Du mardi au dimanche · Fermé le lundi</p>
+          <a href={mapsUrl} target="_blank" rel="noopener" className="mt-6 inline-flex min-h-[44px] items-center gap-2 self-start font-semibold text-white underline decoration-neon decoration-2 underline-offset-8 hover:text-neon">
+            Voir sur Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </Reveal>
+      </div>
     </div>
   );
 }

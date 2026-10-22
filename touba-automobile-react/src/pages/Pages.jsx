@@ -43,26 +43,33 @@ export function Home() {
         <WashPlans />
       </Section>
 
-      {/* Avant / après + carte de devis qui chevauche */}
-      <section aria-labelledby="t-ba" className="relative pb-0 pt-24 md:pt-32">
-        <div className="wrap">
-          <Heading id="t-ba" kicker="Résultats" title="Avant /" accent="après" sub="Glissez la barre pour comparer." />
+      {/* Avant / après : detailing + réparation */}
+      <Section aria-labelledby="t-ba">
+        <Heading id="t-ba" kicker="Résultats" title="Avant /" accent="après" sub="Glissez la barre pour comparer." />
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-8">
           <Reveal><BeforeAfter img={IMG.wet} label="detailing" title="Detailing" alt="carrosserie mouillée et brillante" /></Reveal>
+          <Reveal delay={0.1}><BeforeAfter img={IMG.engine} label="réparation" title="Réparation" alt="moteur remis en état" /></Reveal>
         </div>
-      </section>
+      </Section>
 
+      {/* Bande photo detailing + carte de devis flottante qui la chevauche */}
       <section id="devis" aria-labelledby="t-devis" className="relative scroll-mt-24 pb-24 md:pb-32">
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[70%] bg-gradient-to-b from-transparent via-ink-3 to-ink" />
-        <div className="wrap relative">
-          <Reveal className="relative -mt-10 grid overflow-hidden rounded-[28px] border border-white/10 bg-ink-3/90 shadow-card backdrop-blur-xl md:-mt-28 lg:grid-cols-[1fr_1.25fr]">
-            <div className="relative isolate flex flex-col justify-end gap-6 overflow-hidden p-8 md:p-12">
-              <img src={IMG.night} alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover opacity-50" />
-              <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-3 via-ink-3/80 to-ink-3/30" />
+        <div className="relative h-[260px] overflow-hidden md:h-[440px]" aria-hidden="true">
+          <img src={IMG.detail} alt="" loading="lazy" className="h-full w-full object-cover object-[50%_40%]" />
+          <span className="absolute inset-0 bg-gradient-to-b from-ink via-ink/20 to-ink" />
+          <span className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,10,10,.7))]" />
+        </div>
+        <div className="wrap relative z-10 -mt-24 md:-mt-48">
+          <Reveal className="relative grid overflow-hidden rounded-[28px] border border-white/10 bg-ink-3/90 shadow-card ring-1 ring-black/40 backdrop-blur-xl lg:grid-cols-[1fr_1.25fr]">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/60 to-transparent" />
+            <div className="relative isolate flex flex-col justify-end gap-6 overflow-hidden p-7 md:p-12">
+              <img src={IMG.night} alt="" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover opacity-40" />
+              <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-3 via-ink-3/85 to-ink-3/40" />
               <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.35em] text-neon"><span className="h-px w-10 bg-neon" aria-hidden="true" />Devis gratuit</p>
-              <h2 id="t-devis" className="display text-4xl text-white md:text-5xl">Une panne ? <span className="font-light text-mist/90" style={{ fontWeight: 300 }}>Recevez une</span> <span className="text-neon">estimation</span> avant de venir</h2>
+              <h2 id="t-devis" className="display text-[34px] text-white sm:text-4xl md:text-5xl">Une panne ? <span className="font-light text-mist/90" style={{ fontWeight: 300 }}>Recevez une</span> <span className="text-neon">estimation</span> avant de venir</h2>
               <p className="text-lg font-extralight text-mist">Vous connaissez le prix avant de vous déplacer.</p>
             </div>
-            <div className="border-t border-white/[0.08] p-6 md:p-12 lg:border-l lg:border-t-0">
+            <div className="border-t border-white/[0.08] p-5 sm:p-7 md:p-12 lg:border-l lg:border-t-0">
               <QuoteForm />
             </div>
           </Reveal>
@@ -88,7 +95,7 @@ export function Garage() {
           <Reveal as="li" delay={0.1} className="h-full">
             <div className="relative flex h-full min-h-[320px] flex-col justify-end gap-5 overflow-hidden rounded-3xl bg-neon p-8 text-ink">
               <Gauge className="absolute -right-8 -top-8 h-48 w-48 opacity-10" strokeWidth={1} aria-hidden="true" />
-              <h3 className="display text-4xl">Une panne ?</h3>
+              <h3 className="display text-4xl">Une panne ?</h3>
               <p className="text-lg font-medium">Recevez une estimation avant de venir.</p>
               <GoQuote />
             </div>
@@ -208,7 +215,7 @@ export function Voitures({ tab: initialTab }) {
         <Reveal className="relative mt-20 grid items-center gap-8 overflow-hidden rounded-[28px] border border-neon/40 bg-gradient-to-br from-neon/[0.14] via-ink-3 to-ink-3 p-8 md:grid-cols-[auto_1fr_auto] md:p-12">
           <span className="grid h-16 w-16 place-items-center rounded-2xl bg-neon text-ink"><Video className="h-7 w-7" aria-hidden="true" /></span>
           <div>
-            <h2 className="display text-3xl text-white md:text-4xl">Vous êtes à l'étranger ?</h2>
+            <h2 className="display text-3xl text-white md:text-4xl">Vous êtes à l'étranger ?</h2>
             <p className="mt-3 max-w-2xl text-lg font-light text-mist">Choisissez votre voiture à distance : photos, prix et papiers sont en ligne, et on vous envoie une vidéo sur WhatsApp.</p>
           </div>
           <WhatsAppCta msg="Bonjour Touba Automobile, je suis à l'étranger et je voudrais une vidéo de la voiture : ">Demander une vidéo</WhatsAppCta>

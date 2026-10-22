@@ -43,12 +43,12 @@ export function Modal({ open, onClose, title, children, labelId }) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="relative max-h-[92vh] w-full overflow-y-auto rounded-t-3xl border border-white/10 bg-ink-3 p-6 shadow-card md:max-w-2xl md:rounded-3xl md:p-10"
+            className="relative max-h-[92vh] w-full overflow-y-auto overflow-x-hidden rounded-t-3xl border border-white/10 bg-ink-3 p-6 shadow-card md:max-w-2xl md:rounded-3xl md:p-10"
             style={{ paddingBottom: "calc(24px + env(safe-area-inset-bottom, 0px))" }}
           >
             <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-neon/10 blur-3xl" />
             <div className="relative mb-8 flex items-start justify-between gap-6">
-              <h2 id={labelId} className="display text-3xl text-white md:text-4xl">{title}</h2>
+              <h2 id={labelId} className="display text-[26px] text-white sm:text-3xl md:text-4xl">{title}</h2>
               <button type="button" onClick={onClose} aria-label="Fermer" className="grid h-11 w-11 flex-none place-items-center rounded-xl border border-white/15 text-white transition hover:border-neon hover:text-neon">
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -143,7 +143,7 @@ export function BookingForm({ preselect = [], onDone }) {
                 const on = f.values.services.includes(b.id);
                 return (
                   <button key={b.id} type="button" aria-pressed={on} onClick={() => toggle(b.id)}
-                    className={`inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 text-sm transition-all duration-200 ${on ? "border-neon bg-neon/10 text-neon shadow-[0_0_18px_-6px_rgba(250,204,21,.8)]" : "border-white/15 text-mist/90 hover:border-white/40"}`}>
+                    className={`inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 text-sm transition-all duration-200 ${on ? "border-neon bg-neon/10 text-neon shadow-[0_0_18px_-6px_rgba(250,204,21,.8)]" : "border-white/10 bg-white/[0.02] text-mist/75 hover:border-white/25 hover:text-white"}`}>
                     {on ? <Check className="h-4 w-4" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
                     {b.label}
                   </button>

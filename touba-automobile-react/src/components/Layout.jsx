@@ -143,10 +143,13 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-white/[0.07] bg-ink pb-28 pt-20 md:pb-10">
       <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[900px] -translate-x-1/2 rounded-full bg-neon/[0.06] blur-3xl" />
       <div className="wrap relative">
-        <p className="display text-[13vw] leading-[.85] text-white/[0.04] lg:text-[150px]" aria-hidden="true">Touba</p>
+        <p className="display text-[8.4vw] leading-[.85] text-white/[0.05] lg:text-[128px]" aria-hidden="true">Touba<br />Automobile</p>
         <div className="mt-10 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="grid content-start gap-5">
-            <img src={IMG.logo} alt="Logo Touba Automobile" width="72" height="72" loading="lazy" className="h-[72px] w-[72px] rounded-full" />
+            <div className="flex items-center gap-4">
+              <img src={IMG.logo} alt="Logo Touba Automobile" width="112" height="112" loading="lazy" className="h-28 w-28 rounded-full ring-1 ring-white/15" />
+              <p className="display text-2xl leading-none text-white" aria-hidden="true">Touba<br /><span className="text-neon">Automobile</span></p>
+            </div>
             <p className="max-w-sm text-lg font-light leading-relaxed text-mist/80">Le garage le plus moderne de la ville. La qualité que vous méritez, ici à Thiès.</p>
             <div className="flex gap-2">
               {["TikTok", "Facebook", "Instagram"].map((n) => (
