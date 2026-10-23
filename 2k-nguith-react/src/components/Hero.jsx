@@ -7,19 +7,19 @@ const quartiers = [...new Set(properties.map((p) => p.location.split(' (')[0]))]
 // Un champ de la barre de recherche : icône dans un cercle, libellé, sélecteur.
 function SearchField({ id, label, Icon, value, onChange, children }) {
   return (
-    <div className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2 md:px-4">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-soft text-forest">
-        <Icon aria-hidden className="h-5 w-5" />
+    <div className="flex min-w-0 flex-1 items-center gap-3 px-2 py-1.5 md:px-4 md:py-2">
+      <span className="flex h-8 w-8 shrink-0 md:h-11 md:w-11 items-center justify-center rounded-full bg-navy-soft text-brand">
+        <Icon aria-hidden className="h-4 w-4 md:h-5 md:w-5" strokeWidth={1.5} />
       </span>
       <div className="relative min-w-0 flex-1">
-        <label htmlFor={id} className="block text-xs font-bold text-ink">
+        <label htmlFor={id} className="block text-[0.7rem] font-semibold text-ink md:text-xs">
           {label}
         </label>
         <select
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-6 text-sm text-ink-muted focus:outline-none focus:ring-0"
+          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-6 text-sm font-light text-slate-500 focus:outline-none focus:ring-0"
         >
           {children}
         </select>
@@ -45,12 +45,12 @@ export default function Hero({ onSearch }) {
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/60 to-night/10" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-night/70 to-transparent" />
 
-      <div className="container pb-36 pt-36 md:pb-44 md:pt-48">
+      <div className="container pb-36 pt-32 md:pb-44 md:pt-48">
         <p className="kicker-light">{slogans.main}</p>
-        <h1 id="titre-accueil" className="mt-2 max-w-3xl text-[2.6rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+        <h1 id="titre-accueil" className="mt-2 max-w-3xl font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
           Trouvez le bien <span className="text-gold">de vos rêves</span> avec nous
         </h1>
-        <p className="mt-6 max-w-xl text-lg text-white/85">
+        <p className="mt-6 max-w-xl text-base font-light text-slate-300 md:text-lg">
           {slogans.hero}. Vente, location, gérance et terrains à Dakar et environs.
         </p>
 
@@ -59,7 +59,7 @@ export default function Hero({ onSearch }) {
           role="search"
           aria-label="Rechercher un bien"
           onSubmit={submit}
-          className="mt-10 flex max-w-4xl flex-col gap-2 rounded-2xl bg-white p-4 text-ink shadow-2xl md:flex-row md:items-center md:divide-x md:divide-ink/10"
+          className="mt-16 flex max-w-4xl flex-col gap-1 rounded-2xl bg-white p-3 text-ink shadow-2xl md:mt-12 md:gap-2 md:p-4 md:flex-row md:items-center md:divide-x md:divide-ink/10"
         >
           <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier}>
             <option value="">Tous les quartiers</option>
@@ -82,8 +82,8 @@ export default function Hero({ onSearch }) {
               </option>
             ))}
           </SearchField>
-          <div className="pt-2 md:pl-3 md:pt-0">
-            <button type="submit" className="btn-forest w-full px-7 md:w-auto">
+          <div className="pt-1 md:pl-3 md:pt-0">
+            <button type="submit" className="btn-navy w-full px-7 md:w-auto">
               <Search aria-hidden className="h-4 w-4" />
               Rechercher
             </button>

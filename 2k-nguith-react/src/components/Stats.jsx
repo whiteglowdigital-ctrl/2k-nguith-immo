@@ -18,17 +18,17 @@ export default function Stats() {
             <li
               key={label}
               className={
-                'flex flex-col items-center gap-2 px-4 py-10 text-center ' +
+                'flex flex-col items-center gap-3 px-4 py-14 text-center ' +
                 (i % 2 === 1 ? 'border-l border-ink/10 ' : '') +
                 (i > 1 ? 'border-t border-ink/10 lg:border-t-0 ' : '') +
                 (i === 2 ? 'lg:border-l' : '')
               }
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold-soft text-gold-dark">
-                <Icon aria-hidden className="h-5 w-5" />
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-soft text-gold-dark">
+                <Icon aria-hidden className="h-4 w-4" strokeWidth={1.5} />
               </span>
-              <span className={value.startsWith('[') ? 'text-lg font-bold text-ink-muted' : 'text-4xl font-extrabold tabular-nums text-forest md:text-5xl'}>{value}</span>
-              <span className="text-sm text-ink-muted">{label}</span>
+              <span className={value.startsWith('[') ? 'text-base font-light text-slate-400' : 'font-serif text-4xl font-bold tabular-nums text-navy md:text-5xl'}>{value}</span>
+              <span className="text-xs font-light text-slate-500 md:text-sm">{label}</span>
             </li>
           ))}
         </ul>

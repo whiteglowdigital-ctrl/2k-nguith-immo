@@ -39,7 +39,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
           </a>
         </SectionHead>
 
-        <div role="group" aria-label="Filtrer les biens" className="-mt-4 mb-10 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filtrer les biens" className="-mt-6 mb-12 flex flex-wrap gap-2">
           {tabs.map((t) => {
             const active = type === t.value && !isSearch;
             return (
@@ -49,8 +49,8 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
                 aria-pressed={active}
                 onClick={() => onType(t.value)}
                 className={cn(
-                  'min-h-11 rounded-full px-5 text-sm font-bold transition',
-                  active ? 'bg-forest text-white shadow-md' : 'bg-cloud text-ink-muted ring-1 ring-ink/10 hover:text-ink',
+                  'min-h-11 rounded-full px-5 text-sm transition',
+                  active ? 'bg-navy font-semibold text-white' : 'font-light text-slate-500 ring-1 ring-ink/10 hover:text-ink',
                 )}
               >
                 {t.label}
@@ -66,21 +66,21 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
               {quartier && ` · ${quartier}`}
               {max ? ` · ${budgetLabel.toLowerCase()}` : ''}
             </span>
-            <button type="button" onClick={onReset} className="min-h-11 font-bold text-forest underline underline-offset-4">
+            <button type="button" onClick={onReset} className="min-h-11 font-bold text-brand underline underline-offset-4">
               Voir tous les biens
             </button>
           </p>
         )}
 
         {list.length === 0 ? (
-          <div className="flex flex-col items-start gap-5 rounded-2xl bg-forest-soft p-8 md:p-12">
+          <div className="flex flex-col items-start gap-5 rounded-2xl bg-navy-soft p-8 md:p-12">
             <p className="text-xl font-bold">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
-            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-forest">
+            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-navy">
               Décrire mon besoin sur WhatsApp
             </a>
           </div>
         ) : (
-          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="rail md:grid-cols-2 md:gap-8 lg:grid-cols-3">
             {list.map((p) => (
               <li key={p.id}>
                 <PropertyCard property={p} onOpen={onOpen} />
@@ -88,9 +88,9 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             ))}
             {Array.from({ length: slots }, (_, i) => (
               <li key={`slot-${i}`}>
-                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-ink/15 text-ink-muted">
-                  <ImagePlus aria-hidden className="h-8 w-8" strokeWidth={1.5} />
-                  <span className="text-sm font-semibold">[Bien à ajouter]</span>
+                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink/15 text-slate-400">
+                  <ImagePlus aria-hidden className="h-7 w-7" strokeWidth={1.25} />
+                  <span className="text-sm font-light">[Bien à ajouter]</span>
                 </div>
               </li>
             ))}

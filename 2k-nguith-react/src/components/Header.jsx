@@ -28,7 +28,7 @@ export default function Header({ onFilter }) {
 
   return (
     <header className={cn('fixed inset-x-0 top-0 z-50 text-white transition-colors duration-300', solid || open ? 'bg-night/95 shadow-lg backdrop-blur-md' : 'bg-transparent')}>
-      <div className={cn('hidden overflow-hidden border-b border-white/10 text-xs text-white/80 transition-all duration-300 lg:block', solid ? 'max-h-0 opacity-0' : 'max-h-10')}>
+      <div className={cn('hidden overflow-hidden border-b border-white/10 text-xs font-light text-slate-300 transition-all duration-300 lg:block', solid ? 'max-h-0 opacity-0' : 'max-h-10')}>
         <div className="container flex items-center justify-between py-2">
           <span className="inline-flex items-center gap-2">
             <MapPin aria-hidden className="h-3.5 w-3.5 text-gold" />
@@ -53,7 +53,7 @@ export default function Header({ onFilter }) {
             <img src={logo} width="320" height="260" alt="Logo 2K Nguith Immo" className="h-9 w-auto" />
           </span>
           <span className="hidden leading-tight sm:block" aria-hidden>
-            <span className="block text-lg font-extrabold">2K Nguith</span>
+            <span className="block font-serif text-lg font-semibold">2K Nguith</span>
             <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold">Immobilier</span>
           </span>
         </a>

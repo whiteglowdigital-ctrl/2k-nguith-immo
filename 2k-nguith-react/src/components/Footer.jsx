@@ -18,7 +18,7 @@ export default function Footer() {
           <span className="inline-flex rounded-lg bg-white p-1.5">
             <img src={logo} width="320" height="260" alt="Logo 2K Nguith Immo" className="h-12 w-auto" />
           </span>
-          <p className="mt-4 text-sm text-white/70">{slogans.main}</p>
+          <p className="mt-4 text-sm font-light text-slate-400">{slogans.main}</p>
           <ul className="mt-5 flex gap-2" aria-label="Réseaux sociaux">
             {socials.map(({ label, href, Icon }) => (
               <li key={label}>
@@ -40,7 +40,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-1">
             {nav.map((n) => (
               <li key={n.label}>
-                <a href={n.href} className="inline-flex min-h-9 items-center text-sm text-white/75 hover:text-white">
+                <a href={n.href} className="inline-flex min-h-9 items-center text-sm font-light text-slate-400 hover:text-white">
                   {n.label}
                 </a>
               </li>
@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-wider text-gold">Nos services</h3>
-          <ul className="mt-4 space-y-2 text-sm text-white/75">
+          <ul className="mt-4 space-y-2 text-sm font-light text-slate-400">
             {services.map((s) => (
               <li key={s}>{s}</li>
             ))}
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-wider text-gold">Contact</h3>
-          <ul className="mt-4 space-y-3 text-sm text-white/75">
+          <ul className="mt-4 space-y-3 text-sm font-light text-slate-400">
             <li className="flex gap-3">
               <MapPin aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
               {contact.address}

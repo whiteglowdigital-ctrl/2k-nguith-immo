@@ -34,15 +34,15 @@ export default function PropertyDialog({ property: p, onClose }) {
           </div>
           <div className="p-6 sm:p-8">
             <div className="flex items-start justify-between gap-4">
-              <span className="rounded-full bg-forest-soft px-3 py-1 text-xs font-bold text-forest">{typeLabels[p.type]}</span>
+              <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brand">{typeLabels[p.type]}</span>
               <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-cloud">
                 <X aria-hidden className="h-5 w-5" />
               </button>
             </div>
-            <h2 id="dialog-titre" className="mt-3 text-2xl font-extrabold">
+            <h2 id="dialog-titre" className="mt-3 font-serif text-2xl font-semibold">
               {p.title}
             </h2>
-            <p className="mt-2 text-2xl font-extrabold tabular-nums text-forest">{price}</p>
+            <p className="mt-2 font-serif text-2xl font-bold tabular-nums text-navy">{price}</p>
             <dl className="mt-6 divide-y divide-ink/10 rounded-2xl bg-cloud px-4 text-sm">
               {rows.map(([term, value]) => (
                 <div key={term} className="flex justify-between gap-6 py-3">

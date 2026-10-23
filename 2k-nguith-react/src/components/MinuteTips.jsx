@@ -12,25 +12,25 @@ export default function MinuteTips() {
             <ArrowRight aria-hidden className="h-4 w-4" />
           </a>
         </SectionHead>
-        <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <ul className="rail md:grid-cols-3 md:gap-8">
           {tips.map((tip) => (
             <li key={tip.title}>
-              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-lift">
+              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
                 <div className="relative aspect-video overflow-hidden">
                   {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
                   <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <span aria-hidden className="absolute inset-0 bg-night/35" />
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-ink shadow-lg ring-8 ring-gold/25 transition group-hover:scale-110">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/80 text-navy ring-1 ring-white/60 backdrop-blur-md group-hover:bg-gold transition group-hover:scale-110">
                       <Play aria-hidden className="ml-0.5 h-5 w-5 fill-current" />
                     </span>
                   </span>
                   <span className="ph-tag absolute left-3 top-3">[Miniature à remplacer]</span>
                 </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <span className="w-fit rounded-full bg-forest-soft px-3 py-1 text-xs font-bold text-forest">Minute 2K</span>
-                  <h3 className="mt-3 text-lg font-bold leading-snug">{tip.title}</h3>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-bold text-forest">
+                <div className="flex flex-1 flex-col p-6">
+                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brand">Minute 2K</span>
+                  <h3 className="mt-3 font-serif text-lg font-semibold leading-snug">{tip.title}</h3>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
                     Voir la vidéo
                     <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>

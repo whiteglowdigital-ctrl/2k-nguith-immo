@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-// Contraste fort : blanc pur en alternance avec vert forêt et bleu nuit profonds.
-// Doré vibrant réservé aux boutons d'action et aux icônes mises en avant.
+// Palette alignée sur le logo : blanc pur et bleu marine très profond.
+// Orange/or en petites touches seulement (un mot, un bouton actif, une icône).
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
@@ -11,18 +11,20 @@ export default {
     },
     extend: {
       colors: {
-        ink: { DEFAULT: '#111827', muted: '#4B5563' },
-        forest: { DEFAULT: '#064E3B', deep: '#022C22', soft: '#ECFDF5' },
+        ink: { DEFAULT: '#111827', muted: '#64748B' }, // muted = slate-500 (4,8:1 sur blanc)
+        navy: { DEFAULT: '#0B1A30', soft: '#EEF2F8' }, // sections sombres, boutons principaux
+        brand: '#1E3A8A', // bleu du logo : prix, liens, petites étiquettes
         night: { DEFAULT: '#0F172A', soft: '#1E293B' },
         gold: { DEFAULT: '#F59E0B', dark: '#D97706', soft: '#FEF3C7' },
         cloud: '#F9FAFB',
       },
       fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        card: '0 10px 30px -12px rgba(17, 24, 39, 0.18)',
-        lift: '0 24px 48px -16px rgba(17, 24, 39, 0.28)',
+        card: '0 20px 60px rgba(0, 0, 0, 0.025)', // ombre presque invisible : les cartes flottent
+        lift: '0 24px 60px -12px rgba(11, 26, 48, 0.12)',
       },
     },
   },

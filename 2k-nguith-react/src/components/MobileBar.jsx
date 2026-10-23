@@ -11,7 +11,7 @@ export default function MobileBar() {
           <Phone aria-hidden className="h-4 w-4" />
           Appeler
         </a>
-        <a href={whatsappLink()} target="_blank" rel="noopener" className="btn-forest">
+        <a href={whatsappLink()} target="_blank" rel="noopener" className="btn-navy">
           <MessageCircle aria-hidden className="h-4 w-4" />
           WhatsApp
         </a>
