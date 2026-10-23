@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../lib/utils.js';
 
-// Fade-up au défilement. Ce qui est déjà à l'écran au chargement reste visible tout de suite.
+// Fade-up au défilement. Ce qui est déjà visible au chargement s'affiche tout de suite.
 export default function Reveal({ as: Tag = 'div', delay = 0, className, style, children, ...rest }) {
   const ref = useRef(null);
-  const [state, setState] = useState('idle'); // idle → visible sans animation ; hidden → in
+  const [state, setState] = useState('idle');
 
   useEffect(() => {
     const el = ref.current;
@@ -20,7 +20,7 @@ export default function Reveal({ as: Tag = 'div', delay = 0, className, style, c
           io.disconnect();
         }
       },
-      { rootMargin: '0px 0px -8% 0px' },
+      { rootMargin: '0px 0px -10% 0px' },
     );
     io.observe(el);
     return () => io.disconnect();

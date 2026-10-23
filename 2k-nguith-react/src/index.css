@@ -8,16 +8,16 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-mist pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] font-sans text-base text-ink antialiased lg:pb-0;
+    @apply bg-white pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] font-sans text-[1.0625rem] font-light leading-relaxed text-ink antialiased lg:pb-0;
   }
   h1, h2, h3 {
     text-wrap: balance;
   }
   section[id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 5.5rem;
   }
   :focus-visible {
-    @apply rounded-sm outline outline-2 outline-offset-4 outline-copper;
+    @apply outline outline-1 outline-offset-4 outline-amber;
   }
   select option {
     @apply bg-white text-ink;
@@ -25,47 +25,50 @@
 }
 
 @layer components {
-  .container-site {
-    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12;
+  .wrap {
+    @apply mx-auto w-full max-w-site px-5 sm:px-10 lg:px-16;
   }
-  .section {
-    @apply py-24 sm:py-32 lg:py-40;
+  .block-y {
+    @apply py-28 sm:py-40 lg:py-52;
   }
-  .label {
-    @apply text-[0.7rem] font-semibold uppercase tracking-label text-ink-muted;
+  /* Petites capitales espacées : rubriques, légendes */
+  .caps {
+    @apply text-[0.68rem] font-normal uppercase tracking-caps text-ink-muted;
   }
-  .title {
-    @apply font-display text-[2.6rem] font-light leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl;
+  .display {
+    @apply font-display font-normal leading-[0.95] tracking-display;
   }
-  .btn {
-    @apply inline-flex min-h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-7 text-[0.95rem] font-semibold transition duration-300 ease-soft;
+  .h-section {
+    @apply display text-[2.75rem] sm:text-6xl lg:text-[5.5rem];
   }
-  .btn-dark {
-    @apply btn bg-ink text-white hover:bg-ink-soft;
+  /* Bouton noir minimaliste, angles droits */
+  .btn-ink {
+    @apply inline-flex min-h-12 items-center justify-center gap-4 whitespace-nowrap bg-ink px-7 text-[0.78rem] font-normal uppercase tracking-caps text-white transition-colors duration-700 ease-out hover:bg-black;
   }
-  .btn-light {
-    @apply btn border border-ink/15 bg-transparent text-ink hover:border-ink;
+  .btn-line {
+    @apply inline-flex min-h-12 items-center justify-center gap-4 whitespace-nowrap border border-ink/20 px-7 text-[0.78rem] font-normal uppercase tracking-caps text-ink transition-colors duration-700 ease-out hover:border-ink;
   }
-  .link-arrow {
-    @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink underline decoration-ink/20 underline-offset-8 transition-colors duration-300 hover:decoration-copper;
+  /* Lien texte souligné d'un pixel, la ligne passe en ambre au survol */
+  .link-line {
+    @apply relative inline-flex min-h-11 items-center gap-3 text-[0.78rem] uppercase tracking-caps text-ink after:absolute after:inset-x-0 after:bottom-2 after:h-px after:bg-ink/25 after:transition-colors after:duration-700 after:ease-out hover:after:bg-amber;
+  }
+  .field {
+    @apply w-full appearance-none rounded-none border-0 border-b border-ink/20 bg-transparent px-0 pb-2.5 pt-1 font-sans text-base font-normal text-ink transition-colors duration-700 ease-out placeholder:text-ink/35 focus:border-ink focus:outline-none focus:ring-0;
   }
   .ph-tag {
-    @apply rounded bg-ink/70 px-2 py-0.5 text-[0.7rem] leading-snug text-white backdrop-blur-sm;
-  }
-  .field-line {
-    @apply w-full appearance-none rounded-none border-0 border-b border-ink/15 bg-transparent px-0 pb-3 pt-1.5 text-base text-ink placeholder-ink/40 transition-colors duration-300 focus:border-ink focus:outline-none focus:ring-0;
+    @apply bg-white/85 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.12em] text-ink backdrop-blur-sm;
   }
 }
 
-/* Apparition au défilement (composant Reveal). Les éléments visibles au chargement ne sont jamais masqués. */
+/* Apparition au défilement : ce qui est à l'écran au chargement n'est jamais masqué. */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(32px);
 }
 .reveal-in {
   opacity: 1;
   transform: none;
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.2s cubic-bezier(0, 0, 0.2, 1), transform 1.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { FileText, MapPin, Maximize, MessageCircle, Phone, X } from 'lucide-react';
 import { contact, typeLabels } from '../data/site.js';
-import { formatFcfa, whatsappLink } from '../lib/utils.js';
+import { caption, formatFcfa, whatsappLink } from '../lib/utils.js';
+import { Arrow, Dot, Plus } from './Glyphs.jsx';
 
+// Fiche d'un bien. Les détails administratifs (surface, papiers) sont ici, pas sur les vignettes.
 export default function PropertyDialog({ property: p, onClose }) {
   const ref = useRef(null);
 
@@ -15,6 +16,9 @@ export default function PropertyDialog({ property: p, onClose }) {
 
   const price = p && `${formatFcfa(p.price)} F CFA${p.perMonth ? ' / mois' : ''}`;
   const message = p && `Bonjour 2K Nguith, je suis intéressé par ce bien : ${p.title}, ${p.location}, ${price}. Est-il toujours disponible ?`;
+  const rows = p
+    ? [['Quartier', p.location], ['Surface', p.surface], p.details && ['Détails', p.details], p.papers && ['Papiers', p.papers]].filter(Boolean)
+    : [];
 
   return (
     <dialog
@@ -22,45 +26,45 @@ export default function PropertyDialog({ property: p, onClose }) {
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-labelledby="dialog-titre"
-      className="m-auto w-[min(56rem,calc(100%-2rem))] max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/60 backdrop:backdrop-blur-sm open:motion-safe:animate-rise"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(64rem,calc(100%-2rem))] overflow-y-auto bg-white p-0 text-ink backdrop:bg-ink/70 backdrop:backdrop-blur-sm open:motion-safe:animate-rise"
     >
       {p && (
-        <div className="grid md:grid-cols-2">
-          <div className="relative aspect-[4/3] md:aspect-auto">
+        <div className="grid md:grid-cols-[1.1fr_1fr]">
+          <div className="relative aspect-[4/3] bg-ink/5 md:aspect-auto">
             <img src={p.image} alt={p.alt} className="h-full w-full object-cover" />
-            <span className="ph-tag absolute bottom-4 left-4">[Photo à remplacer]</span>
+            <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
           </div>
-          <div className="flex flex-col p-7 sm:p-10">
-            <div className="flex items-start justify-between gap-4">
-              <span className="label">{typeLabels[p.type]}</span>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Fermer"
-                className="-mr-3 -mt-3 inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-mist"
-              >
-                <X aria-hidden strokeWidth={1.5} />
+          <div className="flex flex-col p-8 sm:p-12">
+            <div className="flex items-center justify-between">
+              <p className="caps flex items-center gap-3">
+                <Dot />
+                {typeLabels[p.type]}
+              </p>
+              <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-3 flex h-11 w-11 items-center justify-center">
+                <Plus className="h-4 w-4 rotate-45" />
               </button>
             </div>
-            <h2 id="dialog-titre" className="mt-3 font-display text-3xl font-light leading-tight tracking-tight">
-              {p.title}
+            <h2 id="dialog-titre" className="display mt-8 text-5xl">
+              {p.short}
             </h2>
-            <p className="mt-5 font-display text-3xl font-light tabular-nums">{price}</p>
+            <p className="mt-3 text-ink-muted">{caption(p, { withName: false })}</p>
+            <p className="display mt-8 text-4xl tabular-nums">{price}</p>
 
-            <dl className="mt-8 divide-y divide-line border-y border-line text-[0.95rem]">
-              <Row Icon={MapPin} term="Quartier" value={p.location} />
-              <Row Icon={Maximize} term="Surface" value={p.surface} />
-              {p.details && <Row Icon={Maximize} term="Détails" value={p.details} hideIcon />}
-              {p.papers && <Row Icon={FileText} term="Papiers" value={p.papers} />}
+            <dl className="mt-10 border-t border-ink/10 text-[0.95rem]">
+              {rows.map(([term, value]) => (
+                <div key={term} className="flex justify-between gap-6 border-b border-ink/10 py-4">
+                  <dt className="caps pt-0.5">{term}</dt>
+                  <dd className="text-right">{value}</dd>
+                </div>
+              ))}
             </dl>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={whatsappLink(message)} target="_blank" rel="noopener" className="btn-dark flex-1">
-                <MessageCircle aria-hidden strokeWidth={1.5} className="h-4 w-4" />
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a href={whatsappLink(message)} target="_blank" rel="noopener" className="btn-ink flex-1">
                 Je suis intéressé
+                <Arrow className="h-2.5 w-6" />
               </a>
-              <a href={`tel:${contact.phoneIntl}`} className="btn-light">
-                <Phone aria-hidden strokeWidth={1.5} className="h-4 w-4" />
+              <a href={`tel:${contact.phoneIntl}`} className="btn-line tabular-nums">
                 {contact.phoneDisplay}
               </a>
             </div>
@@ -68,15 +72,5 @@ export default function PropertyDialog({ property: p, onClose }) {
         </div>
       )}
     </dialog>
-  );
-}
-
-function Row({ Icon, term, value, hideIcon }) {
-  return (
-    <div className="flex items-start gap-3 py-3.5">
-      <Icon aria-hidden strokeWidth={1.5} className={`mt-0.5 h-4 w-4 shrink-0 text-ink-muted ${hideIcon ? 'invisible' : ''}`} />
-      <dt className="w-24 shrink-0 text-ink-muted">{term}</dt>
-      <dd className="font-medium">{value}</dd>
-    </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
+import ServicesIndex from './components/ServicesIndex.jsx';
 import Properties from './components/Properties.jsx';
 import PropertyDialog from './components/PropertyDialog.jsx';
 import WhyUs from './components/WhyUs.jsx';
@@ -22,10 +23,10 @@ export default function App() {
   const [filters, setFilters] = useState(ALL);
   const [selected, setSelected] = useState(null);
 
-  // Menu, raccourcis et onglets : filtre par type uniquement.
+  // Menu et sommaire : filtre par type uniquement.
   const showType = useCallback((type) => setFilters({ ...ALL, type }), []);
 
-  // Barre de recherche : type + quartier + budget, puis défilement vers les biens.
+  // Recherche du hero : type + localisation + budget, puis défilement vers les biens.
   const search = useCallback((criteria) => {
     setFilters(criteria);
     document.getElementById('biens')?.scrollIntoView();
@@ -35,13 +36,14 @@ export default function App() {
     <>
       <a
         href="#contenu"
-        className="sr-only rounded-full bg-white px-5 py-3 font-semibold text-ink shadow focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"
+        className="sr-only bg-ink px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"
       >
         Aller au contenu
       </a>
       <Header onFilter={showType} />
       <main id="contenu">
-        <Hero onSearch={search} onFilter={showType} />
+        <Hero onSearch={search} />
+        <ServicesIndex onFilter={showType} />
         <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} />
         <WhyUs />
         <Steps />

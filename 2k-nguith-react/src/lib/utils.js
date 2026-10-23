@@ -17,6 +17,14 @@ export function normalize(text = '') {
     .trim();
 }
 
+// Légende d'une ligne : « Maison R+3 — Comico Gadaye — 150 m² ».
+// Si la surface n'est pas encore connue, on affiche le détail à la place.
+export function caption(p, { withName = true } = {}) {
+  const place = p.location.split(' (')[0];
+  const size = p.surface && !p.surface.startsWith('[') ? p.surface.replace(' m²', 'm²') : p.details;
+  return [withName && p.short, place, size].filter(Boolean).join(' — ');
+}
+
 export function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }

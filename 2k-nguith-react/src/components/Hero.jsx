@@ -1,107 +1,107 @@
 import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
-import { heroImage, properties, slogans } from '../data/site.js';
+import { Arrow, Dot } from './Glyphs.jsx';
+import { budgets, contact, heroImage, properties } from '../data/site.js';
 
 const quartiers = [...new Set(properties.map((p) => p.location.split(' (')[0]))];
 
-// Index des services : remplace la rangée de raccourcis, à la manière d'un sommaire de magazine.
-const index = [
-  { label: 'Vente', href: '#biens', filter: 'vente' },
-  { label: 'Location', href: '#biens', filter: 'location' },
-  { label: 'Terrains', href: '#biens', filter: 'terrain' },
-  { label: 'Gérance', href: '#gerance' },
-  { label: 'Construction et rénovation', href: '#construction' },
-];
-
-function Select({ id, label, value, onChange, children }) {
+// Sélecteur texte : pas de fond, pas de cadre, un filet d'un pixel dessous.
+function Inline({ id, label, value, onChange, children }) {
   return (
-    <div className="flex min-w-0 flex-1 flex-col gap-1">
-      <label htmlFor={id} className="label">
+    <div className="relative w-full min-w-0 sm:w-auto sm:flex-1">
+      <label htmlFor={id} className="sr-only">
         {label}
       </label>
-      <div className="relative">
-        <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="field-line cursor-pointer pr-7 font-medium">
-          {children}
-        </select>
-        <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
-      </div>
+      <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="field cursor-pointer truncate pr-4 text-[0.95rem]">
+        {children}
+      </select>
+      <span aria-hidden className="pointer-events-none absolute bottom-3.5 right-0 h-1.5 w-1.5 rotate-45 border-b border-r border-ink/60" />
     </div>
   );
 }
 
-export default function Hero({ onSearch, onFilter }) {
+export default function Hero({ onSearch }) {
   const [type, setType] = useState('vente');
   const [quartier, setQuartier] = useState('');
+  const [budget, setBudget] = useState('');
 
   const submit = (e) => {
     e.preventDefault();
-    onSearch({ type, quartier, budget: '' });
+    onSearch({ type, quartier, budget });
   };
 
   return (
-    <section id="accueil" aria-labelledby="titre-accueil" className="grid bg-white lg:min-h-[calc(100svh-7.25rem)] lg:grid-cols-[45fr_55fr]">
-      {/* Colonne gauche : blanc pur, titre et recherche */}
-      <div className="flex flex-col justify-between gap-16 px-5 pb-12 pt-14 sm:px-8 lg:py-16 lg:pl-12 lg:pr-16 xl:pl-[max(3rem,calc((100vw-80rem)/2+3rem))]">
-        <div className="motion-safe:animate-rise">
-          <p className="label">Agence immobilière · Dakar et environs</p>
+    <section id="accueil" aria-labelledby="titre-accueil" className="grid lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[40fr_60fr]">
+      {/* 40 % : blanc pur */}
+      <div className="flex flex-col justify-between gap-16 px-5 pb-14 pt-16 sm:px-10 lg:py-14 lg:pl-16 lg:pr-12 2xl:pl-[max(4rem,calc((100vw-88rem)/2+4rem))]">
+        <p className="caps flex items-center gap-3 motion-safe:animate-rise">
+          <Dot />
+          Dakar · Sénégal
+        </p>
+
+        <div>
           <h1
             id="titre-accueil"
-            className="mt-8 font-display text-[3.1rem] font-light leading-[0.98] tracking-[-0.02em] text-ink sm:text-7xl xl:text-[5.6rem]"
+            className="display text-[3.6rem] leading-[0.9] motion-safe:animate-rise sm:text-[5.5rem] lg:text-[clamp(4.5rem,7.4vw,8.5rem)]"
+            style={{ animationDelay: '150ms' }}
           >
-            {slogans.hero}
+            On vous trouve le toit <em className="font-display italic">parfait</em>
           </h1>
-          <p className="mt-8 max-w-md text-lg leading-relaxed text-ink-muted">Vente, location, gérance et terrains à Dakar et environs.</p>
 
-          <form role="search" aria-label="Rechercher un bien" onSubmit={submit} className="mt-12 flex max-w-lg items-end gap-6">
-            <Select id="s-type" label="Je veux" value={type} onChange={setType}>
+          <form
+            role="search"
+            aria-label="Rechercher un bien"
+            onSubmit={submit}
+            className="mt-14 flex flex-wrap items-end gap-x-5 gap-y-6 motion-safe:animate-rise sm:flex-nowrap lg:mt-20"
+            style={{ animationDelay: '300ms' }}
+          >
+            <Inline id="s-type" label="Je veux" value={type} onChange={setType}>
               <option value="vente">Acheter</option>
               <option value="location">Louer</option>
               <option value="terrain">Un terrain</option>
-            </Select>
-            <Select id="s-quartier" label="Quartier" value={quartier} onChange={setQuartier}>
-              <option value="">Tous</option>
+            </Inline>
+            <span aria-hidden className="hidden pb-3 text-ink/30 sm:block">•</span>
+            <Inline id="s-quartier" label="Localisation" value={quartier} onChange={setQuartier}>
+              <option value="">Localisation</option>
               {quartiers.map((q) => (
                 <option key={q} value={q}>
                   {q}
                 </option>
               ))}
-            </Select>
+            </Inline>
+            <span aria-hidden className="hidden pb-3 text-ink/30 sm:block">•</span>
+            <Inline id="s-budget" label="Budget" value={budget} onChange={setBudget}>
+              <option value="">Budget</option>
+              {budgets.slice(1).map((b) => (
+                <option key={b.value} value={b.value}>
+                  {b.label}
+                </option>
+              ))}
+            </Inline>
             <button
               type="submit"
               aria-label="Rechercher"
-              className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-white transition-all duration-300 ease-soft hover:scale-105 hover:bg-ink-soft"
+              className="group flex h-12 w-full shrink-0 sm:h-11 sm:w-14 items-center justify-center bg-ink text-white transition-colors duration-700 ease-out hover:bg-black"
             >
-              <ArrowRight aria-hidden strokeWidth={1.5} className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <Arrow className="h-2.5 w-6 transition-transform duration-700 ease-out group-hover:translate-x-1" />
             </button>
           </form>
         </div>
 
-        <nav aria-label="Nos services">
-          <h2 className="sr-only">Tout au même endroit</h2>
-          <ul className="flex flex-wrap gap-x-7 border-y border-ink/10 py-3">
-            {index.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  onClick={() => item.filter && onFilter(item.filter)}
-                  className="group flex min-h-11 items-center gap-1.5 text-sm font-medium text-ink-muted transition-colors duration-300 hover:text-ink"
-                >
-                  {item.label}
-                  <ArrowUpRight aria-hidden strokeWidth={1.5} className="h-4 w-4 shrink-0 opacity-40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-copper group-hover:opacity-100" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex flex-col gap-2 border-t border-ink/10 pt-6 text-sm text-ink-muted motion-safe:animate-rise sm:flex-row sm:justify-between" style={{ animationDelay: '450ms' }}>
+          <span>Vente, location, gérance et terrains à Dakar et environs.</span>
+          <a href={`tel:${contact.phoneIntl}`} className="tabular-nums text-ink hover:underline">
+            {contact.phoneDisplay}
+          </a>
+        </div>
       </div>
 
-      {/* Colonne droite : photo verticale pleine hauteur, sans texte */}
-      <div className="relative min-h-[34rem] overflow-hidden bg-mist sm:min-h-[44rem] lg:min-h-0">
+      {/* 60 % : photo verticale pleine hauteur, sans texte */}
+      <div className="relative min-h-[36rem] overflow-hidden bg-ink/5 sm:min-h-[48rem] lg:min-h-0">
         <img
           src={heroImage}
           alt="Villa moderne et lumineuse avec piscine"
           fetchpriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-[60%_50%] motion-safe:animate-[heroZoom_14s_ease-out_both]"
+          className="absolute inset-0 h-full w-full object-cover object-[62%_50%] motion-safe:animate-unveil"
         />
       </div>
     </section>
