@@ -1,4 +1,5 @@
 import SectionHeading from './SectionHeading.jsx';
+import Reveal from './Reveal.jsx';
 
 const steps = [
   'Vous choisissez un bien ou nous décrivez votre besoin.',
@@ -12,16 +13,17 @@ export default function Steps() {
     <section aria-labelledby="titre-etapes" className="section">
       <div className="container-site">
         <SectionHeading id="titre-etapes" title="Comment ça marche" />
-        <ol className="relative grid gap-12 lg:grid-cols-4 lg:gap-10">
-          {/* Fil qui relie les étapes */}
-          <span aria-hidden className="absolute left-5 top-5 h-[calc(100%-2.5rem)] w-px bg-line lg:left-5 lg:right-0 lg:h-px lg:w-auto" />
+        <ol className="grid sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((text, i) => (
-            <li key={text} className="relative flex gap-6 lg:flex-col">
-              <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink bg-mist font-display text-lg tabular-nums text-ink">
-                {i + 1}
-              </span>
-              <p className="pt-1.5 text-lg leading-relaxed text-ink lg:max-w-[16rem] lg:pt-0">{text}</p>
-            </li>
+            <Reveal
+              as="li"
+              key={text}
+              delay={i * 100}
+              className="flex flex-col gap-10 border-t border-ink/10 py-10 sm:pr-8 lg:border-l lg:border-t-0 lg:px-8 lg:py-2 lg:first:border-l-0 lg:first:pl-0"
+            >
+              <span className="font-display text-6xl font-light tabular-nums leading-none text-ink/20">{String(i + 1).padStart(2, '0')}</span>
+              <p className="text-lg leading-relaxed text-ink">{text}</p>
+            </Reveal>
           ))}
         </ol>
       </div>

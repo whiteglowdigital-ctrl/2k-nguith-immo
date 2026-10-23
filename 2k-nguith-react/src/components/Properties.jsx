@@ -1,8 +1,10 @@
 import { ArrowRight, ImagePlus } from 'lucide-react';
-import { budgets, properties, propertySlots } from '../data/site.js';
+import { budgets, featuredPropertyId, properties, propertySlots } from '../data/site.js';
 import { cn, normalize, whatsappLink } from '../lib/utils.js';
 import SectionHeading from './SectionHeading.jsx';
 import PropertyCard from './PropertyCard.jsx';
+import FeaturedProperty from './FeaturedProperty.jsx';
+import Reveal from './Reveal.jsx';
 
 const tabs = [
   { value: 'tous', label: 'Tous' },
@@ -12,6 +14,20 @@ const tabs = [
 ];
 
 const intent = { vente: 'acheter un bien', location: 'louer un bien', terrain: 'acheter un terrain', tous: 'trouver un bien' };
+
+// Hauteurs d'image qui alternent pour casser l'alignement du catalogue.
+const ratios = ['aspect-[4/5]', 'aspect-[4/3]', 'aspect-[4/3]', 'aspect-[4/5]'];
+
+function Slot() {
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink/15 text-ink-muted">
+        <ImagePlus aria-hidden strokeWidth={1} className="h-9 w-9" />
+        <span className="text-sm font-medium">[Bien à ajouter]</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Properties({ filters, onType, onReset, onOpen }) {
   const { type, quartier, budget } = filters;
@@ -24,9 +40,15 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
       (!quartier || normalize(p.location).includes(normalize(quartier))) &&
       (!max || p.price <= max),
   );
-  const showSlots = type === 'tous' && !isSearch;
-  const budgetLabel = budgets.find((b) => b.value === budget)?.label;
+  const featured = list.find((p) => p.id === featuredPropertyId);
+  const rest = list.filter((p) => p !== featured);
 
+  // Grille éditoriale : 2 colonnes, la droite décalée vers le bas.
+  const columns = [rest.filter((_, i) => i % 2 === 0), rest.filter((_, i) => i % 2 === 1)];
+  // Emplacements vides à la fin, pour que les vrais biens passent toujours en premier sur mobile.
+  const slots = type === 'tous' && !isSearch ? propertySlots : 0;
+
+  const budgetLabel = budgets.find((b) => b.value === budget)?.label;
   const need =
     `Bonjour 2K Nguith, je souhaite ${intent[type]}` +
     (quartier ? ` à ${quartier}` : '') +
@@ -37,7 +59,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
     <section id="biens" aria-labelledby="titre-biens" className="section">
       <div className="container-site">
         <SectionHeading id="titre-biens" title="Biens disponibles">
-          <div role="group" aria-label="Filtrer les biens" className="-mx-1 flex gap-1 overflow-x-auto sm:gap-2">
+          <div role="group" aria-label="Filtrer les biens" className="-mx-1 flex gap-1 overflow-x-auto">
             {tabs.map((t) => {
               const active = type === t.value && !isSearch;
               return (
@@ -47,7 +69,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
                   aria-pressed={active}
                   onClick={() => onType(t.value)}
                   className={cn(
-                    'relative min-h-11 shrink-0 px-3 text-[0.95rem] font-semibold transition-colors duration-300 after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:rounded-full after:transition-all after:duration-300 after:ease-soft',
+                    'relative min-h-11 shrink-0 px-3 text-[0.95rem] font-medium transition-colors duration-300 after:absolute after:inset-x-3 after:bottom-1 after:h-px after:transition-transform after:duration-500 after:ease-soft',
                     active ? 'text-ink after:bg-copper' : 'text-ink-muted after:scale-x-0 after:bg-ink hover:text-ink',
                   )}
                 >
@@ -59,57 +81,68 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
         </SectionHeading>
 
         {isSearch && (
-          <p aria-live="polite" className="-mt-8 mb-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-muted">
+          <p aria-live="polite" className="-mt-10 mb-12 flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-muted">
             <span>
               {list.length} résultat{list.length > 1 ? 's' : ''}
               {quartier && ` · ${quartier}`}
               {max ? ` · ${budgetLabel.toLowerCase()}` : ''}
             </span>
-            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-ink underline underline-offset-4">
+            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-ink underline decoration-ink/20 underline-offset-4">
               Voir tous les biens
             </button>
           </p>
         )}
 
-        {list.length > 0 ? (
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-            {list.map((p) => (
-              <li key={p.id}>
-                <PropertyCard property={p} onOpen={onOpen} />
-              </li>
-            ))}
-            {showSlots &&
-              Array.from({ length: propertySlots }, (_, i) => (
-                <li key={`slot-${i}`} aria-label="Emplacement pour un bien à ajouter">
-                  <div className="flex h-full min-h-[26rem] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink/15 text-ink-muted">
-                    <ImagePlus aria-hidden strokeWidth={1} className="h-10 w-10" />
-                    <span className="text-sm font-medium">[Bien à ajouter]</span>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        ) : (
-          <div className="flex flex-col items-start gap-6 rounded-2xl bg-white p-10 shadow-soft sm:p-14">
-            <p className="max-w-lg font-display text-2xl font-light text-ink">
+        {list.length === 0 ? (
+          <Reveal className="flex flex-col items-start gap-8 rounded-2xl bg-white p-10 shadow-air sm:p-16">
+            <p className="max-w-xl font-display text-3xl font-light leading-snug text-ink">
               Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.
             </p>
             <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-dark">
               Décrire mon besoin sur WhatsApp
             </a>
-          </div>
+          </Reveal>
+        ) : (
+          <>
+            {featured && <FeaturedProperty property={featured} onOpen={onOpen} />}
+
+            {rest.length > 0 && (
+              <div className={cn('grid gap-10 md:grid-cols-2 lg:gap-16', featured && 'mt-16 lg:mt-24')}>
+                {columns.map((col, c) => (
+                  <ul key={c} className={cn('flex flex-col gap-10 lg:gap-16', c === 1 && 'md:pt-24 lg:pt-40')}>
+                    {col.map((p, i) => (
+                      <Reveal as="li" key={p.id} delay={c * 120}>
+                        <PropertyCard property={p} ratio={ratios[(i * 2 + c) % ratios.length]} onOpen={onOpen} />
+                      </Reveal>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            )}
+
+            {slots > 0 && (
+              <ul className="mt-10 grid gap-10 md:grid-cols-2 lg:mt-16 lg:gap-16">
+                {Array.from({ length: slots }, (_, i) => (
+                  <Reveal as="li" key={i} delay={i * 120} aria-label="Emplacement pour un bien à ajouter">
+                    <Slot />
+                  </Reveal>
+                ))}
+              </ul>
+            )}
+          </>
         )}
 
-        <div className="mt-20 flex justify-center">
+        <Reveal className="mt-24 flex justify-center border-t border-ink/10 pt-12">
           <a
             href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')}
             target="_blank"
             rel="noopener"
-            className="btn-light group shadow-soft"
+            className="link-arrow group text-base"
           >
             Voir tous nos biens
             <ArrowRight aria-hidden strokeWidth={1.5} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

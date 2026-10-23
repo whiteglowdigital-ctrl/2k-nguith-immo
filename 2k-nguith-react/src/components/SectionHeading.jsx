@@ -1,24 +1,16 @@
-import { cn } from '../lib/utils.js';
+import Reveal from './Reveal.jsx';
 
-export default function SectionHeading({ id, title, intro, align = 'left', dark = false, children }) {
+// En-tête de section façon cabinet d'architecte : filet d'un pixel, titre serif, action à droite.
+export default function SectionHeading({ id, label, title, children }) {
   return (
-    <div
-      className={cn(
-        'mb-16 flex flex-col gap-8 sm:mb-24 lg:flex-row lg:items-end lg:justify-between',
-        align === 'center' && 'items-center text-center lg:flex-col lg:items-center',
-      )}
-    >
-      <div className="max-w-3xl">
-        <h2 id={id} className={cn('title', dark && 'text-white')}>
+    <Reveal className="mb-16 border-t border-ink/10 pt-8 sm:mb-24">
+      {label && <p className="label mb-8">{label}</p>}
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <h2 id={id} className="title max-w-3xl">
           {title}
         </h2>
-        {intro && (
-          <p className={cn('mt-6 max-w-xl text-lg leading-relaxed', dark ? 'text-white/75' : 'text-ink-muted')}>
-            {intro}
-          </p>
-        )}
+        {children}
       </div>
-      {children}
-    </div>
+    </Reveal>
   );
 }

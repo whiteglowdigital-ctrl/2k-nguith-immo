@@ -88,6 +88,9 @@ export const properties = [
   },
 ];
 
+// Bien mis en avant en grande rangée en tête de la liste.
+export const featuredPropertyId = 'maison-r3-comico-gadaye';
+
 // Emplacements réservés aux prochains biens.
 export const propertySlots = 2;
 
@@ -100,6 +103,8 @@ export const budgets = [
   { value: '50000000', label: "Jusqu'à 50 M F" },
   { value: '100000000', label: "Jusqu'à 100 M F" },
 ];
+
+export const managementImage = unsplash('photo-1560518883-ce09059eeffa', 1200);
 
 export const constructionPhotos = [
   { src: unsplash('photo-1504307651254-35680f356dfd', 1200), alt: 'Ouvriers sur un chantier de construction' },

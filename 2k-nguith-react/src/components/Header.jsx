@@ -5,15 +5,7 @@ import { contact, nav } from '../data/site.js';
 import { cn } from '../lib/utils.js';
 
 export default function Header({ onFilter }) {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -27,33 +19,21 @@ export default function Header({ onFilter }) {
     setOpen(false);
   };
 
-  const solid = scrolled || open;
-
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 text-white transition-colors duration-500 ease-soft',
-        solid ? 'bg-ink/95 shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md' : 'bg-transparent',
-      )}
-    >
-      {/* Barre d'infos : ordinateur uniquement, disparaît au défilement */}
-      <div
-        className={cn(
-          'hidden overflow-hidden border-b border-white/10 text-[0.8rem] text-white/80 transition-all duration-500 ease-soft lg:block',
-          scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100',
-        )}
-      >
+    <>
+      {/* Barre d'infos : ordinateur uniquement */}
+      <div className="hidden border-b border-ink/10 bg-white text-[0.8rem] text-ink-muted lg:block">
         <div className="container-site flex items-center justify-between gap-8 py-2.5">
           <span className="inline-flex items-center gap-2">
             <MapPin aria-hidden className="h-3.5 w-3.5" strokeWidth={1.5} />
             {contact.address}
           </span>
-          <span className="flex items-center gap-8">
-            <a href={`tel:${contact.phoneIntl}`} className="inline-flex items-center gap-2 hover:text-white">
+          <span className="flex items-center divide-x divide-ink/10">
+            <a href={`tel:${contact.phoneIntl}`} className="inline-flex items-center gap-2 pr-6 hover:text-ink">
               <Phone aria-hidden className="h-3.5 w-3.5" strokeWidth={1.5} />
               {contact.phoneDisplay}
             </a>
-            <span className="inline-flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 pl-6">
               <Clock aria-hidden className="h-3.5 w-3.5" strokeWidth={1.5} />
               {contact.hours}
             </span>
@@ -61,76 +41,66 @@ export default function Header({ onFilter }) {
         </div>
       </div>
 
-      <div className="container-site flex h-20 items-center justify-between gap-6">
-        <a href="#accueil" className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
-          <Logo imgClassName="h-9 sm:h-10" />
-          <span className="hidden font-display text-lg font-normal tracking-tight sm:block" aria-hidden>
-            2K Nguith Immo
-          </span>
-        </a>
-
-        <nav aria-label="Menu principal" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {nav.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  onClick={() => go(item)}
-                  className="relative inline-flex min-h-11 items-center px-3.5 text-[0.9rem] font-medium text-white/85 transition-colors duration-300 after:absolute after:inset-x-3.5 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          {/* Seul CTA à l'accent cuivré. Texte bleu nuit : contraste 5,6:1 */}
-          <a
-            href="#contact"
-            className="btn hidden bg-copper text-ink hover:bg-copper-light sm:inline-flex"
-          >
-            Nous contacter
+      <header className="sticky top-0 z-50 border-b border-ink/10 bg-white/85 backdrop-blur-xl">
+        <div className="container-site flex h-20 items-center justify-between gap-6">
+          <a href="#accueil" className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
+            <Logo imgClassName="h-10" className="p-0" />
+            <span className="hidden font-display text-lg tracking-tight sm:block" aria-hidden>
+              2K Nguith Immo
+            </span>
           </a>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="menu-mobile"
-            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors hover:border-white lg:hidden"
-          >
-            {open ? <X aria-hidden strokeWidth={1.5} /> : <Menu aria-hidden strokeWidth={1.5} />}
-          </button>
+
+          <nav aria-label="Menu principal" className="hidden lg:block">
+            <ul className="flex items-center">
+              {nav.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    onClick={() => go(item)}
+                    className="relative inline-flex min-h-11 items-center px-4 text-[0.9rem] font-medium text-ink-muted transition-colors duration-300 after:absolute after:inset-x-4 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-copper after:transition-transform after:duration-500 after:ease-soft hover:text-ink hover:after:scale-x-100"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <a href="#contact" className="btn-dark hidden sm:inline-flex">
+              Nous contacter
+            </a>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="menu-mobile"
+              aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-ink lg:hidden"
+            >
+              {open ? <X aria-hidden strokeWidth={1.5} /> : <Menu aria-hidden strokeWidth={1.5} />}
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Menu mobile plein écran */}
-      <div
-        id="menu-mobile"
-        hidden={!open}
-        className="h-[calc(100dvh-5rem)] overflow-y-auto bg-ink lg:hidden"
-      >
-        <nav aria-label="Menu mobile" className="container-site flex h-full flex-col justify-between pb-28 pt-6">
-          <ul className="divide-y divide-white/10">
-            {nav.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  onClick={() => go(item)}
-                  className="flex min-h-16 items-center font-display text-3xl font-light"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a href="#contact" onClick={() => setOpen(false)} className="btn mt-10 w-full bg-copper text-ink">
-            Nous contacter
-          </a>
-        </nav>
-      </div>
-    </header>
+        {/* Menu mobile plein écran */}
+        <div id="menu-mobile" hidden={!open} className="h-[calc(100dvh-5rem)] overflow-y-auto border-t border-ink/10 bg-white lg:hidden">
+          <nav aria-label="Menu mobile" className="container-site flex h-full flex-col justify-between pb-28 pt-4">
+            <ul className="divide-y divide-ink/10">
+              {nav.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} onClick={() => go(item)} className={cn('flex min-h-16 items-center font-display text-3xl font-light text-ink')}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href="#contact" onClick={() => setOpen(false)} className="btn-dark mt-10 w-full">
+              Nous contacter
+            </a>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }

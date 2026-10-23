@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
-import Services from './components/Services.jsx';
 import Properties from './components/Properties.jsx';
 import PropertyDialog from './components/PropertyDialog.jsx';
 import WhyUs from './components/WhyUs.jsx';
@@ -42,8 +41,7 @@ export default function App() {
       </a>
       <Header onFilter={showType} />
       <main id="contenu">
-        <Hero onSearch={search} />
-        <Services onFilter={showType} />
+        <Hero onSearch={search} onFilter={showType} />
         <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} />
         <WhyUs />
         <Steps />

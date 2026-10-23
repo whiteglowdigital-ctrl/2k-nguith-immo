@@ -5,12 +5,12 @@ export default {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#0F172A', // bleu nuit : textes, en-tête, sections d'autorité
-          soft: '#1E293B',
-          muted: '#475569', // texte secondaire (contraste 7,5:1 sur blanc)
+          DEFAULT: '#0A192F', // bleu nuit : textes importants et boutons principaux uniquement
+          soft: '#172A46',
+          muted: '#4B5563', // texte secondaire (contraste 7:1 sur le fond teinté)
         },
-        mist: '#F8F9FA', // gris architectural : fond général du site
-        line: '#E5E7EB',
+        mist: '#F3F4F1', // pierre claire : fond teinté de la page
+        line: '#E3E4E0', // filets d'un pixel
         copper: {
           DEFAULT: '#D97706', // accent : CTA de l'en-tête et états actifs uniquement
           light: '#F59E0B',
@@ -21,8 +21,8 @@ export default {
         sans: ['Manrope', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 8px 30px rgb(0 0 0 / 0.04)',
-        lift: '0 24px 50px -12px rgb(15 23 42 / 0.14)',
+        air: '0 20px 50px rgba(0, 0, 0, 0.02)',
+        'air-lg': '0 30px 70px rgba(10, 25, 47, 0.07)',
         glow: '0 0 0 1px rgb(217 119 6 / 0.35), 0 8px 28px -4px rgb(217 119 6 / 0.45)',
       },
       letterSpacing: {

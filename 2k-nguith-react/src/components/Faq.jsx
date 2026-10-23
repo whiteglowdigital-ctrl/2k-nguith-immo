@@ -7,16 +7,16 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" aria-labelledby="titre-faq" className="section">
+    <section id="faq" aria-labelledby="titre-faq" className="section bg-white">
       <div className="container-site grid gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-24">
-        <h2 id="titre-faq" className="title">
+        <h2 id="titre-faq" className="title border-t border-ink/10 pt-8 lg:sticky lg:top-32 lg:self-start">
           Questions fréquentes
         </h2>
-        <ul className="border-t border-line">
+        <ul className="border-t border-ink/10">
           {faq.map(({ q, a }, i) => {
             const isOpen = open === i;
             return (
-              <li key={q} className="border-b border-line">
+              <li key={q} className="border-b border-ink/10">
                 <h3>
                   <button
                     type="button"
@@ -24,7 +24,7 @@ export default function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={`faq-a-${i}`}
                     onClick={() => setOpen(isOpen ? -1 : i)}
-                    className="flex min-h-20 w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold text-ink"
+                    className="flex min-h-20 w-full items-center justify-between gap-6 py-7 text-left font-display text-xl font-normal text-ink sm:text-2xl"
                   >
                     {q}
                     <Plus
