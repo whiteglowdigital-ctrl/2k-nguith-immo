@@ -1,6 +1,5 @@
 import { whatsappLink } from '../lib/utils.js';
 
-// Logo WhatsApp (tracé simplifié).
 function WhatsAppIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
@@ -9,7 +8,7 @@ function WhatsAppIcon({ className }) {
   );
 }
 
-// Bouton flottant unique : respiration continue et vague discrète, sans agresser.
+// Cercle émeraude flottant avec une douce lueur continue.
 export default function WhatsAppFab() {
   return (
     <a
@@ -17,9 +16,8 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener"
       aria-label="Nous écrire sur WhatsApp (77 461 41 61)"
-      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition-colors duration-300 hover:bg-emerald-600 motion-safe:animate-breathe"
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 rounded-full bg-emerald-500 p-4 text-white transition-transform duration-300 hover:scale-110 active:scale-95 motion-safe:animate-glowEmerald"
     >
-      <span aria-hidden className="absolute inset-0 -z-10 rounded-full bg-emerald-500/60 motion-safe:animate-wave" />
       <WhatsAppIcon className="h-7 w-7" />
     </a>
   );

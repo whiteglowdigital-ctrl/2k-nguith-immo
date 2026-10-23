@@ -6,11 +6,11 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
   }
   body {
-    @apply bg-white font-sans text-base text-ink antialiased;
+    @apply bg-void font-sans text-base text-white antialiased;
   }
-  /* Descriptions fines par défaut ; titres et prix fixent leur propre graisse */
   p {
     @apply font-light;
   }
@@ -28,55 +28,43 @@
     @apply rounded outline outline-2 outline-offset-2 outline-gold;
   }
   select option {
-    @apply bg-white text-ink;
+    @apply bg-panel text-white;
   }
 }
 
 @layer components {
-  /* Grands espaces : le contenu respire aussi sur mobile */
   .section {
-    @apply py-28 md:py-32 lg:py-40;
+    @apply py-24 md:py-32 lg:py-36;
   }
   .kicker {
-    @apply mb-4 inline-flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-brand md:text-[0.7rem] md:tracking-[0.22em];
+    @apply mb-4 inline-flex items-center gap-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-gold md:text-[0.7rem] md:tracking-[0.25em];
   }
-  .kicker-light {
-    @apply mb-4 inline-flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-gold md:text-[0.7rem] md:tracking-[0.22em];
-  }
-  /* Seuls les titres et les prix sont en serif, en gras */
   .title {
-    @apply font-serif text-[1.7rem] font-semibold leading-[1.18] tracking-tight md:text-5xl;
+    @apply font-serif text-[1.85rem] font-semibold leading-[1.15] tracking-tight text-white md:text-5xl;
   }
-  .desc {
-    @apply text-sm font-light leading-relaxed text-slate-500 md:text-base;
+  /* Mot clé doré et lumineux */
+  .glow-word {
+    @apply text-amber-400 drop-shadow-[0_0_12px_rgba(245,158,11,0.3)];
   }
   .btn-gold {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-6 text-sm font-semibold text-ink transition-all duration-300 active:scale-95 hover:-translate-y-0.5 hover:bg-gold-dark;
-  }
-  .btn-navy {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-navy px-6 text-sm font-semibold text-white transition-all duration-300 active:scale-95 hover:-translate-y-0.5 hover:bg-brand;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-6 text-sm font-semibold text-void transition-all duration-300 hover:bg-gold-light hover:shadow-glow active:scale-95;
   }
   .btn-ghost {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-6 text-sm font-semibold text-white transition-all duration-300 active:scale-95 hover:border-white hover:bg-white/10;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/15 px-6 text-sm font-semibold text-white transition-all duration-300 hover:border-gold/60 hover:text-gold active:scale-95;
   }
-  .btn-line {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink/15 px-6 text-sm font-semibold text-ink transition-all duration-300 active:scale-95 hover:border-brand hover:text-brand;
+  .link-gold {
+    @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-gold transition-colors hover:text-gold-light;
   }
-  .link-arrow {
-    @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-navy;
+  /* Panneau sombre satiné à fine bordure lumineuse */
+  .card {
+    @apply rounded-2xl border border-white/5 bg-panel-raised/50 backdrop-blur-sm;
   }
   .ph-tag {
-    @apply rounded bg-black/50 px-2 py-0.5 text-[0.65rem] font-normal text-white backdrop-blur-sm;
+    @apply rounded bg-black/60 px-2 py-0.5 text-[0.65rem] font-normal text-white/80 backdrop-blur-sm;
   }
-  /* Badge en verre poli sur les photos */
-  .glass {
-    @apply rounded-full border border-white/40 bg-white/60 px-3 py-1 text-xs font-semibold text-navy shadow-sm backdrop-blur-md;
-  }
-
-  /* Carrousel au pouce sur mobile, grille dès la tablette.
-     La carte suivante dépasse de 15 % pour inviter au glissement. */
+  /* Carrousel au pouce sur mobile, grille dès la tablette */
   .rail {
-    @apply -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-6 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0;
+    @apply -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-4 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0;
     scrollbar-width: none;
   }
   .rail::-webkit-scrollbar {
@@ -96,5 +84,6 @@
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

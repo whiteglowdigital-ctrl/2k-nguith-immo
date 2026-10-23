@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../lib/utils.js';
 
-// Fondu vers le haut quand l'élément entre à l'écran.
-// Ce qui est déjà visible au chargement s'affiche tout de suite, sans attendre.
+// Fondu vers le haut quand l'élément entre à l'écran (doigt ou souris).
+// Ce qui est déjà visible au chargement s'affiche tout de suite.
 export default function Reveal({ as: Tag = 'div', delay = 0, className, children, ...rest }) {
   const ref = useRef(null);
-  const [state, setState] = useState('idle'); // idle : visible ; hidden : en attente ; in : animé
+  const [state, setState] = useState('idle');
 
   useEffect(() => {
     const el = ref.current;
@@ -34,7 +34,7 @@ export default function Reveal({ as: Tag = 'div', delay = 0, className, children
       style={state === 'in' && delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={cn(
         state !== 'idle' && 'transition-all duration-700 ease-out',
-        state === 'hidden' && 'translate-y-6 opacity-0',
+        state === 'hidden' && 'translate-y-8 opacity-0',
         state === 'in' && 'translate-y-0 opacity-100',
         className,
       )}

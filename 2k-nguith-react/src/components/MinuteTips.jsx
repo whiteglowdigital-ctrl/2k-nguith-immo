@@ -7,35 +7,24 @@ export default function MinuteTips() {
   return (
     <section id="minute-2k" aria-labelledby="titre-minute" className="section">
       <div className="container">
-        <SectionHead id="titre-minute" kicker="Conseils vidéo" title="Minute" accent="2K" intro="Nos conseils immobiliers en vidéo courte.">
-          <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="link-arrow">
+        <SectionHead id="titre-minute" kicker="Conseils vidéo" title="Minute" glow="2K">
+          <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="link-gold">
             Toutes les vidéos sur TikTok
             <ArrowRight aria-hidden className="h-4 w-4" />
           </a>
         </SectionHead>
-        <ul className="rail md:grid-cols-3 md:gap-8">
+        <ul className="rail md:grid-cols-3 md:gap-6">
           {tips.map((tip, i) => (
             <Reveal as="li" key={tip.title} delay={i * 120}>
-              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <div className="relative aspect-video overflow-hidden">
-                  {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
-                  <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
-                  <span aria-hidden className="absolute inset-0 bg-night/35" />
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/80 text-navy ring-1 ring-white/60 backdrop-blur-md group-hover:bg-gold transition group-hover:scale-110">
-                      <Play aria-hidden className="ml-0.5 h-5 w-5 fill-current" />
-                    </span>
-                  </span>
-                  <span className="ph-tag absolute left-3 top-3">[Miniature à remplacer]</span>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brand">Minute 2K</span>
-                  <h3 className="mt-3 font-serif text-lg font-semibold leading-snug">{tip.title}</h3>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
-                    Voir la vidéo
-                    <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
+              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/5">
+                {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
+                <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-void/20" />
+                <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:bg-gold group-hover:text-void">
+                  <Play aria-hidden className="ml-0.5 h-5 w-5 fill-current" />
+                </span>
+                <span className="ph-tag absolute left-3 top-3">[Miniature à remplacer]</span>
+                <h3 className="absolute inset-x-5 bottom-5 font-serif text-xl font-semibold leading-snug">{tip.title}</h3>
               </a>
             </Reveal>
           ))}

@@ -4,26 +4,23 @@ import { budgets, heroImage, properties, slogans } from '../data/site.js';
 
 const quartiers = [...new Set(properties.map((p) => p.location.split(' (')[0]))];
 
-// Un champ de la barre de recherche : icône dans un cercle, libellé, sélecteur.
-function SearchField({ id, label, Icon, value, onChange, children, className = '' }) {
+function Field({ id, label, Icon, value, onChange, children, className = '' }) {
   return (
-    <div className={`flex min-w-0 flex-1 items-center gap-3 px-3 py-2 md:px-4 ${className}`}>
-      <span className="hidden h-11 w-11 shrink-0 md:flex items-center justify-center rounded-full bg-navy-soft text-brand">
-        <Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} />
-      </span>
+    <div className={`relative flex min-w-0 flex-1 items-center gap-3 px-4 py-3 ${className}`}>
+      <Icon aria-hidden strokeWidth={1.5} className="hidden h-5 w-5 shrink-0 text-gold md:block" />
       <div className="relative min-w-0 flex-1">
-        <label htmlFor={id} className="block text-[0.65rem] font-medium uppercase tracking-wider text-slate-400 md:text-xs md:font-semibold md:normal-case md:tracking-normal md:text-ink">
+        <label htmlFor={id} className="block text-[0.65rem] font-medium uppercase tracking-[0.18em] text-silver">
           {label}
         </label>
         <select
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-5 text-[0.8rem] font-normal text-ink md:text-sm md:font-light md:text-slate-500 focus:outline-none focus:ring-0"
+          className="mt-0.5 w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-6 text-sm font-medium text-white focus:outline-none focus:ring-0"
         >
           {children}
         </select>
-        <ChevronDown aria-hidden className="pointer-events-none absolute bottom-0.5 right-0 h-4 w-4 text-ink-muted" />
+        <ChevronDown aria-hidden className="pointer-events-none absolute bottom-0.5 right-0 h-4 w-4 text-silver" />
       </div>
     </div>
   );
@@ -40,51 +37,60 @@ export default function Hero({ onSearch }) {
   };
 
   return (
-    <section id="accueil" aria-labelledby="titre-accueil" className="relative isolate overflow-hidden bg-night text-white">
-      <img src={heroImage} alt="" fetchpriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/60 to-night/10" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-night/70 to-transparent" />
+    <section id="accueil" aria-labelledby="titre-accueil" className="relative isolate flex min-h-[85vh] items-end overflow-hidden">
+      <img src={heroImage} alt="" fetchpriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_75%] motion-safe:animate-heroZoom" />
+      {/* Voiles : le texte reste lisible, la villa reste lumineuse */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-void via-void/30 to-void/70" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-void/80 via-void/20 to-transparent" />
 
-      <div className="container pb-20 pt-32 md:pb-28 md:pt-48">
-        <p className="kicker-light">{slogans.main}</p>
-        <h1 id="titre-accueil" className="mt-2 max-w-3xl font-serif text-[2.05rem] font-semibold leading-[1.12] tracking-tight sm:text-6xl lg:text-7xl">
-          Trouvez le bien <span className="text-gold">de vos rêves</span> avec nous
+      <div className="container pb-16 pt-36 md:pb-24">
+        <p className="kicker text-[0.6rem] tracking-[0.12em] motion-safe:animate-rise md:text-[0.7rem]">
+          <span aria-hidden className="hidden h-px w-8 bg-gold md:block" />
+          {slogans.main}
+        </p>
+        <h1
+          id="titre-accueil"
+          className="max-w-4xl font-serif text-[2.6rem] font-semibold leading-[1.05] tracking-tight motion-safe:animate-rise sm:text-6xl lg:text-[5.5rem]"
+          style={{ animationDelay: '150ms' }}
+        >
+          Trouvez le bien de vos <span className="glow-word">rêves</span> avec nous
         </h1>
-        <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-slate-300 md:mt-6 md:text-lg">
-          {slogans.hero}. Vente, location, gérance et terrains à Dakar et environs.
+        <p className="mt-6 max-w-lg text-sm text-silver motion-safe:animate-rise md:text-lg" style={{ animationDelay: '300ms' }}>
+          Vente, location, gérance et terrains à Dakar et environs.
         </p>
 
-        {/* Barre de recherche blanche, massive */}
+        {/* Panneau sombre translucide */}
         <form
           role="search"
           aria-label="Rechercher un bien"
           onSubmit={submit}
-          className="mt-14 grid max-w-4xl grid-cols-2 rounded-3xl border border-white/60 bg-white/95 p-2 text-ink shadow-[0_20px_50px_rgba(0,0,0,0.06)] backdrop-blur-md md:mt-12 md:flex md:items-center md:divide-x md:divide-ink/10 md:p-4"
+          className="mt-10 grid max-w-4xl grid-cols-2 rounded-2xl border border-white/10 bg-slate-900/60 p-2 shadow-deep backdrop-blur-xl motion-safe:animate-rise md:mt-12 md:flex md:items-center md:divide-x md:divide-white/10 md:p-3"
+          style={{ animationDelay: '450ms' }}
         >
-          <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier} className="col-span-2 border-b border-ink/5 md:border-0">
+          <Field id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier} className="col-span-2 border-b border-white/10 md:border-b-0">
             <option value="">Tous les quartiers</option>
             {quartiers.map((q) => (
               <option key={q} value={q}>
                 {q}
               </option>
             ))}
-          </SearchField>
-          <SearchField id="s-type" label="Type de bien" Icon={Home} value={type} onChange={setType} className="border-r border-ink/5 md:border-r-0">
+          </Field>
+          <Field id="s-type" label="Type de bien" Icon={Home} value={type} onChange={setType} className="border-r border-white/10 md:border-r-0">
             <option value="vente">À acheter</option>
             <option value="location">À louer</option>
             <option value="terrain">Terrain</option>
-          </SearchField>
-          <SearchField id="s-budget" label="Budget" Icon={Banknote} value={budget} onChange={setBudget}>
+          </Field>
+          <Field id="s-budget" label="Budget" Icon={Banknote} value={budget} onChange={setBudget}>
             <option value="">Tous les prix</option>
             {budgets.slice(1).map((b) => (
               <option key={b.value} value={b.value}>
                 {b.label}
               </option>
             ))}
-          </SearchField>
-          <div className="col-span-2 pt-2 md:pl-3 md:pt-0">
-            <button type="submit" className="btn-navy min-h-10 w-full rounded-xl px-7 py-2 text-[0.8rem] md:min-h-12 md:w-auto md:rounded-full md:text-sm">
-              <Search aria-hidden className="h-3.5 w-3.5 md:h-4 md:w-4" />
+          </Field>
+          <div className="col-span-2 p-1 md:pl-3">
+            <button type="submit" className="btn-gold w-full motion-safe:animate-pulseGold md:w-auto md:px-8">
+              <Search aria-hidden className="h-4 w-4" />
               Rechercher
             </button>
           </div>

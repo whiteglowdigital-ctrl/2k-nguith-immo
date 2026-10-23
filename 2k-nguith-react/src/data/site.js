@@ -22,7 +22,7 @@ export const slogans = {
 const unsplash = (id, w = 900) =>
   `https://images.unsplash.com/${id}?w=${w}&q=70&auto=format&fit=crop`;
 
-export const heroImage = unsplash('photo-1600585154340-be6161a56a0c', 2000);
+export const heroImage = unsplash('photo-1613553507747-5f8d62ad5904', 2000);
 
 // Images des sections d'ambiance (illustrations, à remplacer par de vraies photos de l'agence)
 export const ambiance = {

@@ -4,7 +4,6 @@ import Hero from './components/Hero.jsx';
 import Properties from './components/Properties.jsx';
 import PropertyDialog from './components/PropertyDialog.jsx';
 import WhyUs from './components/WhyUs.jsx';
-import Stats from './components/Stats.jsx';
 import Steps from './components/Steps.jsx';
 import Categories from './components/Categories.jsx';
 import Management from './components/Management.jsx';
@@ -35,7 +34,7 @@ export default function App() {
 
   return (
     <>
-      <a href="#contenu" className="sr-only rounded-lg bg-night px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">
+      <a href="#contenu" className="sr-only rounded-lg bg-gold px-5 py-3 text-void focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">
         Aller au contenu
       </a>
       <Header onFilter={showType} />
@@ -43,7 +42,6 @@ export default function App() {
         <Hero onSearch={search} />
         <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} />
         <WhyUs />
-        <Stats />
         <Steps />
         <Categories onFilter={showType} />
         <Management />

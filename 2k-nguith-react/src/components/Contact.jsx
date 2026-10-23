@@ -1,8 +1,8 @@
-import { ArrowRight, Clock, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowUpRight, Clock, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { ambiance, contact } from '../data/site.js';
 import { whatsappLink } from '../lib/utils.js';
+import Reveal from './Reveal.jsx';
 
-// Appel à l'action final : photo de nuit en fond, carte de contact blanche à droite.
 export default function Contact() {
   const rows = [
     { Icon: Phone, term: 'WhatsApp et appel', value: contact.phoneDisplay, href: `tel:${contact.phoneIntl}` },
@@ -11,16 +11,18 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" aria-labelledby="titre-contact" className="relative isolate overflow-hidden bg-navy py-24 text-white md:py-32 lg:py-40">
-      <img src={ambiance.contact} alt="" loading="lazy" decoding="async" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/90 to-navy/50" />
+    <section id="contact" aria-labelledby="titre-contact" className="relative isolate overflow-hidden py-24 md:py-32 lg:py-36">
+      <img src={ambiance.contact} alt="" loading="lazy" decoding="async" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-void via-void/80 to-void" />
       <div className="container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-        <div>
-          <p className="kicker-light">Contact</p>
+        <Reveal>
+          <p className="kicker">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            Contact
+          </p>
           <h2 id="titre-contact" className="title">
-            Venez <span className="text-gold">nous voir</span>
+            Venez <span className="glow-word">nous voir</span>
           </h2>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-slate-300 md:text-lg">Cité Atepa, près VDN 3, Malibu, face au terrain Las Palmas. Ou écrivez-nous directement sur WhatsApp.</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={whatsappLink()} target="_blank" rel="noopener" className="btn-gold">
               <MessageCircle aria-hidden className="h-4 w-4" />
@@ -31,31 +33,31 @@ export default function Contact() {
               Appeler
             </a>
             <a href={contact.mapsUrl} target="_blank" rel="noopener" className="btn-ghost">
-              Voir sur Google Maps
-              <ArrowRight aria-hidden className="h-4 w-4" />
+              Google Maps
+              <ArrowUpRight aria-hidden className="h-4 w-4" />
             </a>
           </div>
-        </div>
+        </Reveal>
 
-        <ul className="space-y-3 rounded-3xl border border-black/5 bg-white p-5 text-ink shadow-2xl sm:p-7 lg:ml-auto lg:max-w-md">
+        <Reveal as="ul" delay={150} className="card space-y-2 p-4 sm:p-6 lg:ml-auto lg:w-full lg:max-w-md">
           {rows.map(({ Icon, term, value, href, external }) => (
-            <li key={term} className="flex items-start gap-4 rounded-2xl p-3">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy-soft text-brand">
-                <Icon aria-hidden className="h-5 w-5" />
+            <li key={term} className="flex items-start gap-4 rounded-xl p-3">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/30 text-gold">
+                <Icon aria-hidden strokeWidth={1.5} className="h-5 w-5" />
               </span>
               <span>
                 <span className="block text-sm font-semibold">{term}</span>
                 {href ? (
-                  <a href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})} className="text-sm font-light text-slate-500 hover:text-brand hover:underline">
+                  <a href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})} className="text-sm text-silver hover:text-gold hover:underline">
                     {value}
                   </a>
                 ) : (
-                  <span className="text-sm font-light text-slate-500">{value}</span>
+                  <span className="text-sm text-silver">{value}</span>
                 )}
               </span>
             </li>
           ))}
-        </ul>
+        </Reveal>
       </div>
     </section>
   );

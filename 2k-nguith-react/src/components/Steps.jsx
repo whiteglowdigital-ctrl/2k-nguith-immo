@@ -8,20 +8,17 @@ const steps = [
   { title: 'Signer', text: "On vous accompagne jusqu'à la signature." },
 ];
 
-// Lecture légère : petits numéros, texte fin, lignes de séparation discrètes.
 export default function Steps() {
   return (
-    <section aria-labelledby="titre-etapes" className="section bg-cloud">
+    <section aria-labelledby="titre-etapes" className="section">
       <div className="container">
-        <SectionHead id="titre-etapes" kicker="Notre méthode" title="Comment ça" accent="marche" />
-        <ol className="divide-y divide-slate-200 border-y border-slate-200 lg:grid lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+        <SectionHead id="titre-etapes" kicker="Notre méthode" title="Comment ça" glow="marche" />
+        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ title, text }, i) => (
-            <Reveal as="li" delay={i * 120} key={title} className="flex gap-6 py-8 lg:flex-col lg:gap-10 lg:px-8 lg:py-10 lg:first:pl-0">
-              <span className="w-8 shrink-0 pt-0.5 text-sm font-normal tabular-nums tracking-widest text-gold-dark">{String(i + 1).padStart(2, '0')}</span>
-              <div>
-                <h3 className="font-serif text-xl font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">{text}</p>
-              </div>
+            <Reveal as="li" key={title} delay={i * 120} className="card group p-7 transition-colors duration-500 hover:border-gold/20">
+              <span className="font-serif text-4xl font-semibold text-gold/80 transition-colors duration-500 group-hover:text-gold">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="mt-6 font-serif text-xl font-semibold">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-silver">{text}</p>
             </Reveal>
           ))}
         </ol>

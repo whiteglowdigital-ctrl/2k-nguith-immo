@@ -3,7 +3,7 @@ import { MessageCircle, Phone, X } from 'lucide-react';
 import { contact, typeLabels } from '../data/site.js';
 import { formatFcfa, whatsappLink } from '../lib/utils.js';
 
-// Fiche détaillée d'un bien, avec les papiers.
+// Fiche détaillée : les informations administratives (papiers, surface) sont ici.
 export default function PropertyDialog({ property: p, onClose }) {
   const ref = useRef(null);
 
@@ -24,7 +24,7 @@ export default function PropertyDialog({ property: p, onClose }) {
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-labelledby="dialog-titre"
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(56rem,calc(100%-2rem))] overflow-y-auto rounded-3xl bg-white p-0 text-ink shadow-2xl backdrop:bg-night/70 backdrop:backdrop-blur-sm"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(56rem,calc(100%-2rem))] overflow-y-auto rounded-3xl border border-white/10 bg-panel p-0 text-white shadow-deep backdrop:bg-black/80 backdrop:backdrop-blur-sm"
     >
       {p && (
         <div className="grid md:grid-cols-2">
@@ -34,20 +34,20 @@ export default function PropertyDialog({ property: p, onClose }) {
           </div>
           <div className="p-6 sm:p-8">
             <div className="flex items-start justify-between gap-4">
-              <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brand">{typeLabels[p.type]}</span>
-              <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-cloud">
+              <span className="kicker mb-0">{typeLabels[p.type]}</span>
+              <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full text-silver hover:bg-white/5 hover:text-white">
                 <X aria-hidden className="h-5 w-5" />
               </button>
             </div>
             <h2 id="dialog-titre" className="mt-3 font-serif text-2xl font-semibold">
               {p.title}
             </h2>
-            <p className="mt-2 font-serif text-2xl font-bold tabular-nums text-navy">{price}</p>
-            <dl className="mt-6 divide-y divide-ink/10 rounded-2xl bg-cloud px-4 text-sm">
+            <p className="mt-2 font-serif text-3xl font-semibold tabular-nums text-gold">{price}</p>
+            <dl className="mt-6 divide-y divide-white/5 rounded-2xl border border-white/5 bg-white/[0.03] px-4 text-sm">
               {rows.map(([term, value]) => (
                 <div key={term} className="flex justify-between gap-6 py-3">
-                  <dt className="text-ink-muted">{term}</dt>
-                  <dd className="text-right font-semibold">{value}</dd>
+                  <dt className="text-silver">{term}</dt>
+                  <dd className="text-right">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -56,7 +56,7 @@ export default function PropertyDialog({ property: p, onClose }) {
                 <MessageCircle aria-hidden className="h-4 w-4" />
                 Je suis intéressé
               </a>
-              <a href={`tel:${contact.phoneIntl}`} className="btn-line tabular-nums">
+              <a href={`tel:${contact.phoneIntl}`} className="btn-ghost tabular-nums">
                 <Phone aria-hidden className="h-4 w-4" />
                 {contact.phoneDisplay}
               </a>
