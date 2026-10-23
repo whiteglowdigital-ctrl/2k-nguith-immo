@@ -1,5 +1,5 @@
-import { ArrowRight, ImagePlus } from 'lucide-react';
-import { budgets, properties, propertySlots } from '../data/site.js';
+import { ArrowRight } from 'lucide-react';
+import { budgets, homeLimit, properties } from '../data/site.js';
 import { cn, normalize, whatsappLink } from '../lib/utils.js';
 import SectionHead from './SectionHead.jsx';
 import PropertyCard from './PropertyCard.jsx';
@@ -14,7 +14,8 @@ const tabs = [
 
 const intent = { vente: 'acheter un bien', location: 'louer un bien', terrain: 'acheter un terrain', tous: 'trouver un bien' };
 
-export default function Properties({ filters, onType, onReset, onOpen }) {
+// Accueil : une sélection de biens ; le catalogue complet est sur la page « Tous nos biens ».
+export default function Properties({ filters, onType, onReset, onOpen, onOpenCatalogue }) {
   const { type, quartier, budget } = filters;
   const max = Number(budget) || 0;
   const isSearch = Boolean(quartier || max);
@@ -25,19 +26,23 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
       (!quartier || normalize(p.location).includes(normalize(quartier))) &&
       (!max || p.price <= max),
   );
-  const slots = type === 'tous' && !isSearch ? propertySlots : 0;
+  const shown = list.slice(0, homeLimit);
   const budgetLabel = budgets.find((b) => b.value === budget)?.label;
   const need =
     `Bonjour 2K Nguith, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
+
+  const catalogueButton = (
+    <button type="button" onClick={onOpenCatalogue} className="link-gold">
+      Voir tous nos biens ({properties.length})
+      <ArrowRight aria-hidden className="h-4 w-4" />
+    </button>
+  );
 
   return (
     <section id="biens" aria-labelledby="titre-biens" className="section section-light">
       <div className="container">
         <SectionHead id="titre-biens" kicker="Biens disponibles" title="Nos biens" glow="à la une">
-          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="link-gold">
-            Voir tous nos biens
-            <ArrowRight aria-hidden className="h-4 w-4" />
-          </a>
+          {catalogueButton}
         </SectionHead>
 
         <div role="group" aria-label="Filtrer les biens" className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0">
@@ -82,21 +87,20 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
           </Reveal>
         ) : (
           <ul className="rail md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-            {list.map((p, i) => (
-              <Reveal as="li" key={p.id} delay={i * 120}>
+            {shown.map((p, i) => (
+              <Reveal as="li" key={p.id} delay={(i % 3) * 120}>
                 <PropertyCard property={p} onOpen={onOpen} />
-              </Reveal>
-            ))}
-            {Array.from({ length: slots }, (_, i) => (
-              <Reveal as="li" key={`slot-${i}`} delay={(list.length + i) * 120}>
-                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-slate-200 text-slate-500">
-                  <ImagePlus aria-hidden strokeWidth={1.25} className="h-7 w-7" />
-                  <span className="text-sm font-light">[Bien à ajouter]</span>
-                </div>
               </Reveal>
             ))}
           </ul>
         )}
+
+        <div className="mt-12 flex justify-center">
+          <button type="button" onClick={onOpenCatalogue} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-7 text-sm font-semibold text-white transition-all duration-300 hover:bg-slate-800 active:scale-95">
+            Voir tous nos biens
+            <ArrowRight aria-hidden className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </section>
   );

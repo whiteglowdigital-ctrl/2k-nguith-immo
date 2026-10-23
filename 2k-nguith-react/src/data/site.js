@@ -1,4 +1,6 @@
-// Contenu du site : tout ce qui manque reste [entre crochets], rien n'est inventé.
+// Contenu du site : tout ce qui manque reste [entre crochets].
+// Les éléments marqués « example: true » sont des EXEMPLES de maquette, signalés comme tels
+// sur le site : à remplacer par de vrais biens et de vrais avis avant la mise en ligne.
 
 export const contact = {
   phoneDisplay: '77 461 41 61',
@@ -63,6 +65,7 @@ export const properties = [
     location: 'Mounka Bambara (croisement Yenn)',
     surface: '225 m²',
     papers: 'Acte administratif double signature',
+    paperType: 'Acte administratif',
     price: 10000000,
     image: unsplash('photo-1500382017468-9049fed747ef'),
     alt: 'Terrain nu dégagé au coucher du soleil',
@@ -75,6 +78,7 @@ export const properties = [
     location: 'Malicounda',
     surface: '220 m²',
     papers: '[à préciser]',
+    paperType: '[à préciser]',
     price: 3500000,
     image: unsplash('photo-1541888946425-d81bb19240f5'),
     alt: 'Terrain préparé pour une construction',
@@ -88,6 +92,7 @@ export const properties = [
     surface: '150 m²',
     details: 'Moins de 5 ans',
     papers: '[à préciser]',
+    paperType: '[à préciser]',
     price: 90000000,
     image: unsplash('photo-1523217582562-09d0def993a6'),
     alt: 'Maison moderne blanche à étages',
@@ -106,13 +111,60 @@ export const properties = [
     image: unsplash('photo-1522708323590-d24dbb6b0267'),
     alt: "Salon lumineux d'un appartement",
   },
+  // --- Exemples de maquette (affichés avec le badge « Exemple ») ---
+  {
+    id: 'exemple-appartement-almadies',
+    example: true,
+    type: 'vente',
+    title: 'Appartement standing 3 chambres',
+    short: 'Appartement standing',
+    location: 'Almadies',
+    surface: '140 m²',
+    bedrooms: 3,
+    papers: 'Titre foncier',
+    paperType: 'Titre foncier',
+    price: 120000000,
+    image: unsplash('photo-1545324418-cc1a3fa10c00'),
+    alt: "Façade d'un immeuble résidentiel moderne",
+  },
+  {
+    id: 'exemple-villa-saly',
+    example: true,
+    type: 'vente',
+    title: 'Villa moderne avec piscine',
+    short: 'Villa moderne',
+    location: 'Saly',
+    surface: '300 m²',
+    bedrooms: 4,
+    papers: 'Titre foncier',
+    paperType: 'Titre foncier',
+    price: 180000000,
+    image: unsplash('photo-1512917774080-9991f1c4c750'),
+    alt: 'Villa blanche moderne avec piscine',
+  },
+  {
+    id: 'exemple-terrain-thies',
+    example: true,
+    type: 'terrain',
+    title: 'Terrain 300 m²',
+    short: 'Terrain',
+    location: 'Thiès',
+    surface: '300 m²',
+    papers: 'Bail',
+    paperType: 'Bail',
+    price: 6000000,
+    image: unsplash('photo-1500382017468-9049fed747ef'),
+    alt: 'Terrain nu au coucher du soleil',
+  },
 ];
+
+export const paperTypes = ['Titre foncier', 'Bail', 'Acte administratif', '[à préciser]'];
 
 // Bien mis en avant en grande rangée en tête de la liste.
 export const featuredPropertyId = 'maison-r3-comico-gadaye';
 
-// Emplacements réservés aux prochains biens.
-export const propertySlots = 2;
+// Nombre de biens montrés sur l'accueil ; la suite est dans la page « Tous nos biens ».
+export const homeLimit = 6;
 
 export const budgets = [
   { value: '', label: 'Tous budgets' },
@@ -148,10 +200,10 @@ export const gallery = [
   { src: unsplash('photo-1613490493576-7fde63acd811', 900), alt: "Façade d'une maison contemporaine" },
 ];
 
-export const faq = [
-  { q: 'Comment visiter un bien ?', a: 'Écrivez-nous sur WhatsApp avec le nom du bien, nous organisons la visite.' },
-  { q: 'Quels papiers ont vos terrains ?', a: 'Le type de papiers est indiqué sur chaque annonce. [à confirmer]' },
-  { q: "Je vis à l'étranger, comment faire ?", a: 'Nous vous envoyons photos, vidéos et documents, et nous vous accompagnons à distance.' },
-  { q: 'Comment fonctionne la gérance ?', a: '[à compléter]' },
-  { q: 'Faites-vous aussi la construction ?', a: 'Oui, construction et rénovation. Demandez un devis sur WhatsApp.' },
+// Avis d'EXEMPLE pour la maquette : affichés avec la mention « Avis d'exemple ».
+// À remplacer par de vrais avis clients (texte, prénom, ville) avant la mise en ligne.
+export const reviews = [
+  { name: 'Moussa D.', city: 'Paris', rating: 5, text: "Depuis la France, j'ai acheté mon terrain sans stress. Photos, vidéos, papiers : tout m'a été envoyé sur WhatsApp. Merci 2K Nguith !" },
+  { name: 'Mariama S.', city: 'Dakar', rating: 5, text: 'Appartement trouvé en une semaine, exactement dans mon budget. Équipe sérieuse et très réactive.' },
+  { name: 'Ibrahima N.', city: 'Milan', rating: 5, text: "Ils gèrent ma maison à Dakar et je reçois des nouvelles régulièrement. Je recommande à toute la diaspora." },
 ];

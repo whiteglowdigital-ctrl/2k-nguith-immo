@@ -4,7 +4,7 @@ import SectionHead from './SectionHead.jsx';
 import Reveal from './Reveal.jsx';
 
 // « Tout au même endroit » : vignettes verticales, nom posé sur l'image.
-export default function Categories({ onFilter }) {
+export default function Categories({ onNavigate }) {
   return (
     <section aria-labelledby="titre-categories" className="section bg-panel/60">
       <div className="container">
@@ -14,7 +14,10 @@ export default function Categories({ onFilter }) {
             <Reveal as="li" key={c.label} delay={i * 100}>
               <a
                 href={c.href}
-                onClick={() => c.filter && onFilter(c.filter)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(c);
+                }}
                 className="group relative block aspect-[3/4] overflow-hidden rounded-2xl border border-white/5"
               >
                 <img src={c.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />

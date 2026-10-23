@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Music2 } from 'lucide-react';
 import { contact, nav, slogans } from '../data/site.js';
-import logo from '../assets/logo-2k-nguith.webp';
+import logo from '../assets/logo-2k-nguith-transparent.webp';
 
 const socials = [
   { label: 'TikTok', href: contact.socials.tiktok, Icon: Music2 },
@@ -8,21 +8,25 @@ const socials = [
   { label: 'Facebook [lien à ajouter]', href: contact.socials.facebook, Icon: Facebook },
 ];
 
-export default function Footer() {
+export default function Footer({ onNavigate }) {
   return (
     <footer className="border-t border-white/5 bg-void">
       <div className="container grid grid-cols-1 gap-10 py-16 md:grid-cols-3">
         <div>
-          <span className="inline-flex rounded-lg bg-white p-1.5">
-            <img src={logo} width="320" height="260" alt="Logo 2K Nguith Immo" className="h-12 w-auto" />
-          </span>
+          <img src={logo} width="360" height="288" alt="Logo 2K Nguith Immo" className="h-16 w-auto drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]" />
           <p className="mt-5 font-serif text-lg text-white">{slogans.main}</p>
         </div>
         <nav aria-label="Liens du pied de page">
           <ul className="grid grid-cols-2 gap-y-1">
             {nav.map((n) => (
               <li key={n.label}>
-                <a href={n.href} className="inline-flex min-h-10 items-center text-sm text-silver transition-colors hover:text-gold">
+                <a
+                  href={n.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(n);
+                  }}
+                  className="inline-flex min-h-10 items-center text-sm text-silver transition-colors hover:text-gold">
                   {n.label}
                 </a>
               </li>

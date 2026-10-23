@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { nav } from '../data/site.js';
 import { cn } from '../lib/utils.js';
-import logo from '../assets/logo-2k-nguith.webp';
+import logo from '../assets/logo-2k-nguith-transparent.webp';
 
 // Transparent sur la photo du hero, noir translucide flouté au défilement.
-export default function Header({ onFilter }) {
+export default function Header({ onNavigate, solidAlways = false }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -21,23 +21,24 @@ export default function Header({ onFilter }) {
     };
   }, []);
 
-  const go = (item) => {
-    if (item.filter) onFilter(item.filter);
+  // Défilement fluide vers la section (et retour à l'accueil depuis le catalogue).
+  const go = (e, item) => {
+    e.preventDefault();
     setOpen(false);
+    onNavigate(item);
   };
 
   return (
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-40 transition-all duration-500',
-        solid || open ? 'border-b border-white/5 bg-void/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent',
+        solid || open || solidAlways ? 'border-b border-white/5 bg-void/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent',
       )}
     >
       <div className="container flex h-20 items-center justify-between gap-6">
-        <a href="#accueil" className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
-          <span className="rounded-lg bg-white p-1">
-            <img src={logo} width="320" height="260" alt="Logo 2K Nguith Immo" className="h-9 w-auto" />
-          </span>
+        <a href="#accueil" onClick={(e) => go(e, { href: '#accueil' })} className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
+          {/* Logo sans fond : le bleu et l'orange se posent directement sur la barre sombre */}
+          <img src={logo} width="360" height="288" alt="Logo 2K Nguith Immo" className="h-11 w-auto drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]" />
           <span className="hidden font-serif text-lg font-semibold sm:block" aria-hidden>
             2K Nguith <span className="text-gold">Immo</span>
           </span>
@@ -49,7 +50,7 @@ export default function Header({ onFilter }) {
               <li key={item.label}>
                 <a
                   href={item.href}
-                  onClick={() => go(item)}
+                  onClick={(e) => go(e, item)}
                   className="relative inline-flex min-h-11 items-center px-3.5 text-sm text-silver transition-colors duration-300 after:absolute after:inset-x-3.5 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-500 hover:text-white hover:after:scale-x-100"
                 >
                   {item.label}
@@ -60,7 +61,7 @@ export default function Header({ onFilter }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="#contact" className="btn-gold hidden min-h-11 sm:inline-flex">
+          <a href="#contact" onClick={(e) => go(e, { href: '#contact' })} className="btn-gold hidden min-h-11 sm:inline-flex">
             Nous contacter
             <ArrowRight aria-hidden className="h-4 w-4" />
           </a>
@@ -81,13 +82,13 @@ export default function Header({ onFilter }) {
         <ul className="container py-4">
           {nav.map((item) => (
             <li key={item.label} className="border-b border-white/5">
-              <a href={item.href} onClick={() => go(item)} className="flex min-h-14 items-center font-serif text-xl">
+              <a href={item.href} onClick={(e) => go(e, item)} className="flex min-h-14 items-center font-serif text-xl">
                 {item.label}
               </a>
             </li>
           ))}
           <li className="pt-6">
-            <a href="#contact" onClick={() => setOpen(false)} className="btn-gold w-full">
+            <a href="#contact" onClick={(e) => go(e, { href: '#contact' })} className="btn-gold w-full">
               Nous contacter
             </a>
           </li>

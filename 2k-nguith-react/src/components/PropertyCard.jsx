@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { BedDouble, FileCheck2, Heart, MapPin, Ruler } from 'lucide-react';
+import { BedDouble, FileCheck2, MapPin, Ruler } from 'lucide-react';
 import { typeLabels } from '../data/site.js';
-import { cn, formatFcfa } from '../lib/utils.js';
+import { formatFcfa } from '../lib/utils.js';
 
 // Mini-caractéristiques : seulement ce qui est connu (aucune donnée inventée).
 function specs(p) {
@@ -14,7 +13,6 @@ function specs(p) {
 
 // Carte blanche à ombre douce : l'image domine, le prix en grand en dessous.
 export default function PropertyCard({ property: p, onOpen }) {
-  const [fav, setFav] = useState(false);
   const place = p.location.split(' (')[0];
 
   return (
@@ -31,15 +29,9 @@ export default function PropertyCard({ property: p, onOpen }) {
         <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-white backdrop-blur-md">
           {typeLabels[p.type]}
         </span>
-        <button
-          type="button"
-          onClick={() => setFav((v) => !v)}
-          aria-pressed={fav}
-          aria-label={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
-          className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white backdrop-blur-md transition hover:scale-105"
-        >
-          <Heart aria-hidden strokeWidth={1.5} className={cn('h-5 w-5', fav && 'fill-gold text-gold')} />
-        </button>
+        {p.example && (
+          <span className="absolute right-3 top-3 rounded-full bg-gold px-3 py-1 text-[0.7rem] font-semibold text-void">Exemple</span>
+        )}
         <p className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-white/85">
           <MapPin aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5 text-gold" />
           {place}
