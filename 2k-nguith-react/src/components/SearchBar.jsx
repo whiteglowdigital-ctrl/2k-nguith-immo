@@ -40,7 +40,7 @@ export default function SearchBar({ onSearch }) {
       role="search"
       aria-label="Rechercher un bien"
       onSubmit={submit}
-      className="mx-auto flex max-w-5xl flex-col divide-y divide-white/15 rounded-3xl border border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:flex-row sm:items-stretch sm:divide-x sm:divide-y-0 sm:rounded-full"
+      className="mx-auto flex max-w-5xl flex-col divide-y divide-white/10 rounded-3xl border border-white/10 bg-slate-900/40 p-2 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] ring-1 ring-inset ring-white/5 backdrop-blur-lg sm:flex-row sm:items-stretch sm:divide-x sm:divide-y-0 sm:rounded-full"
     >
       <Field id="s-type" label="Type de bien">
         <select id="s-type" value={type} onChange={(e) => setType(e.target.value)} className={selectClass}>
@@ -71,10 +71,10 @@ export default function SearchBar({ onSearch }) {
       <div className="flex items-center p-1 pt-3 sm:pt-1">
         <button
           type="submit"
-          className="btn w-full bg-white text-ink hover:bg-mist sm:w-auto"
+          className="btn group w-full rounded-full bg-white px-8 text-ink hover:bg-white/90 hover:shadow-glow active:scale-[0.98] sm:w-auto"
         >
           Rechercher
-          <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={1.75} />
+          <ArrowRight aria-hidden className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-copper" strokeWidth={1.75} />
         </button>
       </div>
     </form>

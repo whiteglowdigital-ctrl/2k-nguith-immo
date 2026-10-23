@@ -3,9 +3,9 @@ import { whatsappLink } from '../lib/utils.js';
 
 export default function Diaspora() {
   return (
-    <section aria-labelledby="titre-diaspora" className="bg-white pb-24 sm:pb-32">
+    <section aria-labelledby="titre-diaspora" className="section">
       <div className="container-site">
-        <div className="relative overflow-hidden rounded-[2rem] border border-line bg-mist px-7 py-14 sm:px-14 sm:py-20">
+        <div className="relative overflow-hidden rounded-[2rem] bg-white px-7 shadow-soft py-14 sm:px-14 sm:py-20">
           <Globe2 aria-hidden strokeWidth={0.5} className="pointer-events-none absolute -right-16 -top-16 h-80 w-80 text-ink/[0.06] sm:h-[28rem] sm:w-[28rem]" />
           <div className="relative flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">

@@ -10,7 +10,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" aria-labelledby="titre-contact" className="section bg-mist">
+    <section id="contact" aria-labelledby="titre-contact" className="section bg-white">
       <div className="container-site grid gap-14 lg:grid-cols-2 lg:gap-24">
         <div>
           <h2 id="titre-contact" className="title">

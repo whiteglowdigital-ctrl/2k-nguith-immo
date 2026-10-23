@@ -4,29 +4,29 @@ import { formatFcfa } from '../lib/utils.js';
 
 export default function PropertyCard({ property: p, onOpen }) {
   return (
-    <article className="group relative flex h-full flex-col">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-mist">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-soft transition-all duration-500 ease-soft hover:-translate-y-1 hover:shadow-lift">
+      <div className="relative aspect-[4/3] overflow-hidden bg-line">
         <img
           src={p.image}
           alt={p.alt}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-soft group-hover:scale-[1.04]"
+          className="h-full w-full object-cover transition-all duration-500 ease-soft group-hover:scale-105"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-label text-ink backdrop-blur">
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-ink/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-label text-ink shadow-sm backdrop-blur">
           {typeLabels[p.type]}
         </span>
         <span className="ph-tag absolute bottom-4 right-4">[Photo à remplacer]</span>
         <span
           aria-hidden
-          className="absolute bottom-4 left-4 inline-flex translate-y-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink opacity-0 transition-all duration-500 ease-soft group-hover:translate-y-0 group-hover:opacity-100"
+          className="absolute bottom-4 left-4 inline-flex translate-y-3 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink opacity-0 shadow-lg transition-all duration-500 ease-soft group-hover:translate-y-0 group-hover:opacity-100"
         >
-          Voir les détails <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+          Voir les détails <ArrowRight className="h-4 w-4 text-copper" strokeWidth={1.75} />
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col pt-6">
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
         <h3 className="font-display text-2xl font-normal leading-snug tracking-tight text-ink">
           {/* Toute la carte est cliquable via ce bouton étendu */}
           <button

@@ -107,10 +107,11 @@ export const constructionPhotos = [
   { src: unsplash('photo-1517581177682-a085bb7ffb15'), alt: "Intérieur d'une maison en rénovation" },
 ];
 
+// Couvertures provisoires : à remplacer par les miniatures réelles des vidéos TikTok.
 export const tips = [
-  'Pourquoi un logement reste vide pendant des mois',
-  "Les papiers à vérifier avant d'acheter un terrain",
-  'Bien choisir son quartier',
+  { title: 'Pourquoi un logement reste vide pendant des mois', cover: unsplash('photo-1502672260266-1c1ef2d93688', 800) },
+  { title: "Les papiers à vérifier avant d'acheter un terrain", cover: unsplash('photo-1503387762-592deb58ef4e', 800) },
+  { title: 'Bien choisir son quartier', cover: unsplash('photo-1605276374104-dee2a0ed3cd6', 800) },
 ];
 
 export const gallery = [

@@ -8,7 +8,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-white pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] font-sans text-base text-ink antialiased lg:pb-0;
+    @apply bg-mist pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] font-sans text-base text-ink antialiased lg:pb-0;
   }
   h1, h2, h3 {
     text-wrap: balance;
@@ -29,7 +29,7 @@
     @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12;
   }
   .section {
-    @apply py-24 sm:py-32;
+    @apply py-28 sm:py-36 lg:py-44;
   }
   .label {
     @apply text-xs font-semibold uppercase tracking-label text-ink-muted;

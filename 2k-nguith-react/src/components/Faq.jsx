@@ -7,7 +7,7 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" aria-labelledby="titre-faq" className="section bg-white">
+    <section id="faq" aria-labelledby="titre-faq" className="section">
       <div className="container-site grid gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-24">
         <h2 id="titre-faq" className="title">
           Questions fréquentes

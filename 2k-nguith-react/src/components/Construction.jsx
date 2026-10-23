@@ -5,7 +5,7 @@ import { whatsappLink } from '../lib/utils.js';
 export default function Construction() {
   const [main, ...rest] = constructionPhotos;
   return (
-    <section id="construction" aria-labelledby="titre-construction" className="section bg-white">
+    <section id="construction" aria-labelledby="titre-construction" className="section">
       <div className="container-site grid items-center gap-14 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
         <div>
           <h2 id="titre-construction" className="title">

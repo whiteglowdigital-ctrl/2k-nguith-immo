@@ -13,7 +13,7 @@ const layout = [
 
 export default function Gallery() {
   return (
-    <section aria-labelledby="titre-galerie" className="section bg-mist">
+    <section aria-labelledby="titre-galerie" className="section bg-white">
       <div className="container-site">
         <SectionHeading id="titre-galerie" title="2K Nguith en images" />
         <div className="grid auto-rows-[9.5rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[14rem]">

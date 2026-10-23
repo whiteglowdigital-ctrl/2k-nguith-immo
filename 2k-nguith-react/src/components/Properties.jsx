@@ -34,7 +34,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
     '.';
 
   return (
-    <section id="biens" aria-labelledby="titre-biens" className="section bg-white">
+    <section id="biens" aria-labelledby="titre-biens" className="section">
       <div className="container-site">
         <SectionHeading id="titre-biens" title="Biens disponibles">
           <div role="group" aria-label="Filtrer les biens" className="-mx-1 flex gap-1 overflow-x-auto sm:gap-2">
@@ -72,7 +72,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
         )}
 
         {list.length > 0 ? (
-          <ul className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
             {list.map((p) => (
               <li key={p.id}>
                 <PropertyCard property={p} onOpen={onOpen} />
@@ -81,7 +81,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             {showSlots &&
               Array.from({ length: propertySlots }, (_, i) => (
                 <li key={`slot-${i}`} aria-label="Emplacement pour un bien à ajouter">
-                  <div className="flex aspect-[4/5] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-line bg-mist text-ink-muted">
+                  <div className="flex h-full min-h-[26rem] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink/15 text-ink-muted">
                     <ImagePlus aria-hidden strokeWidth={1} className="h-10 w-10" />
                     <span className="text-sm font-medium">[Bien à ajouter]</span>
                   </div>
@@ -89,7 +89,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
               ))}
           </ul>
         ) : (
-          <div className="flex flex-col items-start gap-6 rounded-2xl bg-mist p-10 sm:p-14">
+          <div className="flex flex-col items-start gap-6 rounded-2xl bg-white p-10 shadow-soft sm:p-14">
             <p className="max-w-lg font-display text-2xl font-light text-ink">
               Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.
             </p>
@@ -104,7 +104,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')}
             target="_blank"
             rel="noopener"
-            className="btn-light group"
+            className="btn-light group shadow-soft"
           >
             Voir tous nos biens
             <ArrowRight aria-hidden strokeWidth={1.5} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

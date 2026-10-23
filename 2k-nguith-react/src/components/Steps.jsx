@@ -9,7 +9,7 @@ const steps = [
 
 export default function Steps() {
   return (
-    <section aria-labelledby="titre-etapes" className="section bg-mist">
+    <section aria-labelledby="titre-etapes" className="section">
       <div className="container-site">
         <SectionHeading id="titre-etapes" title="Comment ça marche" />
         <ol className="relative grid gap-12 lg:grid-cols-4 lg:gap-10">

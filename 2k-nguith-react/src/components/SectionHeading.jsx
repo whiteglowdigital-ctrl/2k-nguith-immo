@@ -4,7 +4,7 @@ export default function SectionHeading({ id, title, intro, align = 'left', dark 
   return (
     <div
       className={cn(
-        'mb-14 flex flex-col gap-8 sm:mb-20 lg:flex-row lg:items-end lg:justify-between',
+        'mb-16 flex flex-col gap-8 sm:mb-24 lg:flex-row lg:items-end lg:justify-between',
         align === 'center' && 'items-center text-center lg:flex-col lg:items-center',
       )}
     >

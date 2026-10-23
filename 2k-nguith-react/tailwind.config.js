@@ -9,7 +9,7 @@ export default {
           soft: '#1E293B',
           muted: '#475569', // texte secondaire (contraste 7,5:1 sur blanc)
         },
-        mist: '#F9FAFB', // gris architectural des sections alternées
+        mist: '#F8F9FA', // gris architectural : fond général du site
         line: '#E5E7EB',
         copper: {
           DEFAULT: '#D97706', // accent : CTA de l'en-tête et états actifs uniquement
@@ -19,6 +19,11 @@ export default {
       fontFamily: {
         display: ['Fraunces', 'Georgia', 'Times New Roman', 'serif'],
         sans: ['Manrope', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
+      boxShadow: {
+        soft: '0 8px 30px rgb(0 0 0 / 0.04)',
+        lift: '0 24px 50px -12px rgb(15 23 42 / 0.14)',
+        glow: '0 0 0 1px rgb(217 119 6 / 0.35), 0 8px 28px -4px rgb(217 119 6 / 0.45)',
       },
       letterSpacing: {
         label: '0.18em',

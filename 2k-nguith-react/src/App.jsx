@@ -36,7 +36,7 @@ export default function App() {
     <>
       <a
         href="#contenu"
-        className="fixed left-4 top-[-4rem] z-[100] rounded-full bg-white px-5 py-3 font-semibold text-ink shadow focus:top-4"
+        className="sr-only rounded-full bg-white px-5 py-3 font-semibold text-ink shadow focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"
       >
         Aller au contenu
       </a>

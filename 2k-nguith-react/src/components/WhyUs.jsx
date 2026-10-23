@@ -26,7 +26,7 @@ const points = [
 
 export default function WhyUs() {
   return (
-    <section aria-labelledby="titre-pourquoi" className="section border-t border-line bg-white">
+    <section aria-labelledby="titre-pourquoi" className="section bg-white">
       <div className="container-site">
         <SectionHeading id="titre-pourquoi" title="Pourquoi choisir 2K Nguith" />
         <ul className="grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
