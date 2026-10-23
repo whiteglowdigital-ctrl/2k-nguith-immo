@@ -20,7 +20,7 @@ export default function Steps() {
               as="li"
               key={title}
               delay={i * 120}
-              className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-7 pt-24 shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-1"
+              className="arch group relative overflow-hidden border border-slate-100 bg-white p-7 pb-8 pt-24 shadow-soft transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-lift"
             >
               <span aria-hidden className="pointer-events-none absolute -top-3 left-4 select-none font-serif text-[7.5rem] font-bold leading-none text-slate-100 transition-colors duration-500 group-hover:text-amber-50">
                 {String(i + 1).padStart(2, '0')}

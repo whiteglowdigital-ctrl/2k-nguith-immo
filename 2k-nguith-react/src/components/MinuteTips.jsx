@@ -16,7 +16,7 @@ export default function MinuteTips() {
         <ul className="rail md:grid-cols-3 md:gap-6">
           {tips.map((tip, i) => (
             <Reveal as="li" key={tip.title} delay={i * 120}>
-              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/5">
+              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="arch group relative block aspect-[4/5] overflow-hidden border border-white/5">
                 {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
                 <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-void/20" />

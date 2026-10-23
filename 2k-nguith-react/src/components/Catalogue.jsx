@@ -57,6 +57,14 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
   const set = (patch) => setF((v) => ({ ...v, ...patch }));
 
   useEffect(() => {
+    const mobile = window.matchMedia('(max-width: 1023px)').matches;
+    document.body.style.overflow = panel && mobile ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [panel]);
+
+  useEffect(() => {
     document.title = 'Tous nos biens | 2K Nguith Immo';
     return () => {
       document.title = '2K Nguith Immo | Agence immobilière à Dakar : vente, location, terrains, gérance';
@@ -158,17 +166,33 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
           aria-controls="filtres"
           className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-sm font-semibold lg:hidden"
         >
-          {panel ? <X aria-hidden className="h-4 w-4" /> : <SlidersHorizontal aria-hidden className="h-4 w-4" />}
+          <SlidersHorizontal aria-hidden className="h-4 w-4" />
           Filtres{active ? ' (actifs)' : ''}
         </button>
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[17rem_1fr]">
+          {/* Mobile : fenêtre plein écran défilable, bouton « Appliquer » fixé en bas.
+              Ordinateur : barre latérale collante. */}
           <aside
             id="filtres"
             aria-label="Filtres de recherche"
-            className={cn('rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.03)] lg:sticky lg:top-28 lg:block lg:self-start', !panel && 'hidden')}
+            className={cn(
+              'fixed inset-0 z-50 flex-col bg-white lg:static lg:z-auto lg:flex lg:rounded-3xl lg:border lg:border-slate-100 lg:shadow-soft lg:sticky lg:top-28 lg:self-start',
+              panel ? 'flex' : 'hidden',
+            )}
           >
-            {filters}
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 lg:hidden">
+              <p className="font-serif text-xl font-semibold">Filtres</p>
+              <button type="button" onClick={() => setPanel(false)} aria-label="Fermer les filtres" className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-slate-100">
+                <X aria-hidden className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 lg:p-6">{filters}</div>
+            <div className="border-t border-slate-100 bg-white p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] lg:hidden">
+              <button type="button" onClick={() => setPanel(false)} className="btn-gold w-full">
+                Appliquer les filtres ({list.length} bien{list.length > 1 ? 's' : ''})
+              </button>
+            </div>
           </aside>
 
           <div>
@@ -181,7 +205,7 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
                 ))}
               </ul>
             ) : (
-              <div className="rounded-2xl border border-slate-100 bg-white p-10 text-center">
+              <div className="arch border border-slate-100 bg-white p-10 pb-12 text-center">
                 <p className="font-serif text-2xl">Aucun bien ne correspond à ces filtres.</p>
                 <p className="mt-2 text-sm text-slate-600">Décrivez-nous votre besoin, on cherche pour vous.</p>
                 <a href={whatsappLink('Bonjour 2K Nguith, je cherche un bien et je ne le trouve pas dans votre catalogue.')} target="_blank" rel="noopener" className="btn-gold mt-6">
@@ -190,7 +214,7 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
               </div>
             )}
             <p className="mt-10 text-xs text-slate-500">
-              Prix affichés : de {formatFcfa(Math.min(...properties.map((p) => p.price)))} à {formatFcfa(Math.max(...properties.map((p) => p.price)))} F CFA. Les biens marqués « Exemple » sont des exemples de maquette.
+              Prix affichés : de {formatFcfa(Math.min(...properties.map((p) => p.price)))} à {formatFcfa(Math.max(...properties.map((p) => p.price)))} F CFA. Les biens marqués « bien d'exemple » sont des exemples de maquette.
             </p>
           </div>
         </div>

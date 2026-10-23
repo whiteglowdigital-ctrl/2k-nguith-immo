@@ -79,6 +79,10 @@
   .section-light .link-gold {
     @apply text-amber-700 hover:text-amber-800;
   }
+  /* Forme « architecturale » : grands arrondis en diagonale, petits sur l'autre diagonale */
+  .arch {
+    @apply rounded-bl-[40px] rounded-br-2xl rounded-tl-2xl rounded-tr-[40px];
+  }
   .ph-tag {
     @apply rounded bg-black/60 px-2 py-0.5 text-[0.65rem] font-normal text-white/80 backdrop-blur-sm;
   }

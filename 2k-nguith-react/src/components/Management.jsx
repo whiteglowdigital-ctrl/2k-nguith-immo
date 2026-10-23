@@ -66,7 +66,7 @@ export default function Management() {
               </li>
             ))}
           </ul>
-          <div className="group relative mt-10 hidden aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 lg:block">
+          <div className="arch group relative mt-10 hidden aspect-[16/10] overflow-hidden border border-white/5 lg:block">
             <img src={managementImage} alt="Clés remises devant une maison" loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-105" />
             <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
           </div>

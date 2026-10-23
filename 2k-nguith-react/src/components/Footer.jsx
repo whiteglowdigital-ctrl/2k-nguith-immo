@@ -57,7 +57,12 @@ export default function Footer({ onNavigate }) {
       </div>
       <div className="border-t border-white/5">
         <div className="container flex flex-col gap-2 py-5 pb-24 text-xs text-silver sm:flex-row sm:items-center sm:justify-between md:pb-5">
-          <p>© 2K Nguith Immo</p>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            © 2K Nguith Immo
+            <span aria-hidden className="text-slate-700">·</span>
+            {/* Signature Jëfya : ajouter ici le lien vers le site de Jëfya [lien à ajouter] */}
+            <span className="cursor-default text-xs text-slate-500 transition-colors duration-300 hover:text-gold">Site créé par Jëfya</span>
+          </p>
           <nav aria-label="Informations légales" className="flex gap-6">
             <a href="#" className="inline-flex min-h-11 items-center hover:text-white">
               Mentions légales

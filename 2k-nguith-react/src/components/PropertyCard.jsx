@@ -16,22 +16,19 @@ export default function PropertyCard({ property: p, onOpen }) {
   const place = p.location.split(' (')[0];
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(15,23,42,0.08)]">
+    <article className="arch group relative flex h-full flex-col overflow-hidden border border-slate-100 bg-white shadow-soft transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-lift active:shadow-lift">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={p.image}
           alt={p.alt}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-active:scale-105"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105"
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-white backdrop-blur-md">
           {typeLabels[p.type]}
         </span>
-        {p.example && (
-          <span className="absolute right-3 top-3 rounded-full bg-gold px-3 py-1 text-[0.7rem] font-semibold text-void">Exemple</span>
-        )}
         <p className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-white/85">
           <MapPin aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5 text-gold" />
           {place}
@@ -39,7 +36,7 @@ export default function PropertyCard({ property: p, onOpen }) {
         <span className="ph-tag absolute bottom-3 right-3">[Photo à remplacer]</span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-5">
+      <div className="flex flex-1 flex-col gap-4 px-5 pb-6 pt-5">
         <h3>
           {/* Toute la carte ouvre la fiche */}
           <button type="button" onClick={() => onOpen(p)} className="text-left after:absolute after:inset-0">
@@ -47,6 +44,8 @@ export default function PropertyCard({ property: p, onOpen }) {
               {formatFcfa(p.price)} <span className="font-sans text-xs font-medium text-slate-500">F CFA{p.perMonth && ' / mois'}</span>
             </span>
             <span className="sr-only">{p.title}</span>
+            {/* Bien d'exemple (maquette) : mention discrète, à retirer avec les vrais biens */}
+            {p.example && <span className="mt-1.5 block text-[0.7rem] font-light text-slate-500">Bien d'exemple</span>}
           </button>
         </h3>
         <ul className="mt-auto flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-xs font-light text-slate-600">

@@ -16,6 +16,7 @@ import Gallery from './components/Gallery.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import WhatsAppFab from './components/WhatsAppFab.jsx';
+import Preloader from './components/Preloader.jsx';
 import { useRouter } from './lib/router.js';
 
 const ALL = { type: 'tous', quartier: '', budget: '' };
@@ -48,6 +49,7 @@ export default function App() {
 
   return (
     <>
+      <Preloader />
       <a href="#contenu" className="sr-only rounded-lg bg-gold px-5 py-3 text-void focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">
         Aller au contenu
       </a>

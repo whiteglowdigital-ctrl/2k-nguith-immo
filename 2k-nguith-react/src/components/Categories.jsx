@@ -18,7 +18,7 @@ export default function Categories({ onNavigate }) {
                   e.preventDefault();
                   onNavigate(c);
                 }}
-                className="group relative block aspect-[3/4] overflow-hidden rounded-2xl border border-white/5"
+                className="arch group relative block aspect-[3/4] overflow-hidden border border-white/5"
               >
                 <img src={c.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />

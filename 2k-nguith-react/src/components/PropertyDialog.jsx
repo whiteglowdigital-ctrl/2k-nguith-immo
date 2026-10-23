@@ -36,7 +36,7 @@ export default function PropertyDialog({ property: p, onClose }) {
             <div className="flex items-start justify-between gap-4">
               <span className="kicker mb-0">
                 {typeLabels[p.type]}
-                {p.example && <span className="rounded-full bg-gold px-2 py-0.5 tracking-normal text-void">Exemple</span>}
+                {p.example && <span className="font-light normal-case tracking-normal text-silver">· bien d'exemple</span>}
               </span>
               <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full text-silver hover:bg-white/5 hover:text-white">
                 <X aria-hidden className="h-5 w-5" />
