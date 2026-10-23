@@ -5,21 +5,21 @@ import { budgets, heroImage, properties, slogans } from '../data/site.js';
 const quartiers = [...new Set(properties.map((p) => p.location.split(' (')[0]))];
 
 // Un champ de la barre de recherche : icône dans un cercle, libellé, sélecteur.
-function SearchField({ id, label, Icon, value, onChange, children }) {
+function SearchField({ id, label, Icon, value, onChange, children, className = '' }) {
   return (
-    <div className="flex min-w-0 flex-1 items-center gap-3 px-2 py-1.5 md:px-4 md:py-2">
-      <span className="flex h-8 w-8 shrink-0 md:h-11 md:w-11 items-center justify-center rounded-full bg-navy-soft text-brand">
-        <Icon aria-hidden className="h-4 w-4 md:h-5 md:w-5" strokeWidth={1.5} />
+    <div className={`flex min-w-0 flex-1 items-center gap-3 px-3 py-2 md:px-4 ${className}`}>
+      <span className="hidden h-11 w-11 shrink-0 md:flex items-center justify-center rounded-full bg-navy-soft text-brand">
+        <Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} />
       </span>
       <div className="relative min-w-0 flex-1">
-        <label htmlFor={id} className="block text-[0.7rem] font-semibold text-ink md:text-xs">
+        <label htmlFor={id} className="block text-[0.65rem] font-medium uppercase tracking-wider text-slate-400 md:text-xs md:font-semibold md:normal-case md:tracking-normal md:text-ink">
           {label}
         </label>
         <select
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-6 text-sm font-light text-slate-500 focus:outline-none focus:ring-0"
+          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-5 text-[0.8rem] font-normal text-ink md:text-sm md:font-light md:text-slate-500 focus:outline-none focus:ring-0"
         >
           {children}
         </select>
@@ -47,10 +47,10 @@ export default function Hero({ onSearch }) {
 
       <div className="container pb-36 pt-32 md:pb-44 md:pt-48">
         <p className="kicker-light">{slogans.main}</p>
-        <h1 id="titre-accueil" className="mt-2 max-w-3xl font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
+        <h1 id="titre-accueil" className="mt-2 max-w-3xl font-serif text-[2.05rem] font-semibold leading-[1.12] tracking-tight sm:text-6xl lg:text-7xl">
           Trouvez le bien <span className="text-gold">de vos rêves</span> avec nous
         </h1>
-        <p className="mt-6 max-w-xl text-base font-light text-slate-300 md:text-lg">
+        <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-slate-300 md:mt-6 md:text-lg">
           {slogans.hero}. Vente, location, gérance et terrains à Dakar et environs.
         </p>
 
@@ -59,9 +59,9 @@ export default function Hero({ onSearch }) {
           role="search"
           aria-label="Rechercher un bien"
           onSubmit={submit}
-          className="mt-16 flex max-w-4xl flex-col gap-1 rounded-2xl bg-white p-3 text-ink shadow-2xl md:mt-12 md:gap-2 md:p-4 md:flex-row md:items-center md:divide-x md:divide-ink/10"
+          className="mt-14 grid max-w-4xl grid-cols-2 rounded-2xl bg-white/95 p-2 text-ink shadow-2xl backdrop-blur md:mt-12 md:flex md:items-center md:divide-x md:divide-ink/10 md:bg-white md:p-4"
         >
-          <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier}>
+          <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier} className="col-span-2 border-b border-ink/5 md:border-0">
             <option value="">Tous les quartiers</option>
             {quartiers.map((q) => (
               <option key={q} value={q}>
@@ -69,7 +69,7 @@ export default function Hero({ onSearch }) {
               </option>
             ))}
           </SearchField>
-          <SearchField id="s-type" label="Type de bien" Icon={Home} value={type} onChange={setType}>
+          <SearchField id="s-type" label="Type de bien" Icon={Home} value={type} onChange={setType} className="border-r border-ink/5 md:border-r-0">
             <option value="vente">À acheter</option>
             <option value="location">À louer</option>
             <option value="terrain">Terrain</option>
@@ -82,9 +82,9 @@ export default function Hero({ onSearch }) {
               </option>
             ))}
           </SearchField>
-          <div className="pt-1 md:pl-3 md:pt-0">
-            <button type="submit" className="btn-navy w-full px-7 md:w-auto">
-              <Search aria-hidden className="h-4 w-4" />
+          <div className="col-span-2 pt-2 md:pl-3 md:pt-0">
+            <button type="submit" className="btn-navy min-h-10 w-full rounded-xl px-7 py-2 text-[0.8rem] md:min-h-12 md:w-auto md:rounded-full md:text-sm">
+              <Search aria-hidden className="h-3.5 w-3.5 md:h-4 md:w-4" />
               Rechercher
             </button>
           </div>

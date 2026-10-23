@@ -39,7 +39,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
           </a>
         </SectionHead>
 
-        <div role="group" aria-label="Filtrer les biens" className="-mt-6 mb-12 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filtrer les biens" className="-mx-5 -mt-6 mb-10 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:mb-12 md:flex-wrap md:px-0">
           {tabs.map((t) => {
             const active = type === t.value && !isSearch;
             return (
@@ -49,7 +49,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
                 aria-pressed={active}
                 onClick={() => onType(t.value)}
                 className={cn(
-                  'min-h-11 rounded-full px-5 text-sm transition',
+                  'min-h-10 shrink-0 rounded-full px-4 text-[0.8rem] transition md:min-h-11 md:px-5 md:text-sm',
                   active ? 'bg-navy font-semibold text-white' : 'font-light text-slate-500 ring-1 ring-ink/10 hover:text-ink',
                 )}
               >

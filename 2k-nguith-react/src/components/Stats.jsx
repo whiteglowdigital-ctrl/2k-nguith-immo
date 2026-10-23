@@ -27,7 +27,7 @@ export default function Stats() {
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-soft text-gold-dark">
                 <Icon aria-hidden className="h-4 w-4" strokeWidth={1.5} />
               </span>
-              <span className={value.startsWith('[') ? 'text-base font-light text-slate-400' : 'font-serif text-4xl font-bold tabular-nums text-navy md:text-5xl'}>{value}</span>
+              <span className={value.startsWith('[') ? 'text-base font-light text-slate-400' : 'font-serif text-3xl font-bold tabular-nums text-navy md:text-5xl'}>{value}</span>
               <span className="text-xs font-light text-slate-500 md:text-sm">{label}</span>
             </li>
           ))}

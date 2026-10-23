@@ -16,7 +16,7 @@ export default function Diaspora() {
                 <Globe2 aria-hidden className="h-3.5 w-3.5" />
                 Diaspora
               </p>
-              <h2 id="titre-diaspora" className="font-serif text-3xl font-semibold tracking-tight md:text-4xl">
+              <h2 id="titre-diaspora" className="font-serif text-[1.6rem] font-semibold tracking-tight md:text-4xl">
                 Vous êtes à <span className="text-gold">l'étranger</span>&nbsp;?
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-lg">Achetez, louez ou faites gérer votre bien à distance&nbsp;: photos, vidéos et documents envoyés sur WhatsApp.</p>

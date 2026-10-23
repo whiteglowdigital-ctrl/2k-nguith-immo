@@ -8,7 +8,7 @@ export default function Categories({ onFilter }) {
     <section aria-labelledby="titre-categories" className="section bg-night text-white">
       <div className="container">
         <SectionHead id="titre-categories" kicker="Tout au même endroit" title="Un seul interlocuteur pour" accent="tous vos projets" intro="Vente, location, terrains, gérance, construction et rénovation." dark />
-        <ul className="rail md:grid-cols-3 md:gap-4 lg:grid-cols-5">
+        <ul className="rail [&>*]:w-[62%] md:grid-cols-3 md:gap-4 md:[&>*]:w-auto lg:grid-cols-5">
           {categories.map((c) => (
             <li key={c.label}>
               <a
@@ -16,7 +16,7 @@ export default function Categories({ onFilter }) {
                 onClick={() => c.filter && onFilter(c.filter)}
                 className="group block overflow-hidden rounded-2xl bg-white text-ink transition duration-300 hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/5] overflow-hidden md:aspect-[4/3]">
                   <img src={c.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="flex items-center justify-between gap-2 p-4">
