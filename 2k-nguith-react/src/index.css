@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] font-sans text-base text-ink antialiased lg:pb-0;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+  :focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-4 outline-copper;
+  }
+  select option {
+    @apply bg-white text-ink;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12;
+  }
+  .section {
+    @apply py-24 sm:py-32;
+  }
+  .label {
+    @apply text-xs font-semibold uppercase tracking-label text-ink-muted;
+  }
+  .title {
+    @apply font-display text-4xl font-light leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl;
+  }
+  .btn {
+    @apply inline-flex min-h-12 items-center whitespace-nowrap justify-center gap-2.5 rounded-full px-7 text-[0.95rem] font-semibold transition duration-300 ease-soft;
+  }
+  .btn-dark {
+    @apply btn bg-ink text-white hover:bg-ink-soft;
+  }
+  .btn-light {
+    @apply btn border border-line bg-white text-ink hover:border-ink;
+  }
+  .btn-ghost-light {
+    @apply btn border border-white/30 text-white hover:border-white hover:bg-white/10;
+  }
+  .link-arrow {
+    @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink underline decoration-line underline-offset-8 transition-colors duration-300 hover:decoration-ink;
+  }
+  .ph-tag {
+    @apply rounded bg-ink/75 px-2 py-0.5 text-[0.7rem] leading-snug text-white backdrop-blur-sm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
