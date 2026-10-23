@@ -9,13 +9,6 @@
   }
   body {
     @apply bg-white font-sans text-base text-ink antialiased;
-    /* Espace pour la barre fixe mobile : elle ne cache jamais de contenu */
-    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
-  }
-  @media (min-width: 1024px) {
-    body {
-      padding-bottom: 0;
-    }
   }
   /* Descriptions fines par défaut ; titres et prix fixent leur propre graisse */
   p {
@@ -58,16 +51,16 @@
     @apply text-sm font-light leading-relaxed text-slate-500 md:text-base;
   }
   .btn-gold {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-6 text-sm font-semibold text-ink transition duration-300 hover:-translate-y-0.5 hover:bg-gold-dark;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-6 text-sm font-semibold text-ink transition-all duration-300 active:scale-95 hover:-translate-y-0.5 hover:bg-gold-dark;
   }
   .btn-navy {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-navy px-6 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-brand;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-navy px-6 text-sm font-semibold text-white transition-all duration-300 active:scale-95 hover:-translate-y-0.5 hover:bg-brand;
   }
   .btn-ghost {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-6 text-sm font-semibold text-white transition duration-300 hover:border-white hover:bg-white/10;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-6 text-sm font-semibold text-white transition-all duration-300 active:scale-95 hover:border-white hover:bg-white/10;
   }
   .btn-line {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink/15 px-6 text-sm font-semibold text-ink transition duration-300 hover:border-brand hover:text-brand;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink/15 px-6 text-sm font-semibold text-ink transition-all duration-300 active:scale-95 hover:border-brand hover:text-brand;
   }
   .link-arrow {
     @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-navy;

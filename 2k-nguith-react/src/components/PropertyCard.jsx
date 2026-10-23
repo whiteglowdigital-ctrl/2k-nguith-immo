@@ -43,17 +43,17 @@ export default function PropertyCard({ property: p, onOpen }) {
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="font-serif text-2xl font-bold tabular-nums text-navy">
+        <p className="font-serif text-[1.85rem] font-bold leading-none tabular-nums text-navy md:text-3xl">
           {formatFcfa(p.price)} <span className="font-sans text-xs font-semibold text-slate-500">F CFA{p.perMonth && ' / mois'}</span>
         </p>
-        <h3 className="mt-2 text-base font-semibold text-ink">
+        <h3 className="mt-3 text-sm font-medium text-ink">
           {/* Toute la carte ouvre la fiche */}
           <button type="button" onClick={() => onOpen(p)} className="text-left after:absolute after:inset-0">
             {p.title}
           </button>
         </h3>
-        <p className="mb-5 mt-1 flex items-center gap-1.5 text-sm text-slate-500">
-          <MapPin aria-hidden strokeWidth={1.5} className="h-4 w-4 shrink-0 text-gold" />
+        <p className="mb-5 mt-1 flex items-center gap-1 text-xs text-slate-500">
+          <MapPin aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5 shrink-0 text-gold" />
           {p.location}
         </p>
 

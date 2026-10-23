@@ -45,7 +45,7 @@ export default function Hero({ onSearch }) {
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/60 to-night/10" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-night/70 to-transparent" />
 
-      <div className="container pb-36 pt-32 md:pb-44 md:pt-48">
+      <div className="container pb-20 pt-32 md:pb-28 md:pt-48">
         <p className="kicker-light">{slogans.main}</p>
         <h1 id="titre-accueil" className="mt-2 max-w-3xl font-serif text-[2.05rem] font-semibold leading-[1.12] tracking-tight sm:text-6xl lg:text-7xl">
           Trouvez le bien <span className="text-gold">de vos rêves</span> avec nous

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
-import FeatureBadges from './components/FeatureBadges.jsx';
 import Properties from './components/Properties.jsx';
 import PropertyDialog from './components/PropertyDialog.jsx';
 import WhyUs from './components/WhyUs.jsx';
@@ -17,7 +16,7 @@ import Gallery from './components/Gallery.jsx';
 import Faq from './components/Faq.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
-import MobileBar from './components/MobileBar.jsx';
+import WhatsAppFab from './components/WhatsAppFab.jsx';
 
 const ALL = { type: 'tous', quartier: '', budget: '' };
 
@@ -41,9 +40,7 @@ export default function App() {
       </a>
       <Header onFilter={showType} />
       <main id="contenu">
-        {/* Alternance : blanc / vert forêt / blanc / gris / bleu nuit … */}
         <Hero onSearch={search} />
-        <FeatureBadges />
         <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} />
         <WhyUs />
         <Stats />
@@ -59,7 +56,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <MobileBar />
+      <WhatsAppFab />
       <PropertyDialog property={selected} onClose={() => setSelected(null)} />
     </>
   );

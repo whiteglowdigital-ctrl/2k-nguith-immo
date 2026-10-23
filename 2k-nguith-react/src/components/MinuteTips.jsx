@@ -1,6 +1,7 @@
 import { ArrowRight, Play } from 'lucide-react';
 import { contact, tips } from '../data/site.js';
 import SectionHead from './SectionHead.jsx';
+import Reveal from './Reveal.jsx';
 
 export default function MinuteTips() {
   return (
@@ -13,8 +14,8 @@ export default function MinuteTips() {
           </a>
         </SectionHead>
         <ul className="rail md:grid-cols-3 md:gap-8">
-          {tips.map((tip) => (
-            <li key={tip.title}>
+          {tips.map((tip, i) => (
+            <Reveal as="li" key={tip.title} delay={i * 120}>
               <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
                 <div className="relative aspect-video overflow-hidden">
                   {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
@@ -36,7 +37,7 @@ export default function MinuteTips() {
                   </span>
                 </div>
               </a>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>

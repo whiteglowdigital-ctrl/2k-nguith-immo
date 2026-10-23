@@ -1,5 +1,6 @@
 import { Quote, Star, UserRound } from 'lucide-react';
 import SectionHead from './SectionHead.jsx';
+import Reveal from './Reveal.jsx';
 
 // Gabarit prêt : remplacer chaque entrée par un vrai avis (texte, note, nom, ville, photo).
 // Aucun avis n'est inventé : tant qu'il n'y en a pas, les cartes restent marquées [à ajouter].
@@ -12,7 +13,7 @@ export default function Testimonials() {
         <SectionHead id="titre-avis" kicker="Témoignages" title="Ce que disent" accent="nos clients" />
         <ul className="rail md:grid-cols-3 md:gap-8">
           {reviews.map((r, i) => (
-            <li key={i} className="flex flex-col rounded-2xl bg-white p-8 shadow-card">
+            <Reveal as="li" key={i} delay={i * 120} className="flex flex-col rounded-2xl bg-white p-8 shadow-card">
               <div className="flex items-center justify-between">
                 <div className="flex gap-1" aria-label={r ? `${r.rating} étoiles sur 5` : 'Note à ajouter'}>
                   {Array.from({ length: 5 }, (_, s) => (
@@ -35,7 +36,7 @@ export default function Testimonials() {
                   <span className="block text-xs font-light text-slate-500">{r?.city ?? '[Ville]'}</span>
                 </span>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>

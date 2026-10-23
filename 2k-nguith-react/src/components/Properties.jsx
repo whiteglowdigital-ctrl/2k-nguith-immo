@@ -3,6 +3,7 @@ import { budgets, properties, propertySlots } from '../data/site.js';
 import { cn, normalize, whatsappLink } from '../lib/utils.js';
 import SectionHead from './SectionHead.jsx';
 import PropertyCard from './PropertyCard.jsx';
+import Reveal from './Reveal.jsx';
 
 const tabs = [
   { value: 'tous', label: 'Tous' },
@@ -81,10 +82,10 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
           </div>
         ) : (
           <ul className="rail md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-            {list.map((p) => (
-              <li key={p.id}>
+            {list.map((p, i) => (
+              <Reveal as="li" key={p.id} delay={(i % 3) * 120}>
                 <PropertyCard property={p} onOpen={onOpen} />
-              </li>
+              </Reveal>
             ))}
             {Array.from({ length: slots }, (_, i) => (
               <li key={`slot-${i}`}>

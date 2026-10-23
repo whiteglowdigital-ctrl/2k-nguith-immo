@@ -1,12 +1,13 @@
 import { ArrowRight, Check } from 'lucide-react';
 import { ambiance } from '../data/site.js';
 import { whatsappLink } from '../lib/utils.js';
+import Reveal from './Reveal.jsx';
 
 const strengths = [
-  { title: 'Tout au même endroit', text: 'Vente, location, terrains et gérance.' },
-  { title: 'Papiers indiqués', text: 'Le type de papiers est indiqué pour chaque bien.' },
-  { title: 'Une seule équipe', text: 'Construction et rénovation par la même équipe.' },
-  { title: 'Diaspora accompagnée', text: 'Photos, vidéos et documents envoyés sur WhatsApp, à distance.' },
+  { title: 'Tout au même endroit' },
+  { title: 'Papiers indiqués' },
+  { title: 'Une seule équipe' },
+  { title: 'Diaspora accompagnée' },
 ];
 
 // Mobile : fond blanc, arguments séparés par de fines lignes grises.
@@ -32,17 +33,16 @@ export default function WhyUs() {
 
         <div>
           <ul className="divide-y divide-slate-200 border-y border-slate-200 lg:grid lg:grid-cols-2 lg:gap-5 lg:divide-y-0 lg:border-0">
-            {strengths.map((s) => (
-              <li
+            {strengths.map((s, i) => (
+              <Reveal
+                as="li"
+                delay={i * 100}
                 key={s.title}
-                className="flex gap-4 py-7 lg:flex-col lg:gap-0 lg:rounded-2xl lg:border lg:border-white/10 lg:bg-white/5 lg:p-7 lg:transition lg:hover:border-gold/30 lg:hover:bg-white/10"
+                className="flex items-center gap-4 py-6 lg:flex-col lg:items-start lg:gap-0 lg:rounded-2xl lg:border lg:border-white/10 lg:bg-white/5 lg:p-7 lg:transition lg:hover:border-gold/30 lg:hover:bg-white/10"
               >
-                <Check aria-hidden strokeWidth={1.75} className="mt-0.5 h-5 w-5 shrink-0 text-gold-dark lg:h-6 lg:w-6 lg:text-gold" />
-                <div className="lg:mt-5">
-                  <h3 className="text-base font-semibold">{s.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-500 lg:text-slate-400">{s.text}</p>
-                </div>
-              </li>
+                <Check aria-hidden strokeWidth={1.75} className="h-5 w-5 shrink-0 text-gold-dark lg:h-6 lg:w-6 lg:text-gold" />
+                <h3 className="text-base font-semibold lg:mt-5">{s.title}</h3>
+              </Reveal>
             ))}
           </ul>
           <a href={whatsappLink()} target="_blank" rel="noopener" className="btn-navy mt-12 lg:bg-gold lg:text-navy lg:hover:bg-gold-dark">

@@ -2,6 +2,7 @@ import { Hammer } from 'lucide-react';
 import { constructionPhotos } from '../data/site.js';
 import { whatsappLink } from '../lib/utils.js';
 import SectionHead from './SectionHead.jsx';
+import Reveal from './Reveal.jsx';
 
 export default function Construction() {
   const [main, ...rest] = constructionPhotos;
@@ -21,15 +22,15 @@ export default function Construction() {
           </a>
         </SectionHead>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2 md:gap-5">
-          <figure className="relative aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2 md:row-span-2 md:aspect-auto">
+          <Reveal as="figure" className="relative aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2 md:row-span-2 md:aspect-auto">
             <img src={main.src} alt={main.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             <figcaption className="ph-tag absolute left-3 top-3">[Photo à remplacer]</figcaption>
-          </figure>
+          </Reveal>
           {rest.map((p) => (
-            <figure key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Reveal as="figure" key={p.src} delay={120} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
               <figcaption className="ph-tag absolute left-3 top-3">[Photo à remplacer]</figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
       </div>

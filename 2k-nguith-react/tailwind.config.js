@@ -26,6 +26,16 @@ export default {
         card: '0 20px 60px rgba(0, 0, 0, 0.025)', // ombre presque invisible : les cartes flottent
         lift: '0 24px 60px -12px rgba(11, 26, 48, 0.12)',
       },
+      keyframes: {
+        // Vague douce autour du bouton WhatsApp
+        wave: {
+          '0%': { transform: 'scale(1)', opacity: '0.6' },
+          '70%, 100%': { transform: 'scale(1.6)', opacity: '0' },
+        },
+      },
+      animation: {
+        wave: 'wave 2.6s ease-out infinite',
+      },
     },
   },
   plugins: [],

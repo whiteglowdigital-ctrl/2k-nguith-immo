@@ -1,13 +1,14 @@
 import { ArrowRight, Globe2 } from 'lucide-react';
 import { ambiance } from '../data/site.js';
 import { whatsappLink } from '../lib/utils.js';
+import Reveal from './Reveal.jsx';
 
 // Bandeau immersif : photo de fond sous un voile bleu nuit.
 export default function Diaspora() {
   return (
     <section aria-labelledby="titre-diaspora" className="py-16 md:py-24">
       <div className="container">
-        <div className="relative isolate overflow-hidden rounded-3xl bg-navy px-7 py-16 text-white md:px-14 md:py-20">
+        <Reveal className="relative isolate overflow-hidden rounded-3xl bg-navy px-7 py-16 text-white md:px-14 md:py-20">
           <img src={ambiance.diaspora} alt="" loading="lazy" decoding="async" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-40" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/85 to-navy/30" />
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -26,7 +27,7 @@ export default function Diaspora() {
               <ArrowRight aria-hidden className="h-4 w-4" />
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
