@@ -15,10 +15,10 @@ export default function Categories({ onFilter }) {
               <a
                 href={c.href}
                 onClick={() => c.filter && onFilter(c.filter)}
-                className="group block overflow-hidden rounded-2xl bg-white text-ink transition duration-300 hover:-translate-y-1"
+                className="group block overflow-hidden rounded-3xl bg-white text-ink transition-all duration-500 hover:-translate-y-1 transition duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-[4/5] overflow-hidden md:aspect-[4/3]">
-                  <img src={c.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={c.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
                 </div>
                 <div className="flex items-center justify-between gap-2 p-4">
                   <span className="font-semibold">{c.label}</span>

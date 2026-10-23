@@ -16,10 +16,10 @@ export default function MinuteTips() {
         <ul className="rail md:grid-cols-3 md:gap-8">
           {tips.map((tip, i) => (
             <Reveal as="li" key={tip.title} delay={i * 120}>
-              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
+              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
                 <div className="relative aspect-video overflow-hidden">
                   {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
-                  <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
                   <span aria-hidden className="absolute inset-0 bg-night/35" />
                   <span className="absolute inset-0 flex items-center justify-center">
                     <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/80 text-navy ring-1 ring-white/60 backdrop-blur-md group-hover:bg-gold transition group-hover:scale-110">

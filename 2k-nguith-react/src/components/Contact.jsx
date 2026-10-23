@@ -37,7 +37,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <ul className="space-y-3 rounded-3xl bg-white p-5 text-ink shadow-2xl sm:p-7 lg:ml-auto lg:max-w-md">
+        <ul className="space-y-3 rounded-3xl border border-black/5 bg-white p-5 text-ink shadow-2xl sm:p-7 lg:ml-auto lg:max-w-md">
           {rows.map(({ Icon, term, value, href, external }) => (
             <li key={term} className="flex items-start gap-4 rounded-2xl p-3">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy-soft text-brand">

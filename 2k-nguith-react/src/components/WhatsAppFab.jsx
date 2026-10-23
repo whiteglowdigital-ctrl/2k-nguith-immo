@@ -9,7 +9,7 @@ function WhatsAppIcon({ className }) {
   );
 }
 
-// Bouton flottant unique, avec une vague discrète qui attire l'œil sans agresser.
+// Bouton flottant unique : respiration continue et vague discrète, sans agresser.
 export default function WhatsAppFab() {
   return (
     <a
@@ -17,7 +17,7 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener"
       aria-label="Nous écrire sur WhatsApp (77 461 41 61)"
-      className="group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-emerald-600 active:scale-95"
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition-colors duration-300 hover:bg-emerald-600 motion-safe:animate-breathe"
     >
       <span aria-hidden className="absolute inset-0 -z-10 rounded-full bg-emerald-500/60 motion-safe:animate-wave" />
       <WhatsAppIcon className="h-7 w-7" />

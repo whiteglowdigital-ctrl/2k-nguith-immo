@@ -22,13 +22,13 @@ export default function Construction() {
           </a>
         </SectionHead>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2 md:gap-5">
-          <Reveal as="figure" className="relative aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2 md:row-span-2 md:aspect-auto">
-            <img src={main.src} alt={main.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+          <Reveal as="figure" className="relative aspect-[4/3] group overflow-hidden rounded-3xl md:col-span-2 md:row-span-2 md:aspect-auto">
+            <img src={main.src} alt={main.alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
             <figcaption className="ph-tag absolute left-3 top-3">[Photo à remplacer]</figcaption>
           </Reveal>
           {rest.map((p) => (
-            <Reveal as="figure" key={p.src} delay={120} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            <Reveal as="figure" key={p.src} delay={120} className="relative aspect-[4/3] group overflow-hidden rounded-3xl">
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
               <figcaption className="ph-tag absolute left-3 top-3">[Photo à remplacer]</figcaption>
             </Reveal>
           ))}

@@ -74,7 +74,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
         )}
 
         {list.length === 0 ? (
-          <div className="flex flex-col items-start gap-5 rounded-2xl bg-navy-soft p-8 md:p-12">
+          <div className="flex flex-col items-start gap-5 rounded-3xl bg-navy-soft p-8 md:p-12">
             <p className="text-xl font-bold">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
             <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-navy">
               Décrire mon besoin sur WhatsApp
@@ -89,7 +89,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             ))}
             {Array.from({ length: slots }, (_, i) => (
               <li key={`slot-${i}`}>
-                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink/15 text-slate-400">
+                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-ink/15 text-slate-400">
                   <ImagePlus aria-hidden className="h-7 w-7" strokeWidth={1.25} />
                   <span className="text-sm font-light">[Bien à ajouter]</span>
                 </div>

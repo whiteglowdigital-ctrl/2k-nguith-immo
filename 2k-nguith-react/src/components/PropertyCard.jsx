@@ -23,9 +23,9 @@ function features(p) {
 export default function PropertyCard({ property: p, onOpen }) {
   const [fav, setFav] = useState(false);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 hover:-translate-y-1 hover:shadow-lift">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img src={p.image} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <img src={p.image} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
         <span className="glass absolute left-4 top-4 inline-flex items-center gap-1.5">
           <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', dotColor[p.type])} />
           {typeLabels[p.type]}

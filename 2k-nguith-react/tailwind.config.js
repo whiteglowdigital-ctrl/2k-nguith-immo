@@ -32,9 +32,15 @@ export default {
           '0%': { transform: 'scale(1)', opacity: '0.6' },
           '70%, 100%': { transform: 'scale(1.6)', opacity: '0' },
         },
+        // Respiration du bouton WhatsApp : gonflement léger et halo d'ombre
+        breathe: {
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 12px 30px -8px rgba(16, 185, 129, 0.45)' },
+          '50%': { transform: 'scale(1.06)', boxShadow: '0 18px 44px -6px rgba(16, 185, 129, 0.6)' },
+        },
       },
       animation: {
         wave: 'wave 2.6s ease-out infinite',
+        breathe: 'breathe 3.2s ease-in-out infinite',
       },
     },
   },

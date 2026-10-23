@@ -50,8 +50,8 @@ export default function Management() {
     <section id="gerance" aria-labelledby="titre-gerance" className="section">
       <div className="container grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
         <div className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift lg:aspect-[4/5]">
-            <img src={managementImage} alt="Clés remises devant une maison" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+          <div className="relative aspect-[4/3] group overflow-hidden rounded-3xl shadow-lift lg:aspect-[4/5]">
+            <img src={managementImage} alt="Clés remises devant une maison" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" />
             <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
           </div>
           {/* Carte flottante */}
@@ -75,7 +75,7 @@ export default function Management() {
             ))}
           </ul>
 
-          <form onSubmit={submit} noValidate className="mt-12 rounded-2xl bg-navy p-6 text-white sm:p-8">
+          <form onSubmit={submit} noValidate className="mt-12 rounded-3xl bg-navy p-6 text-white sm:p-8">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <Field id="g-nom" label="Votre nom">
                 <input id="g-nom" type="text" autoComplete="name" value={values.nom} onChange={set('nom')} aria-invalid={bad('nom')} className={input} />

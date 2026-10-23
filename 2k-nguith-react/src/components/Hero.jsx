@@ -59,7 +59,7 @@ export default function Hero({ onSearch }) {
           role="search"
           aria-label="Rechercher un bien"
           onSubmit={submit}
-          className="mt-14 grid max-w-4xl grid-cols-2 rounded-2xl bg-white/95 p-2 text-ink shadow-2xl backdrop-blur md:mt-12 md:flex md:items-center md:divide-x md:divide-ink/10 md:bg-white md:p-4"
+          className="mt-14 grid max-w-4xl grid-cols-2 rounded-3xl border border-white/60 bg-white/95 p-2 text-ink shadow-[0_20px_50px_rgba(0,0,0,0.06)] backdrop-blur-md md:mt-12 md:flex md:items-center md:divide-x md:divide-ink/10 md:p-4"
         >
           <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier} className="col-span-2 border-b border-ink/5 md:border-0">
             <option value="">Tous les quartiers</option>
