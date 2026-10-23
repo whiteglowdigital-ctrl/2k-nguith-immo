@@ -12,13 +12,13 @@ function specs(p) {
   return list;
 }
 
-// Carte « écran de cinéma » : l'image domine, le prix doré en dessous.
+// Carte blanche à ombre douce : l'image domine, le prix en grand en dessous.
 export default function PropertyCard({ property: p, onOpen }) {
   const [fav, setFav] = useState(false);
   const place = p.location.split(' (')[0];
 
   return (
-    <article className="card group relative flex h-full flex-col overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-gold/20 hover:shadow-deep">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(15,23,42,0.08)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={p.image}
@@ -27,7 +27,7 @@ export default function PropertyCard({ property: p, onOpen }) {
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-active:scale-105"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void/80 via-transparent to-transparent" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-white backdrop-blur-md">
           {typeLabels[p.type]}
         </span>
@@ -51,16 +51,16 @@ export default function PropertyCard({ property: p, onOpen }) {
         <h3>
           {/* Toute la carte ouvre la fiche */}
           <button type="button" onClick={() => onOpen(p)} className="text-left after:absolute after:inset-0">
-            <span className="block font-serif text-[1.7rem] font-semibold leading-none tabular-nums text-gold">
-              {formatFcfa(p.price)} <span className="font-sans text-xs font-medium text-silver">F CFA{p.perMonth && ' / mois'}</span>
+            <span className="block font-serif text-[1.7rem] font-semibold leading-none tabular-nums text-ink">
+              {formatFcfa(p.price)} <span className="font-sans text-xs font-medium text-slate-500">F CFA{p.perMonth && ' / mois'}</span>
             </span>
             <span className="sr-only">{p.title}</span>
           </button>
         </h3>
-        <ul className="mt-auto flex flex-wrap gap-x-5 gap-y-2 border-t border-white/5 pt-4 text-xs font-light text-white/85">
+        <ul className="mt-auto flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-xs font-light text-slate-600">
           {specs(p).map(({ Icon, text }) => (
             <li key={text} className="inline-flex items-center gap-1.5">
-              <Icon aria-hidden strokeWidth={1.25} className="h-4 w-4 text-white" />
+              <Icon aria-hidden strokeWidth={1.25} className="h-4 w-4 text-amber-600" />
               {text}
             </li>
           ))}

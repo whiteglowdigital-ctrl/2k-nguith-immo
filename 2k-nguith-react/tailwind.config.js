@@ -10,7 +10,8 @@ export default {
     },
     extend: {
       colors: {
-        void: '#090D16', // fond principal
+        void: '#0A0E17', // fond principal sombre
+        ink: '#0F172A', // texte des sections blanches
         panel: { DEFAULT: '#111827', raised: '#1E293B' }, // cartes et sections
         silver: '#94A3B8', // petits détails (contraste 7:1 sur le fond)
         gold: { DEFAULT: '#F59E0B', light: '#FBBF24', dark: '#D97706' },
@@ -31,8 +32,8 @@ export default {
         },
         // Lueur continue du bouton WhatsApp
         glowEmerald: {
-          '0%, 100%': { boxShadow: '0 0 18px 2px rgba(16, 185, 129, 0.35)' },
-          '50%': { boxShadow: '0 0 34px 8px rgba(16, 185, 129, 0.55)' },
+          '0%, 100%': { boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.35)' },
+          '50%': { boxShadow: '0 10px 32px 2px rgba(16, 185, 129, 0.5)' },
         },
         heroZoom: {
           from: { transform: 'scale(1.08)' },

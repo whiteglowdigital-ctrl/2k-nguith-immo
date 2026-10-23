@@ -31,7 +31,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
     `Bonjour 2K Nguith, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
 
   return (
-    <section id="biens" aria-labelledby="titre-biens" className="section">
+    <section id="biens" aria-labelledby="titre-biens" className="section section-light">
       <div className="container">
         <SectionHead id="titre-biens" kicker="Biens disponibles" title="Nos biens" glow="à la une">
           <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="link-gold">
@@ -51,7 +51,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
                 onClick={() => onType(t.value)}
                 className={cn(
                   'min-h-10 shrink-0 rounded-full px-5 text-sm transition-all duration-300 active:scale-95',
-                  active ? 'bg-gold font-semibold text-void' : 'border border-white/10 text-silver hover:border-white/30 hover:text-white',
+                  active ? 'bg-ink font-semibold text-white' : 'border border-slate-200 text-slate-600 hover:border-slate-400 hover:text-ink',
                 )}
               >
                 {t.label}
@@ -61,20 +61,20 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
         </div>
 
         {isSearch && (
-          <p aria-live="polite" className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-silver">
+          <p aria-live="polite" className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-600">
             <span>
               {list.length} résultat{list.length > 1 ? 's' : ''}
               {quartier && ` · ${quartier}`}
               {max ? ` · ${budgetLabel.toLowerCase()}` : ''}
             </span>
-            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-gold underline underline-offset-4">
+            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-amber-700 underline underline-offset-4">
               Voir tous les biens
             </button>
           </p>
         )}
 
         {list.length === 0 ? (
-          <Reveal className="card flex flex-col items-start gap-6 p-8 md:p-12">
+          <Reveal className="flex flex-col items-start gap-6 rounded-2xl border border-slate-100 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.03)] md:p-12">
             <p className="font-serif text-2xl">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
             <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-gold">
               Décrire mon besoin sur WhatsApp
@@ -89,7 +89,7 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             ))}
             {Array.from({ length: slots }, (_, i) => (
               <Reveal as="li" key={`slot-${i}`} delay={(list.length + i) * 120}>
-                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/10 text-silver">
+                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-slate-200 text-slate-500">
                   <ImagePlus aria-hidden strokeWidth={1.25} className="h-7 w-7" />
                   <span className="text-sm font-light">[Bien à ajouter]</span>
                 </div>

@@ -7,7 +7,7 @@ const strengths = ['Tout au même endroit', 'Papiers indiqués', 'Une seule équ
 
 export default function WhyUs() {
   return (
-    <section aria-labelledby="titre-pourquoi" className="section bg-panel/60">
+    <section aria-labelledby="titre-pourquoi" className="section bg-void">
       <div className="container grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal className="group relative order-2 aspect-[4/3] overflow-hidden rounded-3xl border border-white/5 lg:order-1 lg:aspect-[4/5]">
           <img src={ambiance.why} alt="Villa éclairée au crépuscule" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
