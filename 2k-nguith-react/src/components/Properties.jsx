@@ -1,8 +1,8 @@
+import { ArrowRight, ImagePlus } from 'lucide-react';
 import { budgets, properties, propertySlots } from '../data/site.js';
 import { cn, normalize, whatsappLink } from '../lib/utils.js';
-import SectionHeader from './SectionHeader.jsx';
+import SectionHead from './SectionHead.jsx';
 import PropertyCard from './PropertyCard.jsx';
-import { ArrowRight } from './Icons.jsx';
 
 const tabs = [
   { value: 'tous', label: 'Tous' },
@@ -25,35 +25,39 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
       (!max || p.price <= max),
   );
   const slots = type === 'tous' && !isSearch ? propertySlots : 0;
-
   const budgetLabel = budgets.find((b) => b.value === budget)?.label;
   const need =
     `Bonjour 2K Nguith, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
 
   return (
     <section id="biens" aria-labelledby="titre-biens" className="section">
-      <div className="wrap">
-        <SectionHeader id="titre-biens" title="Biens disponibles">
-          <div role="group" aria-label="Filtrer les biens" className="flex flex-wrap gap-x-6">
-            {tabs.map((t) => {
-              const active = type === t.value && !isSearch;
-              return (
-                <button
-                  key={t.value}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => onType(t.value)}
-                  className={cn(
-                    'min-h-11 border-b-2 text-sm font-semibold transition-colors duration-300',
-                    active ? 'border-amber text-ink' : 'border-transparent text-ink-muted hover:text-ink',
-                  )}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-        </SectionHeader>
+      <div className="container">
+        <SectionHead id="titre-biens" kicker="Biens disponibles" title="Nos biens" accent="à la une" intro="Vente, location et terrains à Dakar et environs.">
+          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="link-arrow">
+            Voir tous nos biens
+            <ArrowRight aria-hidden className="h-4 w-4" />
+          </a>
+        </SectionHead>
+
+        <div role="group" aria-label="Filtrer les biens" className="-mt-4 mb-10 flex flex-wrap gap-2">
+          {tabs.map((t) => {
+            const active = type === t.value && !isSearch;
+            return (
+              <button
+                key={t.value}
+                type="button"
+                aria-pressed={active}
+                onClick={() => onType(t.value)}
+                className={cn(
+                  'min-h-11 rounded-full px-5 text-sm font-bold transition',
+                  active ? 'bg-forest text-white shadow-md' : 'bg-cloud text-ink-muted ring-1 ring-ink/10 hover:text-ink',
+                )}
+              >
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
 
         {isSearch && (
           <p aria-live="polite" className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted">
@@ -62,22 +66,21 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
               {quartier && ` · ${quartier}`}
               {max ? ` · ${budgetLabel.toLowerCase()}` : ''}
             </span>
-            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-ink underline underline-offset-4">
+            <button type="button" onClick={onReset} className="min-h-11 font-bold text-forest underline underline-offset-4">
               Voir tous les biens
             </button>
           </p>
         )}
 
         {list.length === 0 ? (
-          <div className="rounded-2xl bg-mist p-8 md:p-12">
-            <p className="font-serif text-2xl">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
-            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-dark mt-6">
+          <div className="flex flex-col items-start gap-5 rounded-2xl bg-forest-soft p-8 md:p-12">
+            <p className="text-xl font-bold">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
+            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-forest">
               Décrire mon besoin sur WhatsApp
             </a>
           </div>
         ) : (
-          // Grille fixe : 1 colonne sur mobile, 2 sur ordinateur
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((p) => (
               <li key={p.id}>
                 <PropertyCard property={p} onOpen={onOpen} />
@@ -85,20 +88,14 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
             ))}
             {Array.from({ length: slots }, (_, i) => (
               <li key={`slot-${i}`}>
-                <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-ink/20 text-sm text-ink-muted">
-                  [Bien à ajouter]
+                <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-ink/15 text-ink-muted">
+                  <ImagePlus aria-hidden className="h-8 w-8" strokeWidth={1.5} />
+                  <span className="text-sm font-semibold">[Bien à ajouter]</span>
                 </div>
               </li>
             ))}
           </ul>
         )}
-
-        <div className="mt-12 flex justify-center">
-          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="btn-outline">
-            Voir tous nos biens
-            <ArrowRight />
-          </a>
-        </div>
       </div>
     </section>
   );

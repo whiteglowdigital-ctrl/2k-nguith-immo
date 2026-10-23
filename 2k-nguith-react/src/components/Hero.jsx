@@ -1,20 +1,29 @@
 import { useState } from 'react';
-import { ArrowRight, Chevron } from './Icons.jsx';
+import { Banknote, ChevronDown, Home, MapPin, Search } from 'lucide-react';
 import { budgets, heroImage, properties, slogans } from '../data/site.js';
 
 const quartiers = [...new Set(properties.map((p) => p.location.split(' (')[0]))];
 
-function SelectField({ id, label, value, onChange, children }) {
+// Un champ de la barre de recherche : icône dans un cercle, libellé, sélecteur.
+function SearchField({ id, label, Icon, value, onChange, children }) {
   return (
-    <div>
-      <label htmlFor={id} className="label">
-        {label}
-      </label>
-      <div className="relative">
-        <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="input cursor-pointer appearance-none pr-10">
+    <div className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2 md:px-4">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-soft text-forest">
+        <Icon aria-hidden className="h-5 w-5" />
+      </span>
+      <div className="relative min-w-0 flex-1">
+        <label htmlFor={id} className="block text-xs font-bold text-ink">
+          {label}
+        </label>
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full cursor-pointer appearance-none truncate border-0 bg-transparent p-0 pr-6 text-sm text-ink-muted focus:outline-none focus:ring-0"
+        >
           {children}
         </select>
-        <Chevron className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
+        <ChevronDown aria-hidden className="pointer-events-none absolute bottom-0.5 right-0 h-4 w-4 text-ink-muted" />
       </div>
     </div>
   );
@@ -31,47 +40,55 @@ export default function Hero({ onSearch }) {
   };
 
   return (
-    <section id="accueil" aria-labelledby="titre-accueil" className="relative">
-      <img src={heroImage} alt="Villa moderne avec piscine" fetchpriority="high" className="h-[80vh] min-h-[38rem] w-full object-cover" />
+    <section id="accueil" aria-labelledby="titre-accueil" className="relative isolate overflow-hidden bg-night text-white">
+      <img src={heroImage} alt="" fetchpriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/60 to-night/10" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-night/70 to-transparent" />
 
-      {/* Boîte blanche alignée à gauche, posée sur l'image, dans le conteneur principal */}
-      <div className="absolute inset-0 flex items-center">
-        <div className="wrap">
-          <div className="max-w-lg rounded-2xl bg-white p-6 shadow-xl sm:p-8">
-            <h1 id="titre-accueil" className="font-serif text-4xl font-medium leading-tight sm:text-5xl">
-              {slogans.hero}
-            </h1>
-            <p className="mt-3 text-ink-muted">Vente, location, gérance et terrains à Dakar et environs.</p>
+      <div className="container pb-36 pt-36 md:pb-44 md:pt-48">
+        <p className="kicker-light">{slogans.main}</p>
+        <h1 id="titre-accueil" className="mt-2 max-w-3xl text-[2.6rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          Trouvez le bien <span className="text-gold">de vos rêves</span> avec nous
+        </h1>
+        <p className="mt-6 max-w-xl text-lg text-white/85">
+          {slogans.hero}. Vente, location, gérance et terrains à Dakar et environs.
+        </p>
 
-            <form role="search" aria-label="Rechercher un bien" onSubmit={submit} className="mt-6 grid gap-4 sm:grid-cols-3">
-              <SelectField id="s-type" label="Je veux" value={type} onChange={setType}>
-                <option value="vente">Acheter</option>
-                <option value="location">Louer</option>
-                <option value="terrain">Terrain</option>
-              </SelectField>
-              <SelectField id="s-quartier" label="Quartier" value={quartier} onChange={setQuartier}>
-                <option value="">Tous</option>
-                {quartiers.map((q) => (
-                  <option key={q} value={q}>
-                    {q}
-                  </option>
-                ))}
-              </SelectField>
-              <SelectField id="s-budget" label="Budget" value={budget} onChange={setBudget}>
-                <option value="">Tous</option>
-                {budgets.slice(1).map((b) => (
-                  <option key={b.value} value={b.value}>
-                    {b.label}
-                  </option>
-                ))}
-              </SelectField>
-              <button type="submit" className="btn-dark sm:col-span-3">
-                Rechercher
-                <ArrowRight />
-              </button>
-            </form>
+        {/* Barre de recherche blanche, massive */}
+        <form
+          role="search"
+          aria-label="Rechercher un bien"
+          onSubmit={submit}
+          className="mt-10 flex max-w-4xl flex-col gap-2 rounded-2xl bg-white p-4 text-ink shadow-2xl md:flex-row md:items-center md:divide-x md:divide-ink/10"
+        >
+          <SearchField id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier}>
+            <option value="">Tous les quartiers</option>
+            {quartiers.map((q) => (
+              <option key={q} value={q}>
+                {q}
+              </option>
+            ))}
+          </SearchField>
+          <SearchField id="s-type" label="Type de bien" Icon={Home} value={type} onChange={setType}>
+            <option value="vente">À acheter</option>
+            <option value="location">À louer</option>
+            <option value="terrain">Terrain</option>
+          </SearchField>
+          <SearchField id="s-budget" label="Budget" Icon={Banknote} value={budget} onChange={setBudget}>
+            <option value="">Tous les prix</option>
+            {budgets.slice(1).map((b) => (
+              <option key={b.value} value={b.value}>
+                {b.label}
+              </option>
+            ))}
+          </SearchField>
+          <div className="pt-2 md:pl-3 md:pt-0">
+            <button type="submit" className="btn-forest w-full px-7 md:w-auto">
+              <Search aria-hidden className="h-4 w-4" />
+              Rechercher
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   );

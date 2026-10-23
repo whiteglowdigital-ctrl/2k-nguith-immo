@@ -1,33 +1,40 @@
-import SectionHeader from './SectionHeader.jsx';
-import { Play } from './Icons.jsx';
+import { ArrowRight, Play } from 'lucide-react';
 import { contact, tips } from '../data/site.js';
+import SectionHead from './SectionHead.jsx';
 
 export default function MinuteTips() {
   return (
-    <section id="minute-2k" aria-labelledby="titre-minute" className="section bg-mist">
-      <div className="wrap">
-        <SectionHeader id="titre-minute" title="Minute 2K">
-          <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="text-sm font-semibold underline underline-offset-4">
+    <section id="minute-2k" aria-labelledby="titre-minute" className="section">
+      <div className="container">
+        <SectionHead id="titre-minute" kicker="Conseils vidéo" title="Minute" accent="2K" intro="Nos conseils immobiliers en vidéo courte.">
+          <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="link-arrow">
             Toutes les vidéos sur TikTok
+            <ArrowRight aria-hidden className="h-4 w-4" />
           </a>
-        </SectionHeader>
+        </SectionHead>
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {tips.map((tip) => (
             <li key={tip.title}>
-              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-white">
+              <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-lift">
+                <div className="relative aspect-video overflow-hidden">
                   {/* Couverture provisoire : à remplacer par la miniature réelle de la vidéo */}
-                  <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                  <span aria-hidden className="absolute inset-0 bg-ink/30" />
+                  <img src={tip.cover} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <span aria-hidden className="absolute inset-0 bg-night/35" />
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:scale-110">
-                      <Play className="ml-0.5 h-5 w-5" />
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-ink shadow-lg ring-8 ring-gold/25 transition group-hover:scale-110">
+                      <Play aria-hidden className="ml-0.5 h-5 w-5 fill-current" />
                     </span>
                   </span>
                   <span className="ph-tag absolute left-3 top-3">[Miniature à remplacer]</span>
                 </div>
-                <h3 className="mt-4 text-lg font-medium">{tip.title}</h3>
-                <p className="mt-1 text-sm font-semibold text-ink-muted">Voir la vidéo</p>
+                <div className="flex flex-1 flex-col p-5">
+                  <span className="w-fit rounded-full bg-forest-soft px-3 py-1 text-xs font-bold text-forest">Minute 2K</span>
+                  <h3 className="mt-3 text-lg font-bold leading-snug">{tip.title}</h3>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-bold text-forest">
+                    Voir la vidéo
+                    <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
               </a>
             </li>
           ))}

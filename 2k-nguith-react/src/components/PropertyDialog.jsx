@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { MessageCircle, Phone, X } from 'lucide-react';
 import { contact, typeLabels } from '../data/site.js';
 import { formatFcfa, whatsappLink } from '../lib/utils.js';
-import { Close } from './Icons.jsx';
 
-// Fiche d'un bien : les détails (surface, papiers) sont ici, pas sur les cartes.
+// Fiche détaillée d'un bien, avec les papiers.
 export default function PropertyDialog({ property: p, onClose }) {
   const ref = useRef(null);
 
@@ -24,38 +24,40 @@ export default function PropertyDialog({ property: p, onClose }) {
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-labelledby="dialog-titre"
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(56rem,calc(100%-2rem))] overflow-y-auto rounded-2xl bg-white p-0 text-ink shadow-xl backdrop:bg-ink/60"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(56rem,calc(100%-2rem))] overflow-y-auto rounded-3xl bg-white p-0 text-ink shadow-2xl backdrop:bg-night/70 backdrop:backdrop-blur-sm"
     >
       {p && (
         <div className="grid md:grid-cols-2">
-          <div className="relative aspect-[4/3] bg-mist md:aspect-auto">
+          <div className="relative aspect-[4/3] md:aspect-auto">
             <img src={p.image} alt={p.alt} className="h-full w-full object-cover" />
-            <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
+            <span className="ph-tag absolute bottom-3 left-3">[Photo à remplacer]</span>
           </div>
           <div className="p-6 sm:p-8">
             <div className="flex items-start justify-between gap-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted">{typeLabels[p.type]}</p>
-              <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-lg hover:bg-mist">
-                <Close className="h-5 w-5" />
+              <span className="rounded-full bg-forest-soft px-3 py-1 text-xs font-bold text-forest">{typeLabels[p.type]}</span>
+              <button type="button" onClick={onClose} aria-label="Fermer" className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-cloud">
+                <X aria-hidden className="h-5 w-5" />
               </button>
             </div>
-            <h2 id="dialog-titre" className="font-serif text-3xl font-medium">
+            <h2 id="dialog-titre" className="mt-3 text-2xl font-extrabold">
               {p.title}
             </h2>
-            <p className="mt-2 text-xl font-bold tabular-nums">{price}</p>
-            <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10 text-sm">
+            <p className="mt-2 text-2xl font-extrabold tabular-nums text-forest">{price}</p>
+            <dl className="mt-6 divide-y divide-ink/10 rounded-2xl bg-cloud px-4 text-sm">
               {rows.map(([term, value]) => (
                 <div key={term} className="flex justify-between gap-6 py-3">
                   <dt className="text-ink-muted">{term}</dt>
-                  <dd className="text-right font-medium">{value}</dd>
+                  <dd className="text-right font-semibold">{value}</dd>
                 </div>
               ))}
             </dl>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a href={whatsappLink(message)} target="_blank" rel="noopener" className="btn-dark flex-1">
+              <a href={whatsappLink(message)} target="_blank" rel="noopener" className="btn-gold flex-1">
+                <MessageCircle aria-hidden className="h-4 w-4" />
                 Je suis intéressé
               </a>
-              <a href={`tel:${contact.phoneIntl}`} className="btn-outline tabular-nums">
+              <a href={`tel:${contact.phoneIntl}`} className="btn-line tabular-nums">
+                <Phone aria-hidden className="h-4 w-4" />
                 {contact.phoneDisplay}
               </a>
             </div>

@@ -22,7 +22,22 @@ export const slogans = {
 const unsplash = (id, w = 900) =>
   `https://images.unsplash.com/${id}?w=${w}&q=70&auto=format&fit=crop`;
 
-export const heroImage = unsplash('photo-1600596542815-ffad4c1539a9', 2000);
+export const heroImage = unsplash('photo-1600585154340-be6161a56a0c', 2000);
+
+// Images des sections d'ambiance (illustrations, à remplacer par de vraies photos de l'agence)
+export const ambiance = {
+  why: unsplash('photo-1599809275671-b5942cabc7a2', 1200),
+  diaspora: unsplash('photo-1494526585095-c41746248156', 1800),
+  contact: unsplash('photo-1416331108676-a22ccb276e35', 1800),
+};
+
+export const categories = [
+  { label: 'Vente', sub: 'Maisons et appartements', href: '#biens', filter: 'vente', image: unsplash('photo-1613977257363-707ba9348227', 700) },
+  { label: 'Location', sub: 'Appartements et maisons', href: '#biens', filter: 'location', image: unsplash('photo-1600566753086-00f18fb6b3ea', 700) },
+  { label: 'Terrains', sub: 'Avec papiers indiqués', href: '#biens', filter: 'terrain', image: unsplash('photo-1500382017468-9049fed747ef', 700) },
+  { label: 'Gérance', sub: 'Confiez-nous votre bien', href: '#gerance', image: unsplash('photo-1600047509358-9dc75507daeb', 700) },
+  { label: 'Construction', sub: 'Et rénovation', href: '#construction', image: unsplash('photo-1504307651254-35680f356dfd', 700) },
+];
 
 export const nav = [
   { label: 'Acheter', href: '#biens', filter: 'vente' },
@@ -85,6 +100,7 @@ export const properties = [
     location: 'Jaxaay terminus 84',
     surface: '[à préciser]',
     details: '3 chambres + salon',
+    bedrooms: 3,
     price: 170000,
     perMonth: true,
     image: unsplash('photo-1522708323590-d24dbb6b0267'),
