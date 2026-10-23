@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
-import ServicesIndex from './components/ServicesIndex.jsx';
+import Services from './components/Services.jsx';
 import Properties from './components/Properties.jsx';
 import PropertyDialog from './components/PropertyDialog.jsx';
 import WhyUs from './components/WhyUs.jsx';
@@ -36,14 +36,14 @@ export default function App() {
     <>
       <a
         href="#contenu"
-        className="sr-only bg-ink px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"
+        className="sr-only rounded-lg bg-ink px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"
       >
         Aller au contenu
       </a>
       <Header onFilter={showType} />
       <main id="contenu">
         <Hero onSearch={search} />
-        <ServicesIndex onFilter={showType} />
+        <Services onFilter={showType} />
         <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} />
         <WhyUs />
         <Steps />

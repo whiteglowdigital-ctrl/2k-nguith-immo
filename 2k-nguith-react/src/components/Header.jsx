@@ -1,49 +1,53 @@
 import { useEffect, useState } from 'react';
-import Logo from './Logo.jsx';
-import { Dot } from './Glyphs.jsx';
+import { Close, Menu } from './Icons.jsx';
 import { contact, nav } from '../data/site.js';
-import { cn } from '../lib/utils.js';
+import logo from '../assets/logo-2k-nguith.webp';
 
 export default function Header({ onFilter }) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState('');
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open]);
+  }, []);
 
   const go = (item) => {
     if (item.filter) onFilter(item.filter);
-    setActive(item.label);
     setOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-white/90 backdrop-blur-xl">
-      <div className="wrap flex h-20 items-center justify-between gap-8">
-        <a href="#accueil" className="flex items-center gap-4" aria-label="2K Nguith Immo, retour en haut de page">
-          <Logo className="h-9" />
-          <span aria-hidden className="hidden h-6 w-px bg-ink/15 sm:block" />
-          <span aria-hidden className="caps hidden text-ink sm:block">
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-white">
+      {/* Barre d'infos : ordinateur uniquement */}
+      <div className="hidden border-b border-ink/10 lg:block">
+        <div className="wrap flex items-center justify-between py-2 text-xs text-ink-muted">
+          <span>{contact.address}</span>
+          <span className="flex gap-6">
+            <a href={`tel:${contact.phoneIntl}`} className="hover:text-ink">
+              {contact.phoneDisplay}
+            </a>
+            <span>{contact.hours}</span>
+          </span>
+        </div>
+      </div>
+
+      <div className="wrap flex h-20 items-center justify-between gap-6">
+        <a href="#accueil" className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
+          <img src={logo} width="320" height="260" alt="Logo 2K Nguith Immo" className="h-10 w-auto" />
+          <span className="hidden font-serif text-lg font-medium sm:block" aria-hidden>
             2K Nguith Immo
           </span>
         </a>
 
         <nav aria-label="Menu principal" className="hidden lg:block">
-          <ul className="flex items-center gap-9">
+          <ul className="flex items-center gap-8">
             {nav.map((item) => (
               <li key={item.label}>
                 <a
                   href={item.href}
                   onClick={() => go(item)}
-                  className={cn(
-                    'relative inline-flex min-h-11 items-center text-[0.78rem] uppercase tracking-caps transition-colors duration-700 ease-out',
-                    'after:absolute after:inset-x-0 after:bottom-1.5 after:h-px after:origin-left after:bg-amber after:transition-transform after:duration-700 after:ease-out',
-                    active === item.label ? 'text-ink after:scale-x-100' : 'text-ink-muted after:scale-x-0 hover:text-ink hover:after:scale-x-100',
-                  )}
+                  className="border-b-2 border-transparent py-2 text-sm font-medium text-ink-muted transition-colors duration-300 hover:border-amber hover:text-ink"
                 >
                   {item.label}
                 </a>
@@ -52,51 +56,39 @@ export default function Header({ onFilter }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-6">
-          <a href={`tel:${contact.phoneIntl}`} className="hidden items-center gap-3 text-sm tabular-nums text-ink xl:inline-flex">
-            <Dot />
-            {contact.phoneDisplay}
+        <div className="flex items-center gap-3">
+          <a href="#contact" className="btn-dark hidden sm:inline-flex">
+            Nous contacter
           </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="menu-mobile"
-            className="group flex min-h-11 items-center gap-3 text-[0.78rem] uppercase tracking-caps text-ink lg:hidden"
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            className="flex h-12 w-12 items-center justify-center rounded-lg border border-ink/15 lg:hidden"
           >
-            {open ? 'Fermer' : 'Menu'}
-            <span aria-hidden className="relative block h-3 w-7">
-              <span className={cn('absolute left-0 h-px w-full bg-ink transition-transform duration-700 ease-out', open ? 'top-1.5 rotate-45' : 'top-0')} />
-              <span className={cn('absolute left-0 h-px bg-ink transition-all duration-700 ease-out', open ? 'top-1.5 w-full -rotate-45' : 'top-3 w-4')} />
-            </span>
+            {open ? <Close /> : <Menu />}
           </button>
         </div>
       </div>
 
-      {/* Menu mobile : rideau plein écran qui se déroule */}
-      <div
-        id="menu-mobile"
-        className={cn(
-          'fixed inset-x-0 top-20 h-[calc(100dvh-5rem)] overflow-y-auto bg-white transition-[clip-path,visibility] duration-700 ease-out lg:hidden',
-          open ? 'visible [clip-path:inset(0_0_0_0)]' : 'invisible [clip-path:inset(0_0_100%_0)]',
-        )}
-      >
-        <nav aria-label="Menu mobile" className="wrap flex min-h-full flex-col justify-between pb-28 pt-6">
-          <ul>
-            {nav.map((item) => (
-              <li key={item.label} className="border-b border-ink/10">
-                <a href={item.href} onClick={() => go(item)} className="display flex min-h-[4.5rem] items-center text-4xl">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-12 flex items-center gap-3 text-sm text-ink-muted">
-            <Dot />
-            {contact.address}
-          </p>
-        </nav>
-      </div>
+      <nav id="menu-mobile" aria-label="Menu mobile" hidden={!open} className="border-t border-ink/10 bg-white lg:hidden">
+        <ul className="wrap py-2">
+          {nav.map((item) => (
+            <li key={item.label} className="border-b border-ink/10 last:border-0">
+              <a href={item.href} onClick={() => go(item)} className="flex min-h-14 items-center text-base font-medium">
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li className="py-4">
+            <a href="#contact" onClick={() => setOpen(false)} className="btn-dark w-full">
+              Nous contacter
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

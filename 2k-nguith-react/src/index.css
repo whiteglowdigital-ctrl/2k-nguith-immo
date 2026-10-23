@@ -8,81 +8,61 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-white pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] font-sans text-[1.0625rem] font-light leading-relaxed text-ink antialiased lg:pb-0;
+    @apply bg-white font-sans text-base text-ink antialiased;
+    /* Espace pour la barre fixe mobile : elle ne cache jamais de contenu */
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  @media (min-width: 1024px) {
+    body {
+      padding-bottom: 0;
+    }
   }
   h1, h2, h3 {
     text-wrap: balance;
   }
   section[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 5rem;
   }
   :focus-visible {
-    @apply outline outline-1 outline-offset-4 outline-amber;
-  }
-  select option {
-    @apply bg-white text-ink;
+    @apply rounded outline outline-2 outline-offset-2 outline-amber;
   }
 }
 
 @layer components {
+  /* Conteneur principal unique : tout le contenu y est aligné */
   .wrap {
-    @apply mx-auto w-full max-w-site px-5 sm:px-10 lg:px-16;
+    @apply container mx-auto px-6 md:px-12;
   }
-  .block-y {
-    @apply py-28 sm:py-40 lg:py-52;
+  .section {
+    @apply py-20 md:py-28;
   }
-  /* Petites capitales espacées : rubriques, légendes */
-  .caps {
-    @apply text-[0.68rem] font-normal uppercase tracking-caps text-ink-muted;
+  .heading {
+    @apply font-serif text-3xl font-medium leading-tight text-ink md:text-4xl;
   }
-  .display {
-    @apply font-display font-normal leading-[0.95] tracking-display;
+  .btn-dark {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-ink px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black;
   }
-  .h-section {
-    @apply display text-[2.75rem] sm:text-6xl lg:text-[5.5rem];
+  .btn-outline {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-ink/20 px-6 text-sm font-semibold text-ink transition-colors duration-300 hover:border-ink;
   }
-  /* Bouton noir minimaliste, angles droits */
-  .btn-ink {
-    @apply inline-flex min-h-12 items-center justify-center gap-4 whitespace-nowrap bg-ink px-7 text-[0.78rem] font-normal uppercase tracking-caps text-white transition-colors duration-700 ease-out hover:bg-black;
+  .input {
+    @apply block w-full rounded-lg border border-ink/15 bg-white px-4 py-3 text-base text-ink placeholder:text-ink/40 focus:border-ink focus:outline-none focus:ring-0;
   }
-  .btn-line {
-    @apply inline-flex min-h-12 items-center justify-center gap-4 whitespace-nowrap border border-ink/20 px-7 text-[0.78rem] font-normal uppercase tracking-caps text-ink transition-colors duration-700 ease-out hover:border-ink;
-  }
-  /* Lien texte souligné d'un pixel, la ligne passe en ambre au survol */
-  .link-line {
-    @apply relative inline-flex min-h-11 items-center gap-3 text-[0.78rem] uppercase tracking-caps text-ink after:absolute after:inset-x-0 after:bottom-2 after:h-px after:bg-ink/25 after:transition-colors after:duration-700 after:ease-out hover:after:bg-amber;
-  }
-  .field {
-    @apply w-full appearance-none rounded-none border-0 border-b border-ink/20 bg-transparent px-0 pb-2.5 pt-1 font-sans text-base font-normal text-ink transition-colors duration-700 ease-out placeholder:text-ink/35 focus:border-ink focus:outline-none focus:ring-0;
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ink-muted;
   }
   .ph-tag {
-    @apply bg-white/85 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.12em] text-ink backdrop-blur-sm;
+    @apply rounded bg-white/90 px-2 py-0.5 text-[0.7rem] text-ink;
   }
-}
-
-/* Apparition au défilement : ce qui est à l'écran au chargement n'est jamais masqué. */
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-}
-.reveal-in {
-  opacity: 1;
-  transform: none;
-  transition: opacity 1.2s cubic-bezier(0, 0, 0.2, 1), transform 1.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }

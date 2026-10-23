@@ -1,44 +1,27 @@
 /** @type {import('tailwindcss').Config} */
-// Direction « magazine d'architecture » : noir profond, blanc pur, angles droits,
-// filets d'un pixel. L'ambre ne sert qu'aux micro-détails (un point, une ligne active).
+// Palette stricte : noir profond pour le texte, blanc pour le fond,
+// ambre uniquement pour les petits éléments importants (numéros, liens actifs).
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
+    // Le conteneur s'arrête à 1280 px : rien ne s'étale sur les grands écrans.
+    container: {
+      screens: { sm: '640px', md: '768px', lg: '1024px', xl: '1280px' },
+    },
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#0F172A', // noir profond : textes, boutons, sections inversées
+          DEFAULT: '#0F172A',
           muted: '#475569', // texte secondaire (7,5:1 sur blanc)
-          faint: '#64748B', // légendes sur fond noir uniquement en clair
         },
+        mist: '#F9FAFB', // fond gris très clair des sections de transition
         amber: {
-          DEFAULT: '#D97706', // micro-détails seulement, jamais pour du texte courant
+          DEFAULT: '#D97706',
         },
       },
       fontFamily: {
-        display: ['"Bodoni Moda"', 'Didot', 'Georgia', 'serif'],
-        sans: ['Jost', 'Futura', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-      },
-      letterSpacing: {
-        caps: '0.22em',
-        display: '-0.035em',
-      },
-      maxWidth: {
-        site: '88rem',
-      },
-      keyframes: {
-        unveil: {
-          from: { clipPath: 'inset(0 0 0 100%)' },
-          to: { clipPath: 'inset(0 0 0 0)' },
-        },
-        rise: {
-          from: { opacity: '0', transform: 'translateY(24px)' },
-          to: { opacity: '1', transform: 'none' },
-        },
-      },
-      animation: {
-        unveil: 'unveil 1.6s cubic-bezier(0.65, 0, 0.35, 1) both',
-        rise: 'rise 1.2s cubic-bezier(0, 0, 0.2, 1) both',
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Manrope', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
     },
   },

@@ -1,10 +1,8 @@
-import { budgets, featuredPropertyId, properties, propertySlots } from '../data/site.js';
+import { budgets, properties, propertySlots } from '../data/site.js';
 import { cn, normalize, whatsappLink } from '../lib/utils.js';
-import Reveal from './Reveal.jsx';
-import SectionTitle from './SectionTitle.jsx';
-import ShowcaseProperty from './ShowcaseProperty.jsx';
-import PropertyTile from './PropertyTile.jsx';
-import { Arrow, Dot } from './Glyphs.jsx';
+import SectionHeader from './SectionHeader.jsx';
+import PropertyCard from './PropertyCard.jsx';
+import { ArrowRight } from './Icons.jsx';
 
 const tabs = [
   { value: 'tous', label: 'Tous' },
@@ -14,9 +12,6 @@ const tabs = [
 ];
 
 const intent = { vente: 'acheter un bien', location: 'louer un bien', terrain: 'acheter un terrain', tous: 'trouver un bien' };
-
-// Bento : une grande vignette verticale à côté de deux vignettes horizontales, puis la suite par paires.
-const shapes = ['tall', 'wide', 'wide'];
 
 export default function Properties({ filters, onType, onReset, onOpen }) {
   const { type, quartier, budget } = filters;
@@ -29,9 +24,6 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
       (!quartier || normalize(p.location).includes(normalize(quartier))) &&
       (!max || p.price <= max),
   );
-  const showcase = list.find((p) => p.id === featuredPropertyId) ?? list[0];
-  const rest = list.filter((p) => p !== showcase);
-  const [first, ...more] = rest;
   const slots = type === 'tous' && !isSearch ? propertySlots : 0;
 
   const budgetLabel = budgets.find((b) => b.value === budget)?.label;
@@ -39,10 +31,10 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
     `Bonjour 2K Nguith, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
 
   return (
-    <section id="biens" aria-labelledby="titre-biens" className="block-y">
+    <section id="biens" aria-labelledby="titre-biens" className="section">
       <div className="wrap">
-        <SectionTitle id="titre-biens" kicker="Sélection" title="Biens disponibles">
-          <div role="group" aria-label="Filtrer les biens" className="flex flex-wrap gap-x-8">
+        <SectionHeader id="titre-biens" title="Biens disponibles">
+          <div role="group" aria-label="Filtrer les biens" className="flex flex-wrap gap-x-6">
             {tabs.map((t) => {
               const active = type === t.value && !isSearch;
               return (
@@ -52,76 +44,61 @@ export default function Properties({ filters, onType, onReset, onOpen }) {
                   aria-pressed={active}
                   onClick={() => onType(t.value)}
                   className={cn(
-                    'flex min-h-11 items-center gap-2.5 text-[0.78rem] uppercase tracking-caps transition-colors duration-700 ease-out',
-                    active ? 'text-ink' : 'text-ink-muted hover:text-ink',
+                    'min-h-11 border-b-2 text-sm font-semibold transition-colors duration-300',
+                    active ? 'border-amber text-ink' : 'border-transparent text-ink-muted hover:text-ink',
                   )}
                 >
-                  <Dot className={cn('transition-transform duration-700 ease-out', active ? 'scale-100' : 'scale-0')} />
                   {t.label}
                 </button>
               );
             })}
           </div>
-        </SectionTitle>
+        </SectionHeader>
 
         {isSearch && (
-          <p aria-live="polite" className="-mt-12 mb-16 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-muted">
+          <p aria-live="polite" className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted">
             <span>
               {list.length} résultat{list.length > 1 ? 's' : ''}
               {quartier && ` · ${quartier}`}
               {max ? ` · ${budgetLabel.toLowerCase()}` : ''}
             </span>
-            <button type="button" onClick={onReset} className="link-line">
+            <button type="button" onClick={onReset} className="min-h-11 font-semibold text-ink underline underline-offset-4">
               Voir tous les biens
             </button>
           </p>
         )}
 
         {list.length === 0 ? (
-          <Reveal className="border-y border-ink/10 py-20">
-            <p className="display max-w-3xl text-4xl sm:text-5xl">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
-            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-ink mt-12">
+          <div className="rounded-2xl bg-mist p-8 md:p-12">
+            <p className="font-serif text-2xl">Aucun bien ne correspond pour le moment. Décrivez-nous votre besoin, on cherche pour vous.</p>
+            <a href={whatsappLink(need)} target="_blank" rel="noopener" className="btn-dark mt-6">
               Décrire mon besoin sur WhatsApp
-              <Arrow className="h-2.5 w-6" />
             </a>
-          </Reveal>
+          </div>
         ) : (
-          <>
-            <ShowcaseProperty property={showcase} onOpen={onOpen} />
-
-            {first && (
-              <ul className="mt-20 grid gap-x-10 gap-y-16 lg:mt-28 lg:grid-cols-12 lg:gap-x-16">
-                {/* Grande vignette verticale */}
-                <Reveal as="li" className="lg:col-span-5 lg:row-span-2">
-                  <PropertyTile property={first} shape={shapes[0]} onOpen={onOpen} />
-                </Reveal>
-                {/* Vignettes horizontales, décalées vers le bas */}
-                {more.map((p, i) => (
-                  <Reveal as="li" key={p.id} delay={120 * (i + 1)} className={cn('lg:col-span-7', i === 0 && 'lg:mt-24')}>
-                    <PropertyTile property={p} shape={shapes[(i + 1) % shapes.length]} onOpen={onOpen} />
-                  </Reveal>
-                ))}
-              </ul>
-            )}
-
-            {slots > 0 && (
-              <ul className="mt-20 grid gap-10 sm:grid-cols-2 lg:mt-28 lg:gap-16">
-                {Array.from({ length: slots }, (_, i) => (
-                  <Reveal as="li" key={i} delay={i * 120} className="flex h-56 items-center justify-center border border-ink/10 text-sm text-ink-muted">
-                    [Bien à ajouter]
-                  </Reveal>
-                ))}
-              </ul>
-            )}
-          </>
+          // Grille fixe : 1 colonne sur mobile, 2 sur ordinateur
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+            {list.map((p) => (
+              <li key={p.id}>
+                <PropertyCard property={p} onOpen={onOpen} />
+              </li>
+            ))}
+            {Array.from({ length: slots }, (_, i) => (
+              <li key={`slot-${i}`}>
+                <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-ink/20 text-sm text-ink-muted">
+                  [Bien à ajouter]
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
 
-        <Reveal className="mt-24 flex justify-end border-t border-ink/10 pt-8">
-          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="link-line group">
+        <div className="mt-12 flex justify-center">
+          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite recevoir la liste de tous vos biens disponibles.')} target="_blank" rel="noopener" className="btn-outline">
             Voir tous nos biens
-            <Arrow className="h-2.5 w-7 transition-transform duration-700 ease-out group-hover:translate-x-1.5" />
+            <ArrowRight />
           </a>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

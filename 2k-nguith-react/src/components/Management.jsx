@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import Reveal from './Reveal.jsx';
-import { Arrow, Dot } from './Glyphs.jsx';
+import { ArrowRight, Chevron } from './Icons.jsx';
 import { managementImage } from '../data/site.js';
 import { whatsappLink } from '../lib/utils.js';
 
 const perks = ['Recherche de locataires', 'Suivi du bien', 'Encaissement des loyers [à confirmer]'];
 const types = ['Appartement', 'Maison', 'Immeuble', 'Local commercial', 'Terrain'];
 
-// Champs sur fond noir : texte blanc, filet blanc d'un pixel.
-const fieldDark =
-  'w-full appearance-none rounded-none border-0 border-b border-white/25 bg-transparent px-0 pb-2.5 pt-1 text-base font-normal text-white transition-colors duration-700 ease-out placeholder:text-white/35 focus:border-white focus:outline-none focus:ring-0 aria-[invalid=true]:border-amber';
+// Champs du formulaire sombre
+const darkInput =
+  'block w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-base text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none focus:ring-0 aria-[invalid=true]:border-amber';
 
 function Field({ id, label, children }) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="caps text-white/60">
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">
         {label}
       </label>
       {children}
@@ -54,80 +53,75 @@ export default function Management() {
   };
 
   return (
-    <section id="gerance" aria-labelledby="titre-gerance" className="bg-ink text-white">
-      <div className="grid lg:grid-cols-[40fr_60fr]">
-        {/* Photo verticale, en miroir du hero */}
-        <div className="relative hidden overflow-hidden lg:block">
-          <img src={managementImage} alt="Clés remises devant une maison" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-          <span className="ph-tag absolute left-4 top-4">[Photo à remplacer]</span>
+    <section id="gerance" aria-labelledby="titre-gerance" className="section">
+      <div className="wrap grid grid-cols-1 gap-12 md:grid-cols-2">
+        {/* Colonne gauche : une seule image */}
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-mist md:aspect-auto md:h-full md:min-h-[28rem]">
+          <img src={managementImage} alt="Clés remises devant une maison" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+          <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
         </div>
 
-        <div className="px-5 py-28 sm:px-10 sm:py-36 lg:px-20 lg:py-44">
-          <Reveal>
-            <p className="caps mb-8 flex items-center gap-3 text-white/60">
-              <Dot />
-              Gérance
-            </p>
-            <h2 id="titre-gerance" className="h-section max-w-2xl">
-              Vous êtes propriétaire&nbsp;? <em className="italic text-white/60">Confiez-nous votre bien</em>
-            </h2>
-          </Reveal>
-
-          <Reveal as="ul" className="mt-16 grid border-t border-white/15 sm:grid-cols-3">
-            {perks.map((text) => (
-              <li key={text} className="border-b border-white/15 py-5 text-white/85 sm:border-b-0 sm:border-r sm:px-6 sm:py-6 sm:first:pl-0 sm:last:border-r-0">
-                {text}
+        {/* Colonne droite : titre, avantages, formulaire sombre */}
+        <div>
+          <h2 id="titre-gerance" className="heading">
+            Vous êtes propriétaire&nbsp;?
+          </h2>
+          <p className="mt-2 font-serif text-2xl text-ink-muted">Confiez-nous votre bien.</p>
+          <ul className="mt-6 space-y-2">
+            {perks.map((t) => (
+              <li key={t} className="flex items-center gap-3">
+                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                {t}
               </li>
             ))}
-          </Reveal>
+          </ul>
 
-          <Reveal as="form" onSubmit={submit} noValidate className="mt-20 grid gap-x-12 gap-y-10 sm:grid-cols-2">
-            <Field id="g-nom" label="Votre nom">
-              <input id="g-nom" type="text" autoComplete="name" value={values.nom} onChange={set('nom')} aria-invalid={bad('nom')} className={fieldDark} />
-            </Field>
-            <Field id="g-tel" label="Téléphone WhatsApp">
-              <input id="g-tel" type="tel" inputMode="tel" autoComplete="tel" placeholder="77 000 00 00" value={values.tel} onChange={set('tel')} aria-invalid={bad('tel')} className={fieldDark} />
-            </Field>
-            <Field id="g-type" label="Type de bien">
-              <div className="relative">
-                <select id="g-type" value={values.type} onChange={set('type')} aria-invalid={bad('type')} className={`${fieldDark} cursor-pointer pr-6`}>
-                  <option value="">Choisir</option>
-                  {types.map((t) => (
-                    <option key={t}>{t}</option>
-                  ))}
-                </select>
-                <span aria-hidden className="pointer-events-none absolute bottom-3.5 right-0 h-1.5 w-1.5 rotate-45 border-b border-r border-white/60" />
-              </div>
-            </Field>
-            <Field id="g-quartier" label="Quartier">
-              <input id="g-quartier" type="text" value={values.quartier} onChange={set('quartier')} aria-invalid={bad('quartier')} className={fieldDark} />
-            </Field>
-
-            <div className="flex flex-col gap-6 sm:col-span-2">
-              {invalid.length > 0 && (
-                <p role="alert" className="text-sm text-white">
-                  Merci de remplir tous les champs.
-                </p>
-              )}
-              <div className="flex flex-col gap-8 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
-                <p className="max-w-sm text-sm text-white/60">
-                  Vos informations servent uniquement à répondre à votre demande et ne sont pas conservées sur ce site.
-                </p>
-                <button
-                  type="submit"
-                  className="group inline-flex min-h-12 items-center justify-center gap-4 bg-white px-7 text-[0.78rem] uppercase tracking-caps text-ink transition-colors duration-700 ease-out hover:bg-white/85"
-                >
-                  Confier mon bien
-                  <Arrow className="h-2.5 w-6 transition-transform duration-700 ease-out group-hover:translate-x-1" />
-                </button>
-              </div>
-              {link && (
-                <a href={link} target="_blank" rel="noopener" className="text-sm text-white underline underline-offset-4">
-                  WhatsApp ne s'est pas ouvert&nbsp;? Ouvrir ma demande
-                </a>
-              )}
+          <form onSubmit={submit} noValidate className="mt-8 rounded-2xl bg-ink p-6 sm:p-8">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <Field id="g-nom" label="Votre nom">
+                <input id="g-nom" type="text" autoComplete="name" value={values.nom} onChange={set('nom')} aria-invalid={bad('nom')} className={darkInput} />
+              </Field>
+              <Field id="g-tel" label="Téléphone WhatsApp">
+                <input id="g-tel" type="tel" inputMode="tel" autoComplete="tel" placeholder="77 000 00 00" value={values.tel} onChange={set('tel')} aria-invalid={bad('tel')} className={darkInput} />
+              </Field>
+              <Field id="g-type" label="Type de bien">
+                <div className="relative">
+                  <select id="g-type" value={values.type} onChange={set('type')} aria-invalid={bad('type')} className={`${darkInput} cursor-pointer appearance-none pr-10 [&>option]:text-ink`}>
+                    <option value="">Choisir</option>
+                    {types.map((t) => (
+                      <option key={t}>{t}</option>
+                    ))}
+                  </select>
+                  <Chevron className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
+                </div>
+              </Field>
+              <Field id="g-quartier" label="Quartier">
+                <input id="g-quartier" type="text" value={values.quartier} onChange={set('quartier')} aria-invalid={bad('quartier')} className={darkInput} />
+              </Field>
             </div>
-          </Reveal>
+
+            {invalid.length > 0 && (
+              <p role="alert" className="mt-4 text-sm text-white">
+                Merci de remplir tous les champs.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-white/20 bg-black px-6 text-sm font-semibold text-white transition-colors duration-300 hover:border-white/60"
+            >
+              Confier mon bien
+              <ArrowRight />
+            </button>
+            {link && (
+              <a href={link} target="_blank" rel="noopener" className="mt-3 block text-center text-sm text-white underline underline-offset-4">
+                WhatsApp ne s'est pas ouvert&nbsp;? Ouvrir ma demande
+              </a>
+            )}
+            <p className="mt-4 text-xs leading-relaxed text-white/60">
+              Vos informations servent uniquement à répondre à votre demande et ne sont pas conservées sur ce site.
+            </p>
+          </form>
         </div>
       </div>
     </section>
