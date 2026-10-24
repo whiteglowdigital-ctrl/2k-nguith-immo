@@ -58,6 +58,25 @@ export default {
           from: { opacity: '0', transform: 'translateY(20px)' },
           to: { opacity: '1', transform: 'none' },
         },
+        // Écran d'entrée : trait du toit, mots du slogan, ligne de balayage
+        draw: { to: { strokeDashoffset: '0' } },
+        word: {
+          from: { opacity: '0', transform: 'translateY(100%)' },
+          to: { opacity: '1', transform: 'none' },
+        },
+        grow: { to: { width: '6rem' } },
+        scan: {
+          from: { transform: 'translateY(0)', opacity: '0' },
+          '15%': { opacity: '1' },
+          to: { transform: 'translateY(100vh)', opacity: '0' },
+        },
+        // Reflet doré qui glisse sur le mot mis en avant
+        shimmer: { to: { backgroundPosition: '-200% center' } },
+        // Zoom lent et continu de la photo d'accueil
+        kenburns: {
+          from: { transform: 'scale(1.12)' },
+          to: { transform: 'scale(1)' },
+        },
       },
       animation: {
         pulseGold: 'pulseGold 2.4s ease-in-out infinite',
@@ -66,7 +85,13 @@ export default {
         logoIn: 'logoIn 1.1s ease-out both',
         halo: 'halo 2.4s ease-in-out infinite',
         letter: 'letter 0.5s ease-out forwards',
-        rise: 'rise 1s ease-out both',
+        rise: 'rise 1s cubic-bezier(0.22,1,0.36,1) both',
+        draw: 'draw 1.2s cubic-bezier(0.65,0,0.35,1) forwards',
+        word: 'word 0.7s cubic-bezier(0.22,1,0.36,1) forwards',
+        grow: 'grow 0.8s ease-out forwards',
+        scan: 'scan 2.6s ease-in-out infinite',
+        shimmer: 'shimmer 4s linear infinite',
+        kenburns: 'kenburns 18s ease-out both',
       },
     },
   },

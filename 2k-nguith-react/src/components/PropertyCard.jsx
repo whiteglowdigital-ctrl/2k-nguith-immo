@@ -1,4 +1,4 @@
-import { BedDouble, FileCheck2, MapPin, Ruler } from 'lucide-react';
+import { BedDouble, Camera, FileCheck2, MapPin, Ruler } from 'lucide-react';
 import { typeLabels } from '../data/site.js';
 import { formatFcfa } from '../lib/utils.js';
 
@@ -33,6 +33,12 @@ export default function PropertyCard({ property: p, onOpen }) {
           <MapPin aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5 text-gold" />
           {place}
         </p>
+        {p.gallery?.length > 1 ? (
+          <span className="absolute right-3 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2.5 py-1 text-[0.7rem] text-white backdrop-blur-md">
+            <Camera aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5" />
+            {p.gallery.length} photos
+          </span>
+        ) : null}
         <span className="ph-tag absolute bottom-3 right-3">[Photo à remplacer]</span>
       </div>
 

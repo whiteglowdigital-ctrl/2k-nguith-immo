@@ -16,7 +16,7 @@ export default function Gallery() {
               as="figure"
               key={p.src}
               delay={(i % 4) * 100}
-              className={`group relative overflow-hidden border border-white/5 ${i === 0 ? 'arch col-span-2 row-span-2 aspect-square md:aspect-auto' : 'aspect-square rounded-2xl'}`}
+              className={`group relative overflow-hidden border border-white/5 arch ${i === 0 ? 'col-span-2 row-span-2 aspect-square md:aspect-auto' : 'aspect-square'}`}
             >
               <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
               <figcaption className="ph-tag absolute bottom-2 left-2 right-2 w-fit">[Photo à remplacer]</figcaption>

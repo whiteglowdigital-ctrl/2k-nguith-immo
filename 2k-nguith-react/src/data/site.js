@@ -68,6 +68,7 @@ export const properties = [
     paperType: 'Acte administratif',
     price: 10000000,
     image: unsplash('photo-1500382017468-9049fed747ef'),
+    gallery: [unsplash('photo-1500382017468-9049fed747ef', 1400), unsplash('photo-1541888946425-d81bb19240f5', 1400)],
     alt: 'Terrain nu dégagé au coucher du soleil',
   },
   {
@@ -95,6 +96,7 @@ export const properties = [
     paperType: '[à préciser]',
     price: 90000000,
     image: unsplash('photo-1523217582562-09d0def993a6'),
+    gallery: [unsplash('photo-1523217582562-09d0def993a6', 1400), unsplash('photo-1600607687939-ce8a6c25118c', 1400), unsplash('photo-1618221195710-dd6b41faaea6', 1400), unsplash('photo-1507089947368-19c1da9775ae', 1400)],
     alt: 'Maison moderne blanche à étages',
   },
   {
@@ -109,6 +111,7 @@ export const properties = [
     price: 170000,
     perMonth: true,
     image: unsplash('photo-1522708323590-d24dbb6b0267'),
+    gallery: [unsplash('photo-1522708323590-d24dbb6b0267', 1400), unsplash('photo-1502672260266-1c1ef2d93688', 1400), unsplash('photo-1600566753086-00f18fb6b3ea', 1400)],
     alt: "Salon lumineux d'un appartement",
   },
   // --- Exemples de maquette (affichés avec le badge « Exemple ») ---
@@ -123,8 +126,9 @@ export const properties = [
     bedrooms: 3,
     papers: 'Titre foncier',
     paperType: 'Titre foncier',
-    price: 120000000,
+    price: 65000000,
     image: unsplash('photo-1545324418-cc1a3fa10c00'),
+    gallery: [unsplash('photo-1545324418-cc1a3fa10c00', 1400), unsplash('photo-1600607687644-c7171b42498f', 1400), unsplash('photo-1507089947368-19c1da9775ae', 1400), unsplash('photo-1600566753086-00f18fb6b3ea', 1400)],
     alt: "Façade d'un immeuble résidentiel moderne",
   },
   {
@@ -138,8 +142,9 @@ export const properties = [
     bedrooms: 4,
     papers: 'Titre foncier',
     paperType: 'Titre foncier',
-    price: 180000000,
+    price: 85000000,
     image: unsplash('photo-1512917774080-9991f1c4c750'),
+    gallery: [unsplash('photo-1512917774080-9991f1c4c750', 1400), unsplash('photo-1613977257363-707ba9348227', 1400), unsplash('photo-1613490493576-7fde63acd811', 1400), unsplash('photo-1618221195710-dd6b41faaea6', 1400), unsplash('photo-1600607687644-c7171b42498f', 1400)],
     alt: 'Villa blanche moderne avec piscine',
   },
   {
@@ -152,7 +157,7 @@ export const properties = [
     surface: '300 m²',
     papers: 'Bail',
     paperType: 'Bail',
-    price: 6000000,
+    price: 2500000,
     image: unsplash('photo-1500382017468-9049fed747ef'),
     alt: 'Terrain nu au coucher du soleil',
   },

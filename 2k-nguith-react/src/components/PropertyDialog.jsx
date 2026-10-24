@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { MessageCircle, Phone, X } from 'lucide-react';
 import { contact, typeLabels } from '../data/site.js';
 import { formatFcfa, whatsappLink } from '../lib/utils.js';
+import PhotoCarousel from './PhotoCarousel.jsx';
 
 // Fiche détaillée : les informations administratives (papiers, surface) sont ici.
 export default function PropertyDialog({ property: p, onClose }) {
@@ -27,11 +28,8 @@ export default function PropertyDialog({ property: p, onClose }) {
       className="m-auto max-h-[calc(100dvh-2rem)] w-[min(56rem,calc(100%-2rem))] overflow-y-auto rounded-3xl border border-white/10 bg-panel p-0 text-white shadow-deep backdrop:bg-black/80 backdrop:backdrop-blur-sm"
     >
       {p && (
-        <div className="grid md:grid-cols-2">
-          <div className="relative aspect-[4/3] md:aspect-auto">
-            <img src={p.image} alt={p.alt} className="h-full w-full object-cover" />
-            <span className="ph-tag absolute bottom-3 left-3">[Photo à remplacer]</span>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <PhotoCarousel key={p.id} images={p.gallery ?? [p.image]} alt={p.alt} className="aspect-[4/3] md:aspect-auto md:min-h-[30rem]" />
           <div className="p-6 sm:p-8">
             <div className="flex items-start justify-between gap-4">
               <span className="kicker mb-0">

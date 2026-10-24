@@ -26,6 +26,21 @@ function Field({ id, label, Icon, value, onChange, children, className = '' }) {
   );
 }
 
+// Délai d'animation qui tient compte de l'écran d'entrée (--intro, posé par Preloader.jsx).
+const after = (ms) => ({ animationDelay: `calc(var(--intro, 0s) + ${ms}ms)` });
+
+// Titre révélé mot par mot, chaque mot remontant depuis un masque.
+function Words({ text, start, step = 90 }) {
+  return text.split(' ').map((w, i) => (
+    <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
+      <span className="inline-block motion-safe:animate-word motion-safe:opacity-0" style={after(start + i * step)}>
+        {w}
+      </span>
+      {'\u00a0'}
+    </span>
+  ));
+}
+
 export default function Hero({ onSearch }) {
   const [type, setType] = useState('vente');
   const [quartier, setQuartier] = useState('');
@@ -38,24 +53,30 @@ export default function Hero({ onSearch }) {
 
   return (
     <section id="accueil" aria-labelledby="titre-accueil" className="relative isolate flex min-h-[85vh] items-end overflow-hidden">
-      <img src={heroImage} alt="" fetchpriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_75%] motion-safe:animate-heroZoom" />
+      <img src={heroImage} alt="" fetchpriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_75%] motion-safe:animate-kenburns" style={after(0)} />
       {/* Voiles : le texte reste lisible, la villa reste lumineuse */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-void via-void/30 to-void/70" />
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-void/80 via-void/20 to-transparent" />
 
       <div className="container pb-16 pt-36 md:pb-24">
-        <p className="kicker text-[0.6rem] tracking-[0.12em] motion-safe:animate-rise md:text-[0.7rem]">
-          <span aria-hidden className="hidden h-px w-8 bg-gold md:block" />
+        <p className="kicker text-[0.6rem] tracking-[0.12em] motion-safe:animate-rise md:text-[0.7rem]" style={after(0)}>
+          <span aria-hidden className="hidden h-px w-0 bg-gold motion-safe:animate-grow motion-reduce:w-8 md:block" style={after(300)} />
           {slogans.main}
         </p>
         <h1
           id="titre-accueil"
-          className="max-w-4xl font-serif text-[2.6rem] font-semibold leading-[1.05] tracking-tight motion-safe:animate-rise sm:text-6xl lg:text-[5.5rem]"
-          style={{ animationDelay: '150ms' }}
+          className="max-w-4xl font-serif text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-[5.5rem]"
         >
-          Trouvez le bien de vos <span className="glow-word">rêves</span> avec nous
+          <Words text="Trouvez le bien de vos" start={150} />
+          <span className="inline-block overflow-hidden pb-[0.12em] align-bottom">
+            <span className="shine-word inline-block motion-safe:animate-[word_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards,shimmer_4s_linear_infinite] motion-safe:opacity-0" style={after(600)}>
+              rêves
+            </span>
+            {'\u00a0'}
+          </span>
+          <Words text="avec nous" start={690} />
         </h1>
-        <p className="mt-6 max-w-lg text-sm text-silver motion-safe:animate-rise md:text-lg" style={{ animationDelay: '300ms' }}>
+        <p className="mt-6 max-w-lg text-sm text-silver motion-safe:animate-rise md:text-lg" style={after(900)}>
           Vente, location, gérance et terrains à Dakar et environs.
         </p>
 
@@ -65,7 +86,7 @@ export default function Hero({ onSearch }) {
           aria-label="Rechercher un bien"
           onSubmit={submit}
           className="mt-10 grid max-w-4xl grid-cols-2 rounded-2xl border border-white/10 bg-slate-900/60 p-2 shadow-deep backdrop-blur-xl motion-safe:animate-rise md:mt-12 md:flex md:items-center md:divide-x md:divide-white/10 md:p-3"
-          style={{ animationDelay: '450ms' }}
+          style={after(1050)}
         >
           <Field id="s-quartier" label="Localisation" Icon={MapPin} value={quartier} onChange={setQuartier} className="col-span-2 border-b border-white/10 md:border-b-0">
             <option value="">Tous les quartiers</option>

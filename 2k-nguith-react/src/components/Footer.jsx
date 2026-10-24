@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Music2 } from 'lucide-react';
 import { contact, nav, slogans } from '../data/site.js';
-import logo from '../assets/logo-2k-nguith-transparent.webp';
+import logo from '../assets/logo-2k-nguith-dark.webp';
 
 const socials = [
   { label: 'TikTok', href: contact.socials.tiktok, Icon: Music2 },
@@ -13,7 +13,7 @@ export default function Footer({ onNavigate }) {
     <footer className="border-t border-white/5 bg-void">
       <div className="container grid grid-cols-1 gap-10 py-16 md:grid-cols-3">
         <div>
-          <img src={logo} width="360" height="288" alt="Logo 2K Nguith Immo" className="h-16 w-auto drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]" />
+          <img src={logo} width="480" height="390" alt="Logo 2K Nguith Immo" className="h-16 w-auto" />
           <p className="mt-5 font-serif text-lg text-white">{slogans.main}</p>
         </div>
         <nav aria-label="Liens du pied de page">
@@ -56,13 +56,8 @@ export default function Footer({ onNavigate }) {
         </div>
       </div>
       <div className="border-t border-white/5">
-        <div className="container flex flex-col gap-2 py-5 pb-24 text-xs text-silver sm:flex-row sm:items-center sm:justify-between md:pb-5">
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            © 2K Nguith Immo
-            <span aria-hidden className="text-slate-700">·</span>
-            {/* Signature Jëfya : ajouter ici le lien vers le site de Jëfya [lien à ajouter] */}
-            <span className="cursor-default text-xs text-slate-500 transition-colors duration-300 hover:text-gold">Site créé par Jëfya</span>
-          </p>
+        <div className="container flex flex-col gap-2 py-5 text-xs text-silver sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2K Nguith Immo</p>
           <nav aria-label="Informations légales" className="flex gap-6">
             <a href="#" className="inline-flex min-h-11 items-center hover:text-white">
               Mentions légales
@@ -73,6 +68,10 @@ export default function Footer({ onNavigate }) {
           </nav>
         </div>
       </div>
+      {/* Signature Jëfya, tout en bas : ajouter ici le lien vers le site de Jëfya [lien à ajouter] */}
+      <p className="pb-24 pt-2 text-center md:pb-6">
+        <span className="cursor-default text-xs font-light text-slate-500 transition-colors duration-300 hover:text-gold">Site créé par Jëfya</span>
+      </p>
     </footer>
   );
 }

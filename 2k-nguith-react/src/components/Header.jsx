@@ -2,15 +2,20 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { nav } from '../data/site.js';
 import { cn } from '../lib/utils.js';
-import logo from '../assets/logo-2k-nguith-transparent.webp';
+import logo from '../assets/logo-2k-nguith-dark.webp';
 
 // Transparent sur la photo du hero, noir translucide flouté au défilement.
 export default function Header({ onNavigate, solidAlways = false }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 30);
+    const onScroll = () => {
+      setSolid(window.scrollY > 30);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? window.scrollY / max : 0);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
@@ -35,10 +40,12 @@ export default function Header({ onNavigate, solidAlways = false }) {
         solid || open || solidAlways ? 'border-b border-white/5 bg-void/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent',
       )}
     >
+      {/* Fine barre dorée : progression de la lecture */}
+      <span aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-gold-dark via-gold to-gold-light" style={{ transform: `scaleX(${progress})` }} />
       <div className="container flex h-20 items-center justify-between gap-6">
         <a href="#accueil" onClick={(e) => go(e, { href: '#accueil' })} className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
           {/* Logo sans fond : le bleu et l'orange se posent directement sur la barre sombre */}
-          <img src={logo} width="360" height="288" alt="Logo 2K Nguith Immo" className="h-11 w-auto drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]" />
+          <img src={logo} width="480" height="390" alt="Logo 2K Nguith Immo" className="h-11 w-auto" />
           <span className="hidden font-serif text-lg font-semibold sm:block" aria-hidden>
             2K Nguith <span className="text-gold">Immo</span>
           </span>
