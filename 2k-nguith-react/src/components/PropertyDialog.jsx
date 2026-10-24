@@ -104,6 +104,7 @@ export default function PropertyDialog({ property, onClose }) {
                 {p.title}
               </h2>
               <p className="mt-2 font-serif text-3xl font-semibold tabular-nums text-gold">{price}</p>
+              {p.description && <p className="mt-4 text-sm leading-relaxed text-white/80">{p.description}</p>}
 
               <dl className="mt-6 divide-y divide-white/5 rounded-2xl border border-white/5 bg-white/[0.03] px-4 text-sm">
                 {main.map(([term, value]) => (
@@ -149,6 +150,8 @@ export default function PropertyDialog({ property, onClose }) {
                   </ul>
                 </section>
               ) : null}
+              {/* Vrais biens : détails rédigés pour la maquette, à vérifier par l'agence */}
+              {p.indicative && <p className="mt-6 text-xs text-silver">Détails indicatifs, confirmés lors de la visite.</p>}
             </div>
 
             {/* Action principale : fixée en bas de la fiche pendant la lecture */}
