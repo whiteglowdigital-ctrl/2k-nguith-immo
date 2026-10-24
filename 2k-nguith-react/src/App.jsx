@@ -24,7 +24,7 @@ const ALL = { type: 'tous', quartier: '', budget: '' };
 export default function App() {
   const [filters, setFilters] = useState(ALL);
   const [selected, setSelected] = useState(null);
-  const { page, openCatalogue, goTo } = useRouter();
+  const { page, fading, openCatalogue, goTo } = useRouter();
 
   // Lien du menu, d'une catégorie ou du pied de page : applique le filtre éventuel,
   // puis défile en douceur jusqu'à la section (en revenant à l'accueil si besoin).
@@ -54,28 +54,31 @@ export default function App() {
         Aller au contenu
       </a>
       <Header onNavigate={navigate} solidAlways={page === 'catalogue'} />
-      <main id="contenu">
-        {page === 'catalogue' ? (
-          <Catalogue initialType={filters.type} onOpen={setSelected} onBack={() => goTo('biens')} />
-        ) : (
-          <>
-            {/* Alternance : sombre (luxe) / blanc (clarté) */}
-            <Hero onSearch={search} />
-            <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} onOpenCatalogue={openCatalogue} />
-            <WhyUs />
-            <Steps />
-            <Categories onNavigate={navigate} />
-            <Management />
-            <Construction onNavigate={navigate} />
-            <Diaspora />
-            <MinuteTips />
-            <Testimonials />
-            <Contact />
-            <Gallery />
-          </>
-        )}
-      </main>
-      <Footer onNavigate={navigate} />
+      {/* Fondu doux entre l'accueil et le catalogue */}
+      <div className={`transition-opacity ease-in-out ${fading ? 'opacity-0 duration-300' : 'opacity-100 duration-500'}`}>
+        <main id="contenu">
+          {page === 'catalogue' ? (
+            <Catalogue initialType={filters.type} onOpen={setSelected} onBack={() => goTo('biens')} />
+          ) : (
+            <>
+              {/* Alternance : sombre (luxe) / blanc (clarté) */}
+              <Hero onSearch={search} />
+              <Properties filters={filters} onType={showType} onReset={() => setFilters(ALL)} onOpen={setSelected} onOpenCatalogue={openCatalogue} />
+              <WhyUs />
+              <Steps />
+              <Categories onNavigate={navigate} />
+              <Management />
+              <Construction onNavigate={navigate} />
+              <Diaspora />
+              <MinuteTips />
+              <Testimonials />
+              <Contact />
+              <Gallery />
+            </>
+          )}
+        </main>
+        <Footer onNavigate={navigate} />
+      </div>
       <WhatsAppFab />
       <PropertyDialog property={selected} onClose={() => setSelected(null)} />
     </>

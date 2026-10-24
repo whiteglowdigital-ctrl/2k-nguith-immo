@@ -58,6 +58,11 @@ export default {
           from: { opacity: '0', transform: 'translateY(20px)' },
           to: { opacity: '1', transform: 'none' },
         },
+        // Ouverture douce des pages et des fenêtres
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
         // Écran d'entrée : trait du toit, mots du slogan, ligne de balayage
         draw: { to: { strokeDashoffset: '0' } },
         word: {
@@ -86,6 +91,7 @@ export default {
         halo: 'halo 2.4s ease-in-out infinite',
         letter: 'letter 0.5s ease-out forwards',
         rise: 'rise 1s cubic-bezier(0.22,1,0.36,1) both',
+        'fade-in': 'fadeIn 0.5s ease-in-out backwards',
         draw: 'draw 1.2s cubic-bezier(0.65,0,0.35,1) forwards',
         word: 'word 0.7s cubic-bezier(0.22,1,0.36,1) forwards',
         grow: 'grow 0.8s ease-out forwards',

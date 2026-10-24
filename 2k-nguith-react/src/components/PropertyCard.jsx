@@ -1,6 +1,7 @@
-import { BedDouble, Camera, FileCheck2, MapPin, Ruler } from 'lucide-react';
+import { BedDouble, FileCheck2, MapPin, Ruler } from 'lucide-react';
 import { typeLabels } from '../data/site.js';
 import { formatFcfa } from '../lib/utils.js';
+import PhotoCarousel from './PhotoCarousel.jsx';
 
 // Mini-caractéristiques : seulement ce qui est connu (aucune donnée inventée).
 function specs(p) {
@@ -17,15 +18,16 @@ export default function PropertyCard({ property: p, onOpen }) {
 
   return (
     <article className="arch group relative flex h-full flex-col overflow-hidden border border-slate-100 bg-white shadow-soft transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-lift active:shadow-lift">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <img
-          src={p.image}
-          alt={p.alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105"
-        />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      {/* Photos à faire défiler directement depuis la carte (au-dessus de la zone cliquable) */}
+      <PhotoCarousel
+        variant="card"
+        images={p.gallery ?? [p.image]}
+        alt={p.alt}
+        onImageClick={() => onOpen(p)}
+        imgClassName="transition-transform duration-700 ease-out group-hover:scale-105"
+        className="relative z-[1] aspect-[4/3]"
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-white backdrop-blur-md">
           {typeLabels[p.type]}
         </span>
@@ -33,14 +35,8 @@ export default function PropertyCard({ property: p, onOpen }) {
           <MapPin aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5 text-gold" />
           {place}
         </p>
-        {p.gallery?.length > 1 ? (
-          <span className="absolute right-3 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2.5 py-1 text-[0.7rem] text-white backdrop-blur-md">
-            <Camera aria-hidden strokeWidth={1.5} className="h-3.5 w-3.5" />
-            {p.gallery.length} photos
-          </span>
-        ) : null}
         <span className="ph-tag absolute bottom-3 right-3">[Photo à remplacer]</span>
-      </div>
+      </PhotoCarousel>
 
       <div className="flex flex-1 flex-col gap-4 px-5 pb-6 pt-5">
         <h3>

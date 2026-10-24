@@ -8,14 +8,9 @@ import logo from '../assets/logo-2k-nguith-dark.webp';
 export default function Header({ onNavigate, solidAlways = false }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
-      setSolid(window.scrollY > 30);
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? window.scrollY / max : 0);
-    };
+    const onScroll = () => setSolid(window.scrollY > 30);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
@@ -40,8 +35,6 @@ export default function Header({ onNavigate, solidAlways = false }) {
         solid || open || solidAlways ? 'border-b border-white/5 bg-void/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent',
       )}
     >
-      {/* Fine barre dorée : progression de la lecture */}
-      <span aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-gold-dark via-gold to-gold-light" style={{ transform: `scaleX(${progress})` }} />
       <div className="container flex h-20 items-center justify-between gap-6">
         <a href="#accueil" onClick={(e) => go(e, { href: '#accueil' })} className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
           {/* Logo sans fond : le bleu et l'orange se posent directement sur la barre sombre */}

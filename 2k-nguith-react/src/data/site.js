@@ -70,6 +70,8 @@ export const properties = [
     image: unsplash('photo-1500382017468-9049fed747ef'),
     gallery: [unsplash('photo-1500382017468-9049fed747ef', 1400), unsplash('photo-1541888946425-d81bb19240f5', 1400)],
     alt: 'Terrain nu dégagé au coucher du soleil',
+    amenities: { water: '[à confirmer]', power: '[à confirmer]', access: '[à confirmer]' },
+    nearby: ['Au croisement Yenn', '[à confirmer]'],
   },
   {
     id: 'terrain-malicounda',
@@ -83,6 +85,8 @@ export const properties = [
     price: 3500000,
     image: unsplash('photo-1541888946425-d81bb19240f5'),
     alt: 'Terrain préparé pour une construction',
+    amenities: { water: '[à confirmer]', power: '[à confirmer]', access: '[à confirmer]' },
+    nearby: ['[à confirmer]'],
   },
   {
     id: 'maison-r3-comico-gadaye',
@@ -98,6 +102,9 @@ export const properties = [
     image: unsplash('photo-1523217582562-09d0def993a6'),
     gallery: [unsplash('photo-1523217582562-09d0def993a6', 1400), unsplash('photo-1600607687939-ce8a6c25118c', 1400), unsplash('photo-1618221195710-dd6b41faaea6', 1400), unsplash('photo-1507089947368-19c1da9775ae', 1400)],
     alt: 'Maison moderne blanche à étages',
+    amenities: { water: '[à confirmer]', power: '[à confirmer]', access: '[à confirmer]' },
+    layout: { bedrooms: '[à confirmer]', livings: '[à confirmer]', baths: '[à confirmer]', kitchen: '[à confirmer]', garage: '[à confirmer]' },
+    nearby: ['[à confirmer]'],
   },
   {
     id: 'appartement-jaxaay',
@@ -113,6 +120,9 @@ export const properties = [
     image: unsplash('photo-1522708323590-d24dbb6b0267'),
     gallery: [unsplash('photo-1522708323590-d24dbb6b0267', 1400), unsplash('photo-1502672260266-1c1ef2d93688', 1400), unsplash('photo-1600566753086-00f18fb6b3ea', 1400)],
     alt: "Salon lumineux d'un appartement",
+    amenities: { water: '[à confirmer]', power: '[à confirmer]', access: '[à confirmer]' },
+    layout: { bedrooms: 3, livings: 1, baths: '[à confirmer]', kitchen: '[à confirmer]', garage: '[à confirmer]' },
+    nearby: ['Près du terminus 84', '[à confirmer]'],
   },
   // --- Exemples de maquette (affichés avec le badge « Exemple ») ---
   {
@@ -130,6 +140,9 @@ export const properties = [
     image: unsplash('photo-1545324418-cc1a3fa10c00'),
     gallery: [unsplash('photo-1545324418-cc1a3fa10c00', 1400), unsplash('photo-1600607687644-c7171b42498f', 1400), unsplash('photo-1507089947368-19c1da9775ae', 1400), unsplash('photo-1600566753086-00f18fb6b3ea', 1400)],
     alt: "Façade d'un immeuble résidentiel moderne",
+    amenities: { water: 'Raccordée (SEN\'EAU)', power: 'Raccordée (Senelec)', access: 'Route bitumée' },
+    layout: { bedrooms: 3, livings: 1, baths: 2, kitchen: 'Équipée', garage: 'Place de parking' },
+    nearby: ['À 5 min de la plage de Ngor', 'À 10 min de la VDN', 'Commerces et écoles à proximité'],
   },
   {
     id: 'exemple-villa-saly',
@@ -146,6 +159,9 @@ export const properties = [
     image: unsplash('photo-1512917774080-9991f1c4c750'),
     gallery: [unsplash('photo-1512917774080-9991f1c4c750', 1400), unsplash('photo-1613977257363-707ba9348227', 1400), unsplash('photo-1613490493576-7fde63acd811', 1400), unsplash('photo-1618221195710-dd6b41faaea6', 1400), unsplash('photo-1600607687644-c7171b42498f', 1400)],
     alt: 'Villa blanche moderne avec piscine',
+    amenities: { water: 'Raccordée (SEN\'EAU)', power: 'Raccordée (Senelec)', access: 'Route bitumée' },
+    layout: { bedrooms: 4, livings: 2, baths: 3, kitchen: 'Équipée', garage: 'Garage 2 voitures' },
+    nearby: ['À 10 min de la plage de Saly', 'À 5 min de l\'autoroute à péage', 'À 15 min du centre de Mbour'],
   },
   {
     id: 'exemple-terrain-thies',
@@ -160,6 +176,8 @@ export const properties = [
     price: 2500000,
     image: unsplash('photo-1500382017468-9049fed747ef'),
     alt: 'Terrain nu au coucher du soleil',
+    amenities: { water: 'Raccordement possible', power: 'Ligne Senelec à 100 m', access: 'Piste' },
+    nearby: ['À 10 min du centre-ville de Thiès', 'À 5 min de l\'autoroute à péage'],
   },
 ];
 
