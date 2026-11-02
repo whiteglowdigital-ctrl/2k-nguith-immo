@@ -34,7 +34,7 @@ export default function WhyUs() {
           <span className="ph-tag absolute left-3 top-3">[Photo à remplacer]</span>
         </Reveal>
         <div className="order-1 lg:order-2">
-          <SectionHead id="titre-pourquoi" kicker="2K Nguith" title="Pourquoi nous" glow="choisir ?" />
+          <SectionHead id="titre-pourquoi" kicker="Jëfya Immo" title="Pourquoi nous" glow="choisir ?" />
           <ul className="divide-y divide-white/5 border-y border-white/5">
             {strengths.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 100} className="flex gap-4 py-6">

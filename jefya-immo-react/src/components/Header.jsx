@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { nav } from '../data/site.js';
 import { cn } from '../lib/utils.js';
-import logo from '../assets/logo-2k-nguith-dark.webp';
+import logo from '../assets/logo-jefya.webp';
 
 // Transparent sur la photo du hero, noir translucide flouté au défilement.
 export default function Header({ onNavigate, solidAlways = false }) {
@@ -36,11 +36,11 @@ export default function Header({ onNavigate, solidAlways = false }) {
       )}
     >
       <div className="container flex h-20 items-center justify-between gap-6">
-        <a href="#accueil" onClick={(e) => go(e, { href: '#accueil' })} className="flex items-center gap-3" aria-label="2K Nguith Immo, retour en haut de page">
-          {/* Logo sans fond : le bleu et l'orange se posent directement sur la barre sombre */}
-          <img src={logo} width="480" height="390" alt="Logo 2K Nguith Immo" className="h-11 w-auto" />
+        <a href="#accueil" onClick={(e) => go(e, { href: '#accueil' })} className="flex items-center gap-3" aria-label="Retour en haut de page">
+          {/* Logo Jëfya clair, posé directement sur la barre sombre */}
+          <img src={logo} width="795" height="282" alt="Logo Jëfya Immo" className="h-11 w-auto" />
           <span className="hidden font-serif text-lg font-semibold sm:block" aria-hidden>
-            2K Nguith <span className="text-gold">Immo</span>
+            <span className="text-gold">Immo</span>
           </span>
         </a>
 

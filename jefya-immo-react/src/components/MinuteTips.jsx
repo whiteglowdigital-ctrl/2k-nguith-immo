@@ -5,9 +5,9 @@ import Reveal from './Reveal.jsx';
 
 export default function MinuteTips() {
   return (
-    <section id="minute-2k" aria-labelledby="titre-minute" className="section">
+    <section id="conseils-video" aria-labelledby="titre-minute" className="section">
       <div className="container">
-        <SectionHead id="titre-minute" kicker="Conseils vidéo" title="Minute" glow="2K">
+        <SectionHead id="titre-minute" kicker="En vidéo" title="Nos conseils" glow="vidéo">
           <a href={contact.socials.tiktok} target="_blank" rel="noopener" className="link-gold">
             Toutes les vidéos sur TikTok
             <ArrowRight aria-hidden className="h-4 w-4" />

@@ -1,7 +1,7 @@
 import { contact } from '../data/site.js';
 
 // Lien WhatsApp avec message pré-rempli : aucun formulaire n'enregistre de données.
-export function whatsappLink(text = 'Bonjour 2K Nguith,') {
+export function whatsappLink(text = 'Bonjour,') {
   return `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
@@ -17,7 +17,7 @@ export function normalize(text = '') {
     .trim();
 }
 
-// Légende d'une ligne : « Maison R+3 — Comico Gadaye — 150 m² ».
+// Légende d'une ligne : « Maison R+3 — Ouakam — 180 m² ».
 // Si la surface n'est pas encore connue, on affiche le détail à la place.
 export function caption(p, { withName = true } = {}) {
   const place = p.location.split(' (')[0];

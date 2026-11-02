@@ -36,7 +36,7 @@ export default function Management() {
       return;
     }
     const url = whatsappLink(
-      'Bonjour 2K Nguith, je souhaite vous confier mon bien en gérance.\n' +
+      'Bonjour, je souhaite vous confier mon bien en gérance.\n' +
         `Nom : ${values.nom.trim()}\nTéléphone WhatsApp : ${values.tel.trim()}\nType de bien : ${values.type}\nQuartier : ${values.quartier.trim()}`,
     );
     setLink(url);

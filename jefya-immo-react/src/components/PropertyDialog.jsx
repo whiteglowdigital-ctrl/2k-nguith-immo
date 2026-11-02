@@ -60,7 +60,7 @@ export default function PropertyDialog({ property, onClose }) {
 
   const price = p && `${formatFcfa(p.price)} F CFA${p.perMonth ? ' / mois' : ''}`;
   const message =
-    p && `Bonjour 2K Nguith, je suis intéressé par « ${p.title} » à ${p.location.split(' (')[0]}, au prix de ${price}. Est-il toujours disponible ? Je souhaite plus d'informations et une visite.`;
+    p && `Bonjour, je suis intéressé par « ${p.title} » à ${p.location.split(' (')[0]}, au prix de ${price}. Est-il toujours disponible ? Je souhaite plus d'informations et une visite.`;
   const main = p ? [['Quartier', p.location], ['Surface', p.surface], p.details && ['Détails', p.details], p.papers && ['Papiers', p.papers]].filter(Boolean) : [];
   const a = p?.amenities;
   const l = p?.layout;

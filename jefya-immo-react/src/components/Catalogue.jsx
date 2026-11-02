@@ -65,9 +65,9 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
   }, [panel]);
 
   useEffect(() => {
-    document.title = 'Tous nos biens | 2K Nguith Immo';
+    document.title = 'Tous nos biens | Jëfya Immo';
     return () => {
-      document.title = '2K Nguith Immo | Agence immobilière à Dakar : vente, location, terrains, gérance';
+      document.title = 'Jëfya Immo | Site de démonstration pour agence immobilière';
     };
   }, []);
 
@@ -208,7 +208,7 @@ export default function Catalogue({ initialType = 'tous', onOpen, onBack }) {
               <div className="arch border border-slate-100 bg-white p-10 pb-12 text-center">
                 <p className="font-serif text-2xl">Aucun bien ne correspond à ces filtres.</p>
                 <p className="mt-2 text-sm text-slate-600">Décrivez-nous votre besoin, on cherche pour vous.</p>
-                <a href={whatsappLink('Bonjour 2K Nguith, je cherche un bien et je ne le trouve pas dans votre catalogue.')} target="_blank" rel="noopener" className="btn-gold mt-6">
+                <a href={whatsappLink('Bonjour, je cherche un bien et je ne le trouve pas dans votre catalogue.')} target="_blank" rel="noopener" className="btn-gold mt-6">
                   Écrire sur WhatsApp
                 </a>
               </div>

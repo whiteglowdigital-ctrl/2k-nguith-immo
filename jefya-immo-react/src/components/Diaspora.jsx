@@ -17,7 +17,7 @@ export default function Diaspora() {
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-silver md:text-lg">Achetez, louez ou faites gérer votre bien à distance&nbsp;: photos, vidéos et documents envoyés sur WhatsApp.</p>
             </div>
-            <a href={whatsappLink("Bonjour 2K Nguith, je vis à l'étranger et j'ai un projet immobilier à Dakar.")} target="_blank" rel="noopener" className="btn-gold shrink-0 self-start md:self-auto">
+            <a href={whatsappLink("Bonjour, je vis à l'étranger et j'ai un projet immobilier à Dakar.")} target="_blank" rel="noopener" className="btn-gold shrink-0 self-start md:self-auto">
               Nous écrire
               <ArrowRight aria-hidden className="h-4 w-4" />
             </a>

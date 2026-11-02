@@ -15,7 +15,7 @@ export default function WhatsAppFab() {
       href={whatsappLink()}
       target="_blank"
       rel="noopener"
-      aria-label="Nous écrire sur WhatsApp (77 461 41 61)"
+      aria-label="Nous écrire sur WhatsApp"
       className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 rounded-full bg-emerald-500 p-4 text-white transition-transform duration-300 hover:scale-110 active:scale-95 motion-safe:animate-glowEmerald"
     >
       <WhatsAppIcon className="h-7 w-7" />

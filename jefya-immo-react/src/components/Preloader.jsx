@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { cn } from '../lib/utils.js';
 import { slogans } from '../data/site.js';
-import logo from '../assets/logo-2k-nguith-dark.webp';
+import logo from '../assets/logo-jefya.webp';
 
 const DURATION = 2900; // durée d'affichage avant l'ouverture du rideau
 const EXIT = 1000; // durée de l'ouverture
@@ -12,7 +12,7 @@ const EXIT = 1000; // durée de l'ouverture
 export default function Preloader() {
   const [state, setState] = useState(() => {
     try {
-      if (sessionStorage.getItem('2k-intro')) return 'done';
+      if (sessionStorage.getItem('demo-intro')) return 'done';
     } catch {
       /* stockage indisponible : on affiche l'intro */
     }
@@ -34,7 +34,7 @@ export default function Preloader() {
       setState('done');
       document.body.style.overflow = '';
       try {
-        sessionStorage.setItem('2k-intro', '1');
+        sessionStorage.setItem('demo-intro', '1');
       } catch {
         /* ignoré */
       }
@@ -54,7 +54,7 @@ export default function Preloader() {
   return (
     <div
       role="status"
-      aria-label="Chargement de 2K Nguith Immo"
+      aria-label="Chargement du site"
       className={cn(
         'fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,#13294B_0%,#0A1A33_45%,#050B16_100%)] px-6 transition-[clip-path] duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] [clip-path:inset(0_0_0_0)]',
         state === 'leave' && '[clip-path:inset(0_0_100%_0)]',
@@ -103,7 +103,7 @@ export default function Preloader() {
           src={logo}
           width="480"
           height="390"
-          alt="2K Nguith Immo"
+          alt="Logo Jëfya Immo"
           className="h-28 w-auto opacity-0 motion-safe:animate-logoIn motion-reduce:opacity-100 md:h-36"
           style={{ animationDelay: '500ms' }}
         />

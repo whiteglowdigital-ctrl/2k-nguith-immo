@@ -18,7 +18,7 @@ export default function Construction({ onNavigate }) {
           <p className="mt-4 text-sm leading-relaxed text-silver md:text-lg">Notre équipe construit et rénove pour vous, du devis à la remise des clés.</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <a href={whatsappLink('Bonjour 2K Nguith, je souhaite un devis pour une construction ou une rénovation.')} target="_blank" rel="noopener" className="btn-gold">
+          <a href={whatsappLink('Bonjour, je souhaite un devis pour une construction ou une rénovation.')} target="_blank" rel="noopener" className="btn-gold">
             <Hammer aria-hidden className="h-4 w-4" />
             Demander un devis
           </a>

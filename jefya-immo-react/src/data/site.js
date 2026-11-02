@@ -3,22 +3,22 @@
 // sur le site : à remplacer par de vrais biens et de vrais avis avant la mise en ligne.
 
 export const contact = {
-  phoneDisplay: '77 461 41 61',
-  phoneIntl: '+221774614161',
-  whatsapp: '221774614161',
-  address: 'Cité Atepa, près VDN 3, Malibu, face au terrain Las Palmas, Dakar',
+  phoneDisplay: '77 000 00 00',
+  phoneIntl: '+221770000000',
+  whatsapp: '221770000000',
+  address: "[Adresse de l'agence], Dakar",
   hours: '[Horaires à confirmer]',
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Cit%C3%A9%20Atepa%20VDN%203%20Malibu%20Dakar',
+  mapsUrl: 'https://www.google.com/maps',
   socials: {
-    tiktok: 'https://www.tiktok.com/@2knguithimmo', // [à confirmer]
-    instagram: 'https://www.instagram.com/2knguithimmo/',
-    facebook: '#', // [lien à ajouter]
+    tiktok: '#',
+    instagram: '#',
+    facebook: '#',
   },
 };
 
 export const slogans = {
-  main: "Votre souci d'habitat, notre raison d'être !",
-  hero: 'On vous trouve le toit parfait',
+  main: 'Votre projet immobilier, en toute confiance !',
+  hero: 'On vous trouve le bien idéal',
 };
 
 const unsplash = (id, w = 900) =>
@@ -58,80 +58,80 @@ export const typeLabels = {
 
 export const properties = [
   {
-    id: 'terrain-mounka-bambara',
+    id: 'terrain-exemple-1',
+    example: true,
     type: 'terrain',
-    title: "Terrain d'angle 225 m²",
+    title: "Terrain d'angle 250 m²",
     short: "Terrain d'angle",
-    location: 'Mounka Bambara (croisement Yenn)',
-    surface: '225 m²',
-    papers: 'Acte administratif double signature',
-    paperType: 'Acte administratif',
-    price: 10000000,
+    location: 'Diamniadio',
+    surface: '250 m²',
+    papers: 'Titre foncier',
+    paperType: 'Titre foncier',
+    price: 12000000,
     image: unsplash('photo-1500382017468-9049fed747ef'),
     gallery: [unsplash('photo-1500382017468-9049fed747ef', 1400), unsplash('photo-1541888946425-d81bb19240f5', 1400)],
     alt: 'Terrain nu dégagé au coucher du soleil',
-    indicative: true,
     description: "Terrain d'angle bien dégagé, avec deux façades : idéal pour bâtir une maison familiale ou un petit immeuble. Le quartier se construit vite, c'est le bon moment pour investir.",
     amenities: { water: 'Raccordement possible', power: 'Raccordement possible (Senelec)', access: 'Piste carrossable' },
-    nearby: ['Au croisement Yenn', 'À quelques minutes de la plage de Yenne', 'Environ 25 min de Diamniadio et de l\'autoroute à péage'],
+    nearby: ['Zone en plein développement', 'À 10 min de l\'autoroute à péage', 'Commerces et écoles à proximité'],
   },
   {
-    id: 'terrain-malicounda',
+    id: 'terrain-exemple-2',
+    example: true,
     type: 'terrain',
-    title: 'Terrain 220 m²',
+    title: 'Terrain 200 m²',
     short: 'Terrain',
-    location: 'Malicounda',
-    surface: '220 m²',
-    papers: '[à préciser]',
-    paperType: '[à préciser]',
-    price: 3500000,
+    location: 'Mbour',
+    surface: '200 m²',
+    papers: 'Bail',
+    paperType: 'Bail',
+    price: 4000000,
     image: unsplash('photo-1541888946425-d81bb19240f5'),
     alt: 'Terrain préparé pour une construction',
-    indicative: true,
     description: 'Terrain plat, prêt à construire, dans une zone calme en plein essor entre Mbour et Saly. Un bon point de départ pour une maison de vacances ou une résidence principale.',
     amenities: { water: 'Raccordement possible', power: 'Raccordement possible (Senelec)', access: 'Piste' },
-    nearby: ['Proche de la route nationale (N1)', 'Environ 10 min de Saly et de ses plages', 'Environ 10 min du centre de Mbour'],
+    nearby: ['Proche de la route nationale', 'À 10 min des plages', 'À 10 min du centre-ville'],
   },
   {
-    id: 'maison-r3-comico-gadaye',
+    id: 'maison-exemple-r3',
+    example: true,
     type: 'vente',
     title: 'Maison R+3',
     short: 'Maison R+3',
-    location: 'Comico Gadaye',
-    surface: '150 m²',
+    location: 'Ouakam',
+    surface: '180 m²',
     details: 'Moins de 5 ans',
     bedrooms: 6,
-    papers: '[à préciser]',
-    paperType: '[à préciser]',
-    price: 90000000,
+    papers: 'Titre foncier',
+    paperType: 'Titre foncier',
+    price: 120000000,
     image: unsplash('photo-1523217582562-09d0def993a6'),
     gallery: [unsplash('photo-1523217582562-09d0def993a6', 1400), unsplash('photo-1600607687939-ce8a6c25118c', 1400), unsplash('photo-1618221195710-dd6b41faaea6', 1400), unsplash('photo-1507089947368-19c1da9775ae', 1400)],
     alt: 'Maison moderne blanche à étages',
-    indicative: true,
     description: 'Maison récente sur quatre niveaux, pensée pour une grande famille ou pour louer les étages séparément. Belles finitions et terrasse sur le toit pour profiter des soirées.',
     amenities: { water: 'Raccordée (SEN\'EAU)', power: 'Raccordée (Senelec)', access: 'Route bitumée' },
     layout: { bedrooms: 6, livings: 2, baths: 4, kitchen: 'Cuisine aménagée', garage: 'Garage 1 voiture' },
     nearby: ['Quartier résidentiel calme', 'Commerces, écoles et mosquée à proximité', 'Transports en commun à quelques minutes'],
   },
   {
-    id: 'appartement-jaxaay',
+    id: 'appartement-exemple-location',
+    example: true,
     type: 'location',
-    title: 'Appartement RDC, 3 chambres salon',
-    short: 'Appartement RDC 3 chambres',
-    location: 'Jaxaay terminus 84',
+    title: 'Appartement 3 chambres, salon',
+    short: 'Appartement 3 chambres',
+    location: 'Mermoz',
     surface: '[à préciser]',
     details: '3 chambres + salon',
     bedrooms: 3,
-    price: 170000,
+    price: 250000,
     perMonth: true,
     image: unsplash('photo-1522708323590-d24dbb6b0267'),
     gallery: [unsplash('photo-1522708323590-d24dbb6b0267', 1400), unsplash('photo-1502672260266-1c1ef2d93688', 1400), unsplash('photo-1600566753086-00f18fb6b3ea', 1400)],
     alt: "Salon lumineux d'un appartement",
-    indicative: true,
     description: 'Appartement en rez-de-chaussée, lumineux et facile à vivre : trois chambres, un grand salon et un accès direct sans escaliers. Parfait pour une famille.',
     amenities: { water: 'Raccordée (SEN\'EAU)', power: 'Raccordée (Senelec, compteur individuel)', access: 'Route bitumée' },
     layout: { bedrooms: 3, livings: 1, baths: 2, kitchen: 'Cuisine aménagée', garage: 'Stationnement devant la maison' },
-    nearby: ['À deux pas du terminus des bus 84', 'Accès rapide à l\'autoroute à péage', 'Marché et boutiques du quartier à proximité'],
+    nearby: ['Transports en commun à proximité', 'Accès rapide à la VDN', 'Marché et boutiques du quartier'],
   },
   // --- Exemples de maquette (affichés avec le badge « Exemple ») ---
   {
@@ -196,7 +196,7 @@ export const properties = [
 export const paperTypes = ['Titre foncier', 'Bail', 'Acte administratif', '[à préciser]'];
 
 // Bien mis en avant en grande rangée en tête de la liste.
-export const featuredPropertyId = 'maison-r3-comico-gadaye';
+export const featuredPropertyId = 'maison-exemple-r3';
 
 // Nombre de biens montrés sur l'accueil ; la suite est dans la page « Tous nos biens ».
 export const homeLimit = 6;
@@ -238,7 +238,7 @@ export const gallery = [
 // Avis d'EXEMPLE pour la maquette : affichés avec la mention « Avis d'exemple ».
 // À remplacer par de vrais avis clients (texte, prénom, ville) avant la mise en ligne.
 export const reviews = [
-  { name: 'Moussa D.', city: 'Paris', rating: 5, text: "Depuis la France, j'ai acheté mon terrain sans stress. Photos, vidéos, papiers : tout m'a été envoyé sur WhatsApp. Merci 2K Nguith !" },
+  { name: 'Moussa D.', city: 'Paris', rating: 5, text: "Depuis la France, j'ai acheté mon terrain sans stress. Photos, vidéos, papiers : tout m'a été envoyé sur WhatsApp. Merci !" },
   { name: 'Mariama S.', city: 'Dakar', rating: 5, text: 'Appartement trouvé en une semaine, exactement dans mon budget. Équipe sérieuse et très réactive.' },
   { name: 'Ibrahima N.', city: 'Milan', rating: 5, text: "Ils gèrent ma maison à Dakar et je reçois des nouvelles régulièrement. Je recommande à toute la diaspora." },
 ];

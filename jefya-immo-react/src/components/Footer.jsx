@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Music2 } from 'lucide-react';
 import { contact, nav, slogans } from '../data/site.js';
-import logo from '../assets/logo-2k-nguith-dark.webp';
+import logo from '../assets/logo-jefya.webp';
 
 const socials = [
   { label: 'TikTok', href: contact.socials.tiktok, Icon: Music2 },
@@ -13,7 +13,7 @@ export default function Footer({ onNavigate }) {
     <footer className="border-t border-white/5 bg-void">
       <div className="container grid grid-cols-1 gap-10 py-16 md:grid-cols-3">
         <div>
-          <img src={logo} width="480" height="390" alt="Logo 2K Nguith Immo" className="h-16 w-auto" />
+          <img src={logo} width="795" height="282" alt="Logo Jëfya Immo" className="h-16 w-auto" />
           <p className="mt-5 font-serif text-lg text-white">{slogans.main}</p>
         </div>
         <nav aria-label="Liens du pied de page">
@@ -57,7 +57,7 @@ export default function Footer({ onNavigate }) {
       </div>
       <div className="border-t border-white/5">
         <div className="container flex flex-col gap-2 py-5 text-xs text-silver sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2K Nguith Immo</p>
+          <p>© Jëfya Immo</p>
           <nav aria-label="Informations légales" className="flex gap-6">
             <a href="#" className="inline-flex min-h-11 items-center hover:text-white">
               Mentions légales
@@ -68,9 +68,9 @@ export default function Footer({ onNavigate }) {
           </nav>
         </div>
       </div>
-      {/* Signature Jëfya, tout en bas : ajouter ici le lien vers le site de Jëfya [lien à ajouter] */}
+      {/* Mention de démonstration, tout en bas */}
       <p className="pb-24 pt-2 text-center md:pb-6">
-        <span className="cursor-default text-xs font-light text-slate-500 transition-colors duration-300 hover:text-gold">Site créé par Jëfya</span>
+        <span className="cursor-default text-xs font-light text-slate-500 transition-colors duration-300 hover:text-gold">Site de démonstration · Jëfya</span>
       </p>
     </footer>
   );

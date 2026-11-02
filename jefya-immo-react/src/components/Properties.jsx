@@ -29,7 +29,7 @@ export default function Properties({ filters, onType, onReset, onOpen, onOpenCat
   const shown = list.slice(0, homeLimit);
   const budgetLabel = budgets.find((b) => b.value === budget)?.label;
   const need =
-    `Bonjour 2K Nguith, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
+    `Bonjour, je souhaite ${intent[type]}` + (quartier ? ` à ${quartier}` : '') + (budgetLabel && max ? `, budget ${budgetLabel.toLowerCase()}` : '') + '.';
 
   const catalogueButton = (
     <button type="button" onClick={onOpenCatalogue} className="link-gold">
